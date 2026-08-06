@@ -236,6 +236,30 @@ body:not(.products-page) .hero:first-of-type {
     object-fit: cover;
 }
 
+.hero-image .video-container {
+    aspect-ratio: 16 / 10;
+    flex: 0 1 min(46vw, 680px);
+    height: clamp(320px, 38vw, 520px);
+    max-width: min(100%, 680px);
+    overflow: hidden;
+    width: min(100%, 680px) !important;
+}
+
+.hero-image .hero-video,
+.hero-image .floating-video {
+    aspect-ratio: 16 / 10;
+    display: block;
+    height: 100% !important;
+    inset: 0;
+    object-fit: cover !important;
+    object-position: center center;
+    width: 100% !important;
+}
+
+.products-page .hero-image .hero-video {
+    object-position: center 55%;
+}
+
 .hero-actions,
 .cta-row,
 .modal-actions {
@@ -1896,6 +1920,13 @@ body.filters-open {
 
     .hero-content {
         text-align: left !important;
+    }
+
+    .hero-image .video-container {
+        flex-basis: 100%;
+        height: clamp(220px, 58vw, 360px);
+        max-width: 100%;
+        width: 100% !important;
     }
 
     .hero-actions,
