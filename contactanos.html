@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="upgrade.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="icon" href="imgCleanPel/hoja logo cp-Photoroom.png" type="image/png">
 </head>
 <body>
@@ -102,8 +101,8 @@
         </div>
         <div class="hero-image" data-aos ="fade-down">
             <div class="video-container">
-                <video class="floating-video hero-video" muted playsinline preload="metadata">
-                    <source src="imgCleanPel/video servicios y contactanos.mp4" type="video/mp4">
+                <video class="floating-video hero-video" muted playsinline preload="none" poster="imgCleanPel/poster-servicios.jpg">
+                    <source data-src="imgCleanPel/video servicios y contactanos.mp4" type="video/mp4">
                 </video>
 
                 <div class="video-controls">
@@ -331,11 +330,6 @@
 
     <script src="common.js"></script>
     <script src="contactanos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-    window.AOS?.init({ duration: 1000, once: true });
-
-</script>
 </body>
 </html>
 

@@ -252,11 +252,41 @@
         if (forceMuted) video.muted = true;
         updateMuteIcon(muteBtn, video.muted);
 
+        let loadPromise = null;
+
+        const loadVideo = () => {
+            if (video.dataset.loaded === 'true') return Promise.resolve();
+            if (loadPromise) return loadPromise;
+
+            loadPromise = new Promise((resolve) => {
+                const source = video.querySelector('source[data-src]');
+                const src = video.dataset.src || source?.dataset.src;
+
+                if (!src) {
+                    resolve();
+                    return;
+                }
+
+                const done = () => resolve();
+                video.addEventListener('loadedmetadata', done, { once: true });
+                video.addEventListener('error', done, { once: true });
+
+                if (source) source.src = src;
+                else video.src = src;
+
+                video.dataset.loaded = 'true';
+                video.load();
+            });
+
+            return loadPromise;
+        };
+
         const togglePlay = async () => {
             const icon = playBtn?.querySelector('i');
 
             if (video.paused) {
                 try {
+                    loadVideo();
                     await video.play();
                     icon?.classList.replace('fa-play', 'fa-pause');
                 } catch {
@@ -271,6 +301,9 @@
 
         playBtn?.addEventListener('click', togglePlay);
         video.addEventListener('click', togglePlay);
+        video.addEventListener('pointerenter', () => {
+            if (window.matchMedia('(pointer: fine)').matches) loadVideo();
+        }, { once: true, passive: true });
 
         muteBtn?.addEventListener('click', () => {
             video.muted = !video.muted;
@@ -284,13 +317,16 @@
         });
 
         progressBar?.addEventListener('input', () => {
+            loadVideo();
             if (video.duration) video.currentTime = (progressBar.value / 100) * video.duration;
         });
 
         fullscreenBtn?.addEventListener('click', () => {
+            loadVideo();
             if (!document.fullscreenElement) video.requestFullscreen?.();
             else document.exitFullscreen?.();
         });
+
     }
 
     function setupReveal(selector, { threshold = 0.15, rootMargin = '0px 0px -8% 0px' } = {}) {
@@ -320,6 +356,40 @@
         elements.forEach((element) => observer.observe(element));
     }
 
+    function setupDataAos() {
+        const elements = Array.from(document.querySelectorAll('[data-aos]'));
+        if (!elements.length) return;
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            elements.forEach(revealElement);
+            return;
+        }
+
+        elements.forEach((element) => {
+            element.style.opacity = '0';
+            element.style.transform = getAosStartTransform(element.dataset.aos);
+            element.style.transition = 'opacity 700ms ease, transform 700ms ease';
+            element.style.willChange = 'opacity, transform';
+        });
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                revealElement(entry.target);
+                obs.unobserve(entry.target);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+        elements.forEach((element) => observer.observe(element));
+    }
+
+    function getAosStartTransform(type = '') {
+        if (type.includes('slide-right') || type.includes('fade-right')) return 'translateX(-34px)';
+        if (type.includes('slide-left') || type.includes('fade-left')) return 'translateX(34px)';
+        if (type.includes('fade-down')) return 'translateY(-28px)';
+        return 'translateY(30px)';
+    }
+
     function revealElement(element) {
         element.style.opacity = '1';
         element.style.transform = 'translateY(0)';
@@ -329,7 +399,13 @@
     function setupLazyMedia({ eagerCount = 3 } = {}) {
         document.querySelectorAll('img').forEach((img, index) => {
             if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
-            if (index >= eagerCount && !img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+            if (index < eagerCount) {
+                if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'high');
+                return;
+            }
+
+            if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+            if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'low');
         });
 
         document.querySelectorAll('video').forEach((video) => {
@@ -371,6 +447,7 @@
         setupHeroVideo,
         setupLazyMedia,
         setupLeadModal,
+        setupDataAos,
         setupHeaderState,
         setupReveal,
         setupSideMenu,
@@ -381,5 +458,6 @@
     onReady(() => {
         setupHeaderState();
         setupLeadModal();
+        setupDataAos();
     });
 }());

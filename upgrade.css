@@ -2067,3 +2067,37 @@ body.filters-open {
         grid-template-rows: 130px auto;
     }
 }
+
+@supports (content-visibility: auto) {
+    .company-info,
+    .upgrade-section,
+    .products-services,
+    .brands,
+    .clients,
+    .cta-contact,
+    .featured-products,
+    .main-content,
+    .main-services,
+    .logistics,
+    .advantages,
+    .contact-info,
+    .contact-form-section,
+    .location-section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 900px;
+    }
+
+    .product-card,
+    .featured-product-card,
+    .service-card,
+    .advantage-card,
+    .upgrade-card,
+    .process-card,
+    .sector-card,
+    .contact-card,
+    .logistics-item,
+    .brand-logo,
+    .client-logo {
+        contain: layout paint style;
+    }
+}
