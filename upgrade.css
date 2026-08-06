@@ -947,6 +947,17 @@ body.filters-open {
 
 .products-page .products-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}
+
+.products-page .page-layout,
+.products-page .products-content,
+.products-page .product-card {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
 }
 
 
@@ -2099,6 +2110,147 @@ body.filters-open {
     }
 }
 
+.location-heading {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.location-heading p {
+    color: var(--cp-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 auto;
+    max-width: 660px;
+}
+
+.location-modern {
+    align-items: stretch;
+    display: grid !important;
+    gap: 22px !important;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr) !important;
+}
+
+.location-modern .map-container {
+    border: 1px solid var(--cp-line) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 18px 44px rgba(8, 59, 90, 0.12) !important;
+    min-height: 460px;
+}
+
+.location-modern .map-image {
+    height: 100% !important;
+    min-height: 460px;
+    object-fit: cover;
+}
+
+.location-panel {
+    background: #ffffff;
+    border: 1px solid var(--cp-line);
+    border-radius: 8px;
+    box-shadow: 0 18px 44px rgba(8, 59, 90, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(22px, 3vw, 34px);
+}
+
+.location-badge {
+    align-items: center;
+    color: var(--cp-teal);
+    display: inline-flex;
+    font-size: 0.82rem;
+    font-weight: 800;
+    gap: 9px;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.location-panel h3 {
+    color: var(--cp-blue-dark);
+    font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+    line-height: 1.05;
+    margin: 0 0 14px;
+}
+
+.location-copy {
+    color: var(--cp-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 0 22px;
+}
+
+.location-details {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.location-detail {
+    align-items: center;
+    background: #f7fbfd;
+    border: 1px solid #d9e7ef;
+    border-radius: 8px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    padding: 13px;
+}
+
+.location-detail i {
+    align-items: center;
+    background: #e9f8fb;
+    border-radius: 8px;
+    color: var(--cp-blue);
+    display: flex;
+    height: 42px;
+    justify-content: center;
+    width: 42px;
+}
+
+.location-detail strong,
+.location-detail span {
+    display: block;
+}
+
+.location-detail strong {
+    color: var(--cp-blue-dark);
+    font-size: 0.95rem;
+}
+
+.location-detail span {
+    color: var(--cp-muted);
+    font-size: 0.88rem;
+    margin-top: 3px;
+}
+
+.location-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.location-actions .cta-button,
+.location-actions .ghost-button {
+    align-items: center;
+    display: inline-flex;
+    flex: 1 1 150px;
+    justify-content: center;
+    min-height: 48px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .location-modern {
+        grid-template-columns: 1fr !important;
+    }
+
+    .location-modern .map-container,
+    .location-modern .map-image {
+        min-height: 320px;
+    }
+}
+
 @supports (content-visibility: auto) {
     .company-info,
     .upgrade-section,
@@ -2107,7 +2259,6 @@ body.filters-open {
     .clients,
     .cta-contact,
     .featured-products,
-    .main-content,
     .main-services,
     .logistics,
     .advantages,
@@ -2118,7 +2269,6 @@ body.filters-open {
         contain-intrinsic-size: 1px 900px;
     }
 
-    .product-card,
     .featured-product-card,
     .service-card,
     .advantage-card,
