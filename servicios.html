@@ -1,0 +1,430 @@
+﻿<!-- SERVICIOS - HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - CLEAN PEL</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="servicios.css">
+    <link rel="stylesheet" href="upgrade.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" href="imgCleanPel/hoja logo cp-Photoroom.png" type="image/png">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+
+            <div id="menuToggle" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <a href="index.html" class="logo">
+                <img src="imgCleanPel/logo_cleanpel_cromatico (4) (3).png" alt="CLEAN PEL Logo">
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">LA EMPRESA</a>
+                <a href="productos.html" class="nav-link">PRODUCTOS</a>
+                <a href="servicios.html" class="nav-link active">SERVICIOS</a>
+                <a href="contactanos.html" class="nav-link">CONTACTANOS</a>
+            </nav>
+            <div class="social-buttons">
+                <button type="button" class="nav-cta js-open-quote"><i class="fa-solid fa-bolt"></i><span>Cotizar</span></button>
+                <a href="https://www.instagram.com/cleanpelrosario/" class="social-btn instagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====== MENÚ HAMBURGUESA ====== -->
+    <div class="side-menu" id="side-menu">
+        <div class="menu-header">
+            <div class="menu-close" id="menu-close">
+            <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <div class="menu-content">
+            <div class="menu-social">
+            <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/cleanpelrosario/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <nav class="menu-nav">
+                <a href="index.html">LA EMPRESA</a>
+                <a href="productos.html">PRODUCTOS</a>
+                <a href="servicios.html">SERVICIOS</a>
+                <a href="contactanos.html">CONTACTANOS</a>
+            </nav>
+
+            <div class="menu-contact">
+                <a href="mailto:ventas@cleanpel.com.ar">
+                    <i class="fas fa-envelope"></i> ventas@cleanpel.com.ar
+                </a>
+            </div>
+
+            <!-- CHATBOT DENTRO DEL MENU -->
+            <div id="mobileChatContainer"></div>
+
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content" data-aos="slide-right">
+            <span class="hero-eyebrow"><i class="fa-solid fa-handshake"></i> Servicio integral</span>
+            <h1 class="hero-title">NUESTROS SERVICIOS</h1>
+            <p class="hero-subtitle">En CleanPel acompañamos a nuestros clientes con un conjunto de servicios integrales que complementan la provisión de insumos de higiene y limpieza.</p>
+            <div class="hero-actions">
+                <button type="button" class="cta-button cta-button-main js-open-quote">Coordinar visita</button>
+                <a href="productos.html" class="ghost-button"><i class="fa-solid fa-boxes"></i> Ver productos</a>
+            </div>
+            <div class="hero-proof-grid">
+                <div class="hero-proof">
+                    <strong>Sin cargo</strong>
+                    <span>instalacion de dispensadores</span>
+                </div>
+                <div class="hero-proof">
+                    <strong>Soporte</strong>
+                    <span>tecnico y comercial</span>
+                </div>
+                <div class="hero-proof">
+                    <strong>Plan</strong>
+                    <span>por consumo y frecuencia</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image" data-aos ="fade-down">
+            <div class="video-container">
+                <video class="floating-video hero-video" muted playsinline preload="metadata">
+                    <source src="imgCleanPel/video servicios y contactanos.mp4" type="video/mp4">
+                </video>
+
+                <div class="video-controls">
+                    <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    <div class="progress-container"><input type="range" class="progress-bar" value="0"></div>
+                    <span class="time">0:00 / 0:14</span>
+                    <button class="mute-btn"><i class="fa-solid fa-volume-high"></i></button>
+                    <button class="fullscreen-btn"><i class="fa-solid fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="upgrade-section quick-highlight">
+        <div class="container">
+            <div class="section-heading center">
+                <span class="section-eyebrow"><i class="fa-solid fa-star"></i> Servicios destacados</span>
+                <h2>Lo que más valoran nuestros clientes.</h2>
+            </div>
+            <div class="insight-grid">
+                <div class="upgrade-card">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h3>Asesor asignado</h3>
+                    <p>Contacto directo para compras y reposiciones.</p>
+                </div>
+                <div class="upgrade-card">
+                    <i class="fa-solid fa-tools"></i>
+                    <h3>Servicio tecnico</h3>
+                    <p>Instalacion y mantenimiento de dispensadores.</p>
+                </div>
+                <div class="upgrade-card">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                    <h3>Entrega coordinada</h3>
+                    <p>Logistica propia en Rosario y alrededores.</p>
+                </div>
+                <div class="upgrade-card">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <h3>Mejora continua</h3>
+                    <p>Seguimiento para optimizar consumo y stock.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS ESPECIALIZADOS -->
+    <section class="main-services">
+        <div class="container" data-aos="slide-left">
+            <h2>SERVICIOS ESPECIALIZADOS</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>SERVICIO TÉCNICO Y DISPENSADORES</h3>
+                    <p>Dispensadores en comodato, instalacion sin cargo y soporte ante recambios o revisiones.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h3>ASESORAMIENTO PERSONALIZADO</h3>
+                    <p>Te ayudamos a elegir productos por rubro, consumo, tipo de baño, frecuencia y presupuesto.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <h3>CAPACITACIONES Y CHARLAS TÉCNICAS</h3>
+                    <p>Capacitaciones simples para que el equipo use mejor los productos y dispensadores.</p>
+                    <ul class="service-features">
+                        <li>Uso correcto de productos químicos.</li>
+                        <li>Instrucciones prácticas para recarga y mantenimiento de dispensadores.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+                    <h3>LOGÍSTICA Y DISTRIBUCIÓN</h3>
+                    <p>Pedidos ordenados y entregas coordinadas para sostener stock sin compras de urgencia.</p>
+                    <ul class="service-features">
+                        <li>Preparación y entrega de pedidos sin cargo en Rosario y alrededores.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGISTICA -->
+    <section class="logistics">
+        <div class="container">
+            <h2>NUESTRO PROCESO LOGÍSTICO</h2>
+            <div class="logistics-grid">
+                <div class="logistics-item">
+                    <div class="logistics-image">
+                        <img src="imgCleanPel/casual mauro.jpg" alt="Evaluación">
+                    </div>
+                    <div class="logistics-content">
+                        <div class="step-number">01</div>
+                        <h3>EVALUACIÓN INICIAL</h3>
+                        <p>Relevamos consumo, espacios y necesidades para armar una propuesta precisa.</p>
+                        <ul>
+                            <li>Consumo actual.</li>
+                            <li>Oportunidades de ahorro.</li>
+                            <li>Necesidad de dispensadores.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="logistics-item reverse">
+                    <div class="logistics-image">
+                        <img src="imgCleanPel/foto magui mashe.jpg" alt="Planificación">
+                    </div>
+                    <div class="logistics-content">
+                        <div class="step-number">02</div>
+                        <h3>PLANIFICACIÓN ESTRATÉGICA</h3>
+                        <p>Definimos productos, frecuencia de reposición y presupuesto.</p>
+                        <ul>
+                            <li>Productos recomendados.</li>
+                            <li>Entregas programadas.</li>
+                            <li>Presupuesto adaptado.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="logistics-item">
+                    <div class="logistics-image">
+                        <img src="imgCleanPel/dispenser santi.jpg" alt="Ejecución">
+                    </div>
+                    <div class="logistics-content">
+                        <div class="step-number">03</div>
+                        <h3>EJECUCIÓN PROFESIONAL</h3>
+                        <p>Instalamos, entregamos y dejamos el servicio funcionando.</p>
+                        <ul>
+                            <li>Instalación de dispensadores.</li>
+                            <li>Entrega coordinada.</li>
+                            <li>Puesta en marcha.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="logistics-item reverse">
+                    <div class="logistics-image">
+                        <img src="imgCleanPel/anotando juani.jpg" alt="Control de Calidad">
+                    </div>
+                    <div class="logistics-content">
+                        <div class="step-number">04</div>
+                        <h3>CONTROL DE CALIDAD Y MEJORA</h3>
+                        <p>Seguimos el consumo y ajustamos el plan cuando hace falta.</p>
+                        <ul>
+                            <li>Seguimiento comercial.</li>
+                            <li>Control de reposición.</li>
+                            <li>Mejora continua.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VENTAJAS -->
+    <section class="advantages">
+        <div class="container">
+            <h2>¿POR QUE ELEGIR CLEAN PEL?</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3>RESPALDO TÉCNICO Y GARANTIAS</h3>
+                    <ul class="service-features">
+                        <li>Todos nuestros productos cuentan con fichas técnicas y hojas de seguridad.</li>
+                        <li>Nuestros servicios están respaldados por seguros de responsabilidad civil y garantías de calidad.</li>
+                        <li>Brindamos confianza y seguridad a cada institución que nos elige.</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>EQUIPO CAPACITADO</h3>
+                    <ul class="service-features">
+                        <li>Nuestro equipo recibe formación continua en protocolos de higiene y limpieza.</li>
+                        <li>Contamos  con la cobertura y seguros correspondientes para operar con tranquilidad.</li>
+                        <li>Asesoramiento profesional y cercano, adaptado a cada necesidad.</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>DISPONIBILIDAD Y RESPUESTA RÁPIDA</h3>
+                    <ul class="service-features">
+                        <li>Atención permanente, con disponibilidad  para emergencias .</li>
+                        <li>Flexibilidad en las entregas y en la atención de incidencias.</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>INNOVACIÓN Y TECNOLOGÍA</h3>
+                    <ul class="service-features">
+                        <li>Incorporamos las últimas tecnologías en equipos y sistemas de gestión.</li>
+                        <li>Procesos optimizados que mejoran la eficiencia y la experiencia del cliente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="upgrade-section alt">
+        <div class="container">
+            <div class="catalog-panel service-action-panel">
+                <div>
+                    <span class="section-eyebrow"><i class="fa-solid fa-circle-check"></i> Empezar ahora</span>
+                    <h2>Te armamos una propuesta en minutos.</h2>
+                    <p>Contanos rubro, zona y necesidad. Un asesor te responde con una recomendación clara.</p>
+                    <div class="catalog-tags">
+                        <span>Visita comercial</span>
+                        <span>Presupuesto por rubro</span>
+                        <span>Recomendacion tecnica</span>
+                    </div>
+                </div>
+                <div class="cta-row">
+                    <button type="button" class="cta-button cta-button-main js-open-quote">Solicitar diagnostico</button>
+                    <a href="contactanos.html" class="ghost-button"><i class="fa-solid fa-envelope"></i> Contacto formal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+     <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CLEAN PEL</h3>
+                    <p>Líderes en higiene institucional.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/cleanpelrosario/" class="social-btn instagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>PRODUCTOS</h4>
+                    <ul>
+                        <li><a href="productos.html">Elite</a></li>
+                        <li><a href="productos.html">Wassington</a></li>
+                        <li><a href="productos.html">Royco</a></li>
+                        <li><a href="productos.html">Productos Varios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>SERVICIOS</h4>
+                    <ul>
+                        <li><a href="servicios.html">Servicios Especializados</a></li>
+                        <li><a href="servicios.html">Proceso Logístico</a></li>
+                        <li><a href="servicios.html">Consultoría</a></li>
+                        <li><a href="servicios.html">Capacitación</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACTO</h4>
+                    <p><i class="fas fa-phone"></i>       +54 341 2 151 619</p>
+                    <p><i class="fas fa-envelope"></i>     ventas@cleanpel.com.ar</p>
+                    <p><i class="fas fa-map-marker-alt"></i>    Rosario, Argentina</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Desarrollado por CRISMAN JUAN BAUTISTA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chatbot" data-aos="fade-down">
+        <div class="chatbot-icon" onclick="toggleChat()">
+            <img src="imgCleanPel/robot cp.png" alt="Chatbot" class="chatbot-img">
+        </div>
+        <div class="chatbot-popup" id="chatPopup">
+            <div class="chat-header">
+                <h4>PREGUNTAS FRECUENTES</h4>
+                <span class="close-chat" onclick="toggleChat()">&times;</span>
+            </div>
+            <div class="chat-content">
+                <div class="faq-item" onclick="showAnswer(1)">
+                    <p>¿Hacemos repartos a todo el país?</p>
+                    <div class="answer" id="answer1">Sí. En Rosario y alrededores entregamos en 24/48 hs. Para el resto del país, realizamos envíos coordinados según la ubicación.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(2)">
+                    <p>¿Qué servicios ofrecemos?</p>
+                    <div class="answer" id="answer2">Distribucion de productos de higiene, asesoramiento personalizado  y colocación de dispensadores en comodato.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(3)">
+                    <p>¿Por dónde puedo hacer los pedidos?</p>
+                    <div class="answer" id="answer3">Puedes hacer pedidos por WhatsApp, email o a través de nuestro formulario de contacto.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(4)">
+                    <p>¿Tienen un catálogo con todos los productos?</p>
+                    <div class="answer" id="answer4">Sí, puedes ver nuestro catálogo completo en la sección Productos de nuestra web.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="servicios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+    window.AOS?.init({ duration: 1000, once: true });
+
+</script>
+
+</body>
+</html>
+
+

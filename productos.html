@@ -1,0 +1,2222 @@
+﻿<!-- PÁGINA PRODUCTOS - HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - CLEAN PEL</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="productos.css">
+    <link rel="stylesheet" href="upgrade.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" href="imgCleanPel/hoja logo cp-Photoroom.png" type="image/png">
+</head>
+
+<body class="products-page">
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+
+            <div id="menuToggle" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <a href="index.html" class="logo">
+                <img src="imgCleanPel/logo_cleanpel_cromatico (4) (3).png" alt="CLEAN PEL Logo">
+            </a>
+
+            <nav class="nav" id="mainNav">
+                <a href="index.html" class="nav-link">LA EMPRESA</a>
+                <a href="productos.html" class="nav-link active">PRODUCTOS</a>
+                <a href="servicios.html" class="nav-link">SERVICIOS</a>
+                <a href="contactanos.html" class="nav-link">CONTACTANOS</a>
+            </nav>
+            <div class="social-buttons">
+                <button type="button" class="nav-cta js-open-quote"><i class="fa-solid fa-bolt"></i><span>Cotizar</span></button>
+                <a href="https://www.instagram.com/cleanpelrosario/" class="social-btn instagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====== MENÚ HAMBURGUESA ====== -->
+    <div class="side-menu" id="side-menu">
+        <div class="menu-header">
+            <div class="menu-close" id="menu-close">
+            <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <div class="menu-content">
+            <div class="menu-social">
+            <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/cleanpelrosario/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <nav class="menu-nav">
+                <a href="index.html">LA EMPRESA</a>
+                <a href="productos.html">PRODUCTOS</a>
+                <a href="servicios.html">SERVICIOS</a>
+                <a href="contactanos.html">CONTACTANOS</a>
+            </nav>
+
+            <div class="menu-contact">
+                <a href="mailto:ventas@cleanpel.com.ar">
+                    <i class="fas fa-envelope"></i> ventas@cleanpel.com.ar
+                </a>
+            </div>
+
+            <!-- CHATBOT DENTRO DEL MENU -->
+            <div id="mobileChatContainer"></div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content" data-aos="slide-right">
+            <span class="hero-eyebrow"><i class="fa-solid fa-box-open"></i> Catalogo institucional</span>
+            <h1 class="hero-title">NUESTROS PRODUCTOS</h1>
+            <p class="hero-subtitle">Soluciones integrales de limpieza y mantenimiento para empresas, instituciones, comercios e industrias.</p>
+            <div class="hero-actions">
+                <a href="imgCleanPel/catalogo.pdf" class="cta-button" target="_blank">Descargar catalogo</a>
+                <button type="button" class="ghost-button js-open-quote"><i class="fa-solid fa-tasks"></i> Pedir recomendacion</button>
+            </div>
+            <div class="hero-proof-grid">
+                <div class="hero-proof">
+                    <strong>Elite</strong>
+                    <span>papeles, toallas y jabones</span>
+                </div>
+                <div class="hero-proof">
+                    <strong>Wassington</strong>
+                    <span>quimicos profesionales</span>
+                </div>
+                <div class="hero-proof">
+                    <strong>RCM</strong>
+                    <span>maquinas de limpieza</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image" data-aos ="fade-down">
+            <div class="video-container">
+                <video class="floating-video hero-video" preload="metadata" playsinline muted>
+                    <source src="imgCleanPel/video productos.mp4" type="video/mp4">
+                </video>
+
+                <div class="video-controls">
+                    <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    <div class="progress-container"><input type="range" class="progress-bar" value="0"></div>
+                    <span class="time">0:00 / 0:14</span>
+                    <button class="mute-btn"><i class="fa-solid fa-volume-high"></i></button>
+                    <button class="fullscreen-btn"><i class="fa-solid fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-heading">
+                <span class="section-eyebrow"><i class="fa-solid fa-star"></i> Productos destacados</span>
+                <h2>Lo más pedido por nuestros clientes.</h2>
+            </div>
+            <div class="featured-grid">
+                <article class="featured-product-card" onclick="showProductInfo('elite-Papel Higienico Elite Rollo SH Plus 500')">
+                    <img src="img/Papel Higienico Elite Rollo SH Plus 500.png" alt="Papel higienico Elite Rollo SH Plus 500">
+                    <div>
+                        <span>Alto tránsito</span>
+                        <h3>Papel Higienico Elite Rollo SH Plus 500</h3>
+                        <p>Rendimiento para baños institucionales.</p>
+                    </div>
+                </article>
+                <article class="featured-product-card" onclick="showProductInfo('elite-Toallas De Papel Intercaladas Elite SH Plus')">
+                    <img src="img/Toallas Intercaladas Elite SH Plus.png" alt="Toallas intercaladas Elite SH Plus">
+                    <div>
+                        <span>Baños y cocinas</span>
+                        <h3>Toallas Intercaladas Elite SH Plus</h3>
+                        <p>Reposición simple y consumo controlado.</p>
+                    </div>
+                </article>
+                <article class="featured-product-card" onclick="showProductInfo('wassington-Limpiador Multiuso Tiger')">
+                    <img src="img2/Limpiador Multiuso Tiger.png" alt="Limpiador multiuso Tiger">
+                    <div>
+                        <span>Superficies</span>
+                        <h3>Limpiador Multiuso Tiger</h3>
+                        <p>Solución práctica para mantenimiento diario.</p>
+                    </div>
+                </article>
+                <article class="featured-product-card" onclick="showProductInfo('rcm-Bite I')">
+                    <img src="img5/Bite I.png" alt="Maquina de limpieza RCM Bite I">
+                    <div>
+                        <span>Maquinaria</span>
+                        <h3>RCM Bite I</h3>
+                        <p>Equipo compacto para limpieza profesional.</p>
+                    </div>
+                </article>
+                <article class="featured-product-card" onclick="showProductInfo('elite-Jabon Espuma Multiflex')">
+                    <img src="img/Jabon Espuma Multiflex.png" alt="Jabon espuma Multiflex">
+                    <div>
+                        <span>Higiene de manos</span>
+                        <h3>Jabon Espuma Multiflex</h3>
+                        <p>Alto rendimiento para baños corporativos.</p>
+                    </div>
+                </article>
+                <article class="featured-product-card" onclick="showProductInfo('royco-Carro Mini Con Prensamopas Horizontal')">
+                    <img src="img3/Carro Mini Con Prensamopas Horizontal.png" alt="Carro mini con prensamopas horizontal">
+                    <div>
+                        <span>Equipamiento</span>
+                        <h3>Carro Mini con Prensamopas</h3>
+                        <p>Orden y eficiencia para equipos de limpieza.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARRA BUSCAR -->
+    <main class="main-content">
+        <div class="container">
+            <div class="filter-toolbar">
+                <button type="button" class="filter-toggle" id="openFilters">
+                    <i class="fa-solid fa-sliders"></i>
+                    Filtrar catálogo
+                </button>
+                <span>Usá filtros por marca o buscá directo por producto.</span>
+            </div>
+            <div class="page-layout" data-aos="fade-up">
+                <!-- Sidebar -->
+                <aside class="sidebar" id="productFilters" aria-hidden="true">
+                    <div class="filter-panel-head">
+                        <span>Catálogo Clean Pel</span>
+                        <h2>Categorías</h2>
+                        <p>Explorá por marca, línea de producto o necesidad.</p>
+                        <button type="button" class="filter-close" id="closeFilters" aria-label="Cerrar filtros">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <button type="button" onclick="clearSearch()" class="filter-reset">
+                            <i class="fa-solid fa-border-all"></i> Ver todo el catálogo
+                        </button>
+                    </div>
+
+                    <!-- Buscador -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Buscar productos..." class="search-input">
+                            <button class="search-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORIAS DESPLEGABLES -->
+                    <div class="categories" data-aos ="slide-up">
+
+                        <!-- ELITE -->
+                        <div class="category-item">
+                            <div class="category-header" onclick="toggleCategory('elite')">
+                                <span class="category-title">ELITE</span>
+                                <i class="fas fa-chevron-down category-arrow" id="elite-arrow"></i>
+                            </div>
+                            <div class="category-content" id="elite-content">
+                                <ul class="subcategory-list">
+                                    <li><a href="#"onclick="filterProducts('elite','PAPEL HIGIÉNICO'); toggleSubSubcategory(event, 'elite-Papel Higienico')">PAPEL HIGIÉNICO <i class="fas fa-chevron-down"></i></a>
+                                      <ul class="sub-subcategory-list" id="elite-Papel Higienico">
+                                         <li><a href="#" onclick="filterProducts('elite','PAPEL HIGIÉNICO ALTO METRAJE'); highlightSelectedSubcategory(this)">ALTO METRAJE</a></li>
+                                         <li><a href="#" onclick="filterProducts('elite', 'PAPEL HIGIÉNICO BAJO METRAJE'); highlightSelectedSubcategory(this)">BAJO METRAJE</a></li>
+                                      </ul>
+                                    </li>
+
+                                    <li><a href="#"onclick="filterProducts('elite','TOALLAS DE PAPEL'); toggleSubSubcategory(event, 'elite-Toallas De Papel')">TOALLAS DE PAPEL <i class="fas fa-chevron-down"></i></a>
+                                      <ul class="sub-subcategory-list" id="elite-Toallas De Papel">
+                                         <li><a href="#" onclick="filterProducts('elite', 'TOALLAS DE PAPEL EN ROLLO'); highlightSelectedSubcategory(this)">EN ROLLO</a></li>
+                                         <li><a href="#" onclick="filterProducts('elite', 'TOALLAS DE PAPEL INTERCALADAS'); highlightSelectedSubcategory(this)">INTERCALADAS</a></li>
+                                      </ul>
+                                    </li>
+
+                                    <li><a href="#" onclick="filterProducts('elite', 'ROLLOS Y BOBINAS'); highlightSelectedSubcategory(this)">ROLLOS Y BOBINAS</a></li>
+                                    <li><a href="#" onclick="filterProducts('elite','SERVILLETAS'); highlightSelectedSubcategory(this)">SERVILLETAS</a></li>
+                                    <li><a href="#" onclick="filterProducts('elite', 'PAÑOS DE LIMPIEZA'); highlightSelectedSubcategory(this)">PAÑOS DE LIMPIEZA</a></li>
+                                    <li><a href="#" onclick="filterProducts('elite', 'JABONES Y ALCOHOLES'); highlightSelectedSubcategory(this)">JABONES Y ALCOHOLES</a></li>
+                                    <li><a href="#" onclick="filterProducts('elite', 'DISPENSADORES'); highlightSelectedSubcategory(this)">DISPENSADORES</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- WASSINGTON -->
+                        <div class="category-item">
+                            <div class="category-header" onclick="toggleCategory('wassington')">
+                                <span class="category-title">WASSINGTON</span>
+                                <i class="fas fa-chevron-down category-arrow" id="wassington-arrow"></i>
+                            </div>
+                            <div class="category-content" id="wassington-content">
+                                <ul class="subcategory-list">
+                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO DE PISOS'); highlightSelectedSubcategory(this)">CUIDADO DE PISOS</a></li>
+                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO DE BAÑOS'); highlightSelectedSubcategory(this)">CUIDADO DE BAÑOS</a></li>
+                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO DE COCINAS'); highlightSelectedSubcategory(this)">CUIDADO DE COCINAS</a></li>
+                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO PERSONAL'); highlightSelectedSubcategory(this)">CUIDADO PERSONAL</a></li>
+                                    <li><a href="#" onclick="filterProducts('wassington', 'LIMPIADORES Y DESINFECTANTES'); highlightSelectedSubcategory(this)">LIMPIADORES Y DESINFECTANTES</a></li>    
+                                    <li><a href="#" onclick="filterProducts('wassington', 'LIMPIAVIDRIOS Y MULTIUSOS'); highlightSelectedSubcategory(this)">LIMPIAVIDRIOS Y MULTIUSOS</a></li>                         
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- ROYCO -->
+                        <div class="category-item">
+                            <div class="category-header" onclick="toggleCategory('royco')">
+                                <span class="category-title">ROYCO</span>
+                                <i class="fas fa-chevron-down category-arrow" id="royco-arrow"></i>
+                            </div>
+                            <div class="category-content" id="royco-content">
+                                <ul class="subcategory-list">
+                                    <li><a href="#" onclick="filterProducts('royco', 'CARROS, CESTOS Y CONTENEDORES'); highlightSelectedSubcategory(this)">CARROS, CESTOS Y CONTENEDORES</a></li>
+                                    <li><a href="#" onclick="filterProducts('royco', 'EQUIPAMIENTO DE LIMPIEZA'); highlightSelectedSubcategory(this)">EQUIPAMIENTO DE LIMPIEZA</a></li>
+                                    <li><a href="#" onclick="filterProducts('royco', 'EQUIPOS DE VIDRIO'); highlightSelectedSubcategory(this)">EQUIPOS DE VIDRIO</a></li>
+                                    <li><a href="#" onclick="filterProducts('royco', 'CABOS'); highlightSelectedSubcategory(this)">CABOS</a></li>
+                                    <li><a href="#" onclick="filterProducts('royco', 'ESCOBAS, BARREDORES Y ESCOBILLONES'); highlightSelectedSubcategory(this)">ESCOBAS, BARREDORES Y ESCOBILLONES</a></li>
+                                    <li><a href="#" onclick="filterProducts('royco', 'SECADORES DE PISO'); highlightSelectedSubcategory(this)">SECADORES DE PISO</a></li>                                  
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- PRODUCTOS VARIOS -->
+                        <div class="category-item">
+                            <div class="category-header" onclick="toggleCategory('productos varios')">
+                                <span class="category-title">PRODUCTOS VARIOS</span>
+                                <i class="fas fa-chevron-down category-arrow" id="productos varios-arrow"></i>
+                            </div>
+                            <div class="category-content" id="productos varios-content">
+                                <ul class="subcategory-list">
+                                    <li><a href="#" onclick="filterProducts('productos varios', 'TRAPOS Y PAÑOS'); highlightSelectedSubcategory(this)">TRAPOS Y PAÑOS</a></li>
+                                    <li><a href="#" onclick="filterProducts('productos varios', 'VARIOS'); highlightSelectedSubcategory(this)">VARIOS</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- MAQUINAS DE LIMPIEZA RCN -->
+                        <div class="category-item">
+                            <div class="category-header" onclick="toggleCategory('rcm')">
+                                <span class="category-title">RCM</span>
+                                <i class="fas fa-chevron-down category-arrow" id="rcm-arrow"></i>
+                            </div>
+                            <div class="category-content" id="rcm-content">
+                                <ul class="subcategory-list">
+                                    <li><a href="#" onclick="filterProducts('rcm', 'MÁQUINAS DE LIMPIEZA RCM'); highlightSelectedSubcategory(this)">MÁQUINAS DE LIMPIEZA RCM</a></li>                               
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="filter-backdrop" id="filterBackdrop"></div>
+
+                <!-- PRODUCTOS -->
+                <section class="products-content">
+                    <div class="page-title">
+                    <h1 id="productsTitle">PRODUCTOS</h1>
+                    </div>
+                    <div class="products-grid"  id="productsGrid" data-aos ="fade-left">
+
+                        <!-- ELITE -->
+
+                        <!-- PAPEL HIGIENICO -->
+                        <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO ALTO METRAJE" onclick="showProductInfo('elite-Papel Higienico SH Plus')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico SH Plus.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico SH Plus</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO ALTO METRAJE" onclick="showProductInfo('elite-Papel Higienico Elite Rollo SH Classic')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Elite Rollo SH Classic.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Elite Rollo SH Classic</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO ALTO METRAJE" onclick="showProductInfo('elite-Papel Higienico Elite Rollo SH Plus 300')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Elite Rollo SH Plus 300.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Elite Rollo SH Plus 300</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO ALTO METRAJE" onclick="showProductInfo('elite-Papel Higienico Elite Rollo SH Plus 500')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Elite Rollo SH Plus 500.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Elite Rollo SH Plus 500</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO BAJO METRAJE" onclick="showProductInfo('elite-Papel Higienico Elite Rollo SH Plus')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Elite Rollo SH Plus.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Elite Rollo SH Plus</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO BAJO METRAJE" onclick="showProductInfo('elite-Papel Higienico Elite SH Plus')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Elite SH Plus.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Elite SH Plus</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO BAJO METRAJE" onclick="showProductInfo('elite-Papel Higienico Elite DH Excellence')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Elite DH Excellence.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Elite DH Excellence</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="PAPEL HIGIÉNICO BAJO METRAJE" onclick="showProductInfo('elite-Papel Higienico Interfoliado Doble Hoja')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Interfoliado Doble Hoja.png" alt="Elite Papel Higiénico" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Higiénico Interfoliado Doble Hoja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- TOALLAS DE PAPEL -->
+                        <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL EN ROLLO" onclick="showProductInfo('elite-Toalla Elite DH Excellence')">
+                            <div class="product-image">
+                                <img src="img/Toalla Elite DH Excellence.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla Elite DH Excellence</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL EN ROLLO" onclick="showProductInfo('elite-Toalla Elite Rollo SH Plus')">
+                            <div class="product-image">
+                                <img src="img/Toalla Elite Rollo SH Plus.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla Elite Rollo SH Plus</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL EN ROLLO" onclick="showProductInfo('elite-Toalla Elite SH Plus')">
+                            <div class="product-image">
+                                <img src="img/Toalla Elite SH Plus.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla Elite SH Plus</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL INTERCALADAS" onclick="showProductInfo('elite-Toallas De Papel Intercaladas Una Hoja')">
+                            <div class="product-image">
+                                <img src="img/Toalla De Papel Intercaladas Una Hoja.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toallas De Papel Intercaladas Una Hoja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL INTERCALADAS" onclick="showProductInfo('elite-Toalla De Papel Elite HC Excellence')">
+                            <div class="product-image">
+                                <img src="img/Toalla De Papel Elite HC Excellence.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla De Papel Elite HC Excellence</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL INTERCALADAS" onclick="showProductInfo('elite-Toallas De Papel Intercaladas Elite SH Plus')">
+                            <div class="product-image">
+                                <img src="img/Toallas Intercaladas Elite SH Plus.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toallas De Papel Intercaladas Elite SH Plus</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="TOALLAS DE PAPEL INTERCALADAS" onclick="showProductInfo('elite-Toallas De Papel Dobladas Una Hoja')">
+                            <div class="product-image">
+                                <img src="img/Toallas De Papel Dobladas Una Hoja.png" alt="Elite Toallas De Papel" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toallas De Papel Dobladas Una Hoja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- ROLLOS Y BOBINAS -->
+                         <div class="product-card" data-brand="elite" data-category="ROLLOS Y BOBINAS" onclick="showProductInfo('elite-Rollos De Cocina Doble Hoja')">
+                            <div class="product-image">
+                                <img src="img/Rollos De Cocina Doble Hoja.png" alt="Elite Rollos Y Bobinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rollos De Cocina Doble Hoja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="ROLLOS Y BOBINAS"onclick="showProductInfo('elite-Rollos Multiuso Doble Hoja')">
+                            <div class="product-image">
+                                <img src="img/Rollo Multiuso Doble Hoja.png" alt="Elite Rollos Y Bobinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rollos Multiuso Doble Hoja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="ROLLOS Y BOBINAS" onclick="showProductInfo('elite-Bobina Elite DH Excellence')">
+                            <div class="product-image">
+                                <img src="img/Bobina Elite DH Excellence.png" alt="Elite Rollos Y Bobinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Bobina Elite DH Excellence</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="ROLLOS Y BOBINAS" onclick="showProductInfo('elite-Bobina Elite DH Plus')">
+                            <div class="product-image">
+                                <img src="img/Bobina Elite DH Plus.png" alt="Elite Rollos Y Bobinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Bobina Elite DH Plus</h3>
+                                <button class="btn-ver-mas">VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- SERVILLETAS -->
+                         <div class="product-card" data-brand="elite" data-category="SERVILLETAS" onclick="showProductInfo('elite-Servilletas Interfoliadas')">
+                            <div class="product-image">
+                                <img src="img/Servilletas Interfoliadas.png" alt="Elite Servilletas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Servilletas Interfoliadas</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="SERVILLETAS" onclick="showProductInfo('elite-Servilletas Fast Food Una Hoja')">
+                            <div class="product-image">
+                                <img src="img/Servilletas Fast Food Una Hoja.png" alt="Elite Servilletas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Servilletas Fast Food Una Hoja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="SERVILLETAS" onclick="showProductInfo('elite-Servilletas Hoja Simple')">
+                            <div class="product-image">
+                                <img src="img/Servilletas Hoja Simple.png" alt="Elite Servilletas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Servilletas Hoja Simple</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- PAÑOS DE LIMPIEZA -->
+                        <div class="product-card" data-brand="elite" data-category="PAÑOS DE LIMPIEZA" onclick="showProductInfo('elite-Paños De Limpieza Max50')">
+                            <div class="product-image">
+                                <img src="img/Panos De Limpieza MAX50.png" alt="Elite Paños De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños De Limpieza MAX50</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAÑOS DE LIMPIEZA" onclick="showProductInfo('elite-Paños De Limpieza Max60 50 Paños')">
+                            <div class="product-image">
+                                <img src="img/Panos De Limpieza MAX60 50 Panos.png" alt="Elite Paños De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños De Limpieza MAX60 50 Paños</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAÑOS DE LIMPIEZA" onclick="showProductInfo('elite-Paños De Limpieza Max60 890 Paños')">
+                            <div class="product-image">
+                                <img src="img/Panos De Limpieza MAX60 890 Panos.png" alt="Elite Paños De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños De Limpieza MAX60 890 Paños</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAÑOS DE LIMPIEZA" onclick="showProductInfo('elite-Paños De Limpieza Max70 88 Paños')">
+                            <div class="product-image">
+                                <img src="img/Panos De Limpieza MAX70 88 Panos.png" alt="Elite Paños De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños De Limpieza MAX70 88 Paños</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAÑOS DE LIMPIEZA" onclick="showProductInfo('elite-Paños De Limpieza Max70 750 Paños')">
+                            <div class="product-image">
+                                <img src="img/Panos De Limpieza MAX70 750 Panos.png" alt="Elite Paños De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños De Limpieza MAX70 750 Paños</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                         <div class="product-card" data-brand="elite" data-category="PAÑOS DE LIMPIEZA" onclick="showProductInfo('elite-Paños De Limpieza Max80')">
+                            <div class="product-image">
+                                <img src="img/Panos De Limpieza MAX80.png" alt="Elite Paños De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños De Limpieza MAX80</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- JABONES Y ALCOHOLES -->
+                        <div class="product-card" data-brand="elite" data-category="JABONES Y ALCOHOLES" onclick="showProductInfo('elite-Jabon Liquido Glicerina')">
+                            <div class="product-image">
+                                <img src="img/Jabon Liquido Glicerina.png" alt="Elite Jabones Y Alcoholes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabon Líquido Glicerina</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="JABONES Y ALCOHOLES" onclick="showProductInfo('elite-Jabon Liquido Antibacterial Multiflex')">
+                            <div class="product-image">
+                                <img src="img/Jabon Liquido Antibacterial Multiflex.png" alt="Elite Jabones Y Alcoholes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabon Líquido Antibacterial Multiflex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="JABONES Y ALCOHOLES" onclick="showProductInfo('elite-Jabon Liquido Glicerina Multiflex')">
+                            <div class="product-image">
+                                <img src="img/Jabon Liquido Glicerina Multiflex.png" alt="Elite Jabones Y Alcoholes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabon Líquido Glicerina Multiflex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="JABONES Y ALCOHOLES" onclick="showProductInfo('elite-Jabon Spray Multiflex')">
+                            <div class="product-image">
+                                <img src="img/Jabon Spray Multiflex.png" alt="Elite Jabones Y Alcoholes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabon Spray Multiflex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="JABONES Y ALCOHOLES" onclick="showProductInfo('elite-Alcohol En Gel Multiflex')">
+                            <div class="product-image">
+                                <img src="img/Alcohol En Gel Multiflex.png" alt="Elite Jabones Y Alcoholes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Alcohol En Gel Multiflex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="JABONES Y ALCOHOLES" onclick="showProductInfo('elite-Jabon Espuma Multiflex')">
+                            <div class="product-image">
+                                <img src="img/Jabon Espuma Multiflex.png" alt="Elite Jabones Y Alcoholes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabón Espuma Multiflex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- DISPENSADORES -->
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Jabon Alcohol Multiflex Jabon Granel')">
+                            <div class="product-image">
+                                <img src="img/Jabon Alcohol Multiflex Jabon Granel.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabón/Alcohol Multiflex Jabón Granel</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Jabon Alcohol Multiflex')">
+                            <div class="product-image">
+                                <img src="img/Jabon Alcohol Multiflex.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabón/Alcohol Multiflex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Papel Higienico Jumbo')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Jumbo.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Hgiénico Jumbo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Papel Higienico Intercalado')">
+                            <div class="product-image">
+                                <img src="img/Papel Higienico Intercalado.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Papel Hgiénico Intercalado</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Toallas Dobladas Intercaladas')">
+                            <div class="product-image">
+                                <img src="img/Toallas Dobladas Intercaladas.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toallas Dobladas Intercaladas</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Toalla Jumbo Autocorte Non-Touch')">
+                            <div class="product-image">
+                                <img src="img/Toalla Jumbo Autocorte Non-Touch.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla Jumbo Autocorte Non-Touch</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Toalla Jumbo Autocorte Automatico')">
+                            <div class="product-image">
+                                <img src="img/Toalla Jumbo Autocorte Automatico.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla Jumbo Autocorte Automático</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="elite" data-category="DISPENSADORES" onclick="showProductInfo('elite-Dispensadores Toalla Jumbo Palanca')">
+                            <div class="product-image">
+                                <img src="img/Toalla Jumbo Palanca.png" alt="Dispensadores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Toalla Jumbo Palanca</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+ 
+
+                        <!-- WASSINGTON -->
+
+                        <!-- CUIDADOS DE PISOS -->                         
+                         <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Cera Autobrillo Uniwax')">
+                            <div class="product-image">
+                                <img src="img2/Cera Autobrillo Uniwax.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cera Autobrillo Uniwax</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Cera Autobrillo Superwax')">
+                            <div class="product-image">
+                                <img src="img2/Cera Autobrillo Superwax.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cera Autobrillo Superwax</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Cera Autobrillo Rex')">
+                            <div class="product-image">
+                                <img src="img2/Cera Autobrillo Rex.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cera Autobrillo Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Cera Acrilica Acrilwax')">
+                            <div class="product-image">
+                                <img src="img2/Cera Acrilica Acrilwax.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cera Acrílica Acrilwax</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Sellador Acrilico Acrilwax')">
+                            <div class="product-image">
+                                <img src="img2/Sellador Acrilico Acrilwax.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Sellador Acrílico Acrilwax</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Cera Madera Waxin')">
+                            <div class="product-image">
+                                <img src="img2/Cera Madera Waxin.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cera Madera Waxin</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Acondicionador Kwik')">
+                            <div class="product-image">
+                                <img src="img2/Acondicionador Kwik.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Acondicionador Kwik</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Limpiador Pisos Flotantes Waxin')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Pisos Flotantes Waxin.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Pisos Flotantes Waxin</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Limpia Alfombra Klin')">
+                            <div class="product-image">
+                                <img src="img2/Limpia Alfombra Klin.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpia Alfombra Klin</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Removedor Cera Acrilica Kito')">
+                            <div class="product-image">
+                                <img src="img2/Removedor Cera Acrilica Kito.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Removedor Cera Acrílica Kito</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Removedor Cera Madera Kito')">
+                            <div class="product-image">
+                                <img src="img2/Removedor Cera Madera Kito.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Removedor Cera Madera Kito</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE PISOS" onclick="showProductInfo('wassington-Removedor Autobrillo Kito')">
+                            <div class="product-image">
+                                <img src="img2/Removedor Autobrillo Kito.png" alt="Wassington Cuidado De Pisos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Removedor Autobrillo Kito</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <!-- CUIDADO DE BAÑOS -->
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE BAÑOS" onclick="showProductInfo('wassington-Quita Sarro')">
+                            <div class="product-image">
+                                <img src="img2/Quita Sarro.png" alt="Wassington Cuidado De Baños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Quita Sarro</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE BAÑOS" onclick="showProductInfo('wassington-Desodorante Para Mingitorio Power WC')">
+                            <div class="product-image">
+                                <img src="img2/Desodorante Para Minguitorio Power WC.png" alt="Wassington Cuidado De Baños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Desodorante Para Mingitorio Power WC</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <!-- CUIDADO DE COCINAS -->
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE COCINAS" onclick="showProductInfo('wassington-Limpiador Multiuso Tiger')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Multiuso Tiger.png" alt="Wassington Cuidado De Cocinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Multiuso Tiger</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE COCINAS" onclick="showProductInfo('wassington-Desengrasante Panter I')">
+                            <div class="product-image">
+                                <img src="img2/Desengrasante Panter I.png" alt="Wassington Cuidado De Cocinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Desengrasante Panter I</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE COCINAS" onclick="showProductInfo('wassington-Desengrasante Panter H')">
+                            <div class="product-image">
+                                <img src="img2/Desodorante Panter H.png" alt="Wassington Cuidado De Cocinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Desengrasante Panter H</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE COCINAS" onclick="showProductInfo('wassington-Detergente 15 Back')">
+                            <div class="product-image">
+                                <img src="img2/Detergente 15 Back.png" alt="Wassington Cuidado De Cocinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Detergente 15% Back</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE COCINAS" onclick="showProductInfo('wassington-Lavavajilla Tiger Para Maquina Automatica')">
+                            <div class="product-image">
+                                <img src="img2/Abrillantador Tiger Para Maquina Automatica.png" alt="Wassington Cuidado De Cocinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Lavavajilla Tiger Para Máquina Automatica</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO DE COCINAS" onclick="showProductInfo('wassington-Abrillantador Tiger Para Maquina Automatica')">
+                            <div class="product-image">
+                                <img src="img2/Lavavajilla Tiger Para Maquina Automatica.png" alt="Wassington Cuidado De Cocinas" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Abrillantador Tiger Para Máquina Automatica</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- CUIDADO PERSONAL -->
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO PERSONAL" onclick="showProductInfo('wassington-Limpiador De Manos Desengrasante Klin-up')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador De Manos Desengrasante Klin-up.png" alt="Wassington Cuidado Personal" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador De Manos Desengrasante Klin-up</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO PERSONAL" onclick="showProductInfo('wassington-Jabon Para Manos Klin-up')">
+                            <div class="product-image">
+                                <img src="img2/Jabon Para Manos Klin-up.png" alt="Wassington Cuidado Personal" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabon Para Manos Klin-up</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO PERSONAL" onclick="showProductInfo('wassington-Jabon Para Manos Bactericida Perfumado Klin-up')">
+                            <div class="product-image">
+                                <img src="img2/Jabon Para Manos Bactericida Perfumado Klin-up.png" alt="Wassington Cuidado Personal" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Jabon Para Manos Bactericida Perfumado Klin-up</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO PERSONAL" onclick="showProductInfo('wassington-Alcohol En Gel')">
+                            <div class="product-image">
+                                <img src="img2/Alcohol En Gel.png" alt="Wassington Cuidado Personal" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Alcohol en Gel</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="CUIDADO PERSONAL" onclick="showProductInfo('wassington-Shampoo Perfumado Para Manos Rex')">
+                            <div class="product-image">
+                                <img src="img2/Shampoo Para Manos Perfumado Rex.png" alt="Wassington Cuidado Personal" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Shampoo Perfumado Para Manos Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- LIMPIADORES Y DESINFECTANTES -->
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIADORES Y DESINFECTANTES" onclick="showProductInfo('wassington-Limpiador Lysto Bactericida Cherry')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Lysto Bactericida Cherry.png" alt="Wassington Limpiadores Y Desinfectantes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Lysto Bactericida Cherry</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIADORES Y DESINFECTANTES" onclick="showProductInfo('wassington-Limpiador Desinfectante Sanitol Incoloro')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Desinf Sanitol Incoloro.png" alt="Wassington Limpiadores Y Desinfectantes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Desinfectante Sanitol Incoloro</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIADORES Y DESINFECTANTES" onclick="showProductInfo('wassington-Limpiador Desinfectante Sanitol Azul')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Desinf Sanitol Azul.png" alt="Wassington Limpiadores Y Desinfectantes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Desinfectante Sanitol Azul</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIADORES Y DESINFECTANTES" onclick="showProductInfo('wassington-Limpiador Desinfectante Sanitol Peroxido')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Desinf Sanitol Peroxido.png" alt="Wassington Limpiadores Y Desinfectantes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Desinfectante Sanitol Peroxido</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIADORES Y DESINFECTANTES" onclick="showProductInfo('wassington-Limpiador Desodorante Concentrado Lysto')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Deso Concentrado Lysto.png" alt="Wassington Limpiadores Y Desinfectantes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Desodorante Concentrado Lysto</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIADORES Y DESINFECTANTES" onclick="showProductInfo('wassington-Limpiador Desodorante Rex')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Deso Rex.png" alt="Wassington Limpiadores Y Desinfectantes" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Desodorante Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- LIMPIAVIDRIOS Y MULTIUSOS -->
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIAVIDRIOS Y MULTIUSOS" onclick="showProductInfo('wassington-Limpiavidrios Spray')">
+                            <div class="product-image">
+                                <img src="img2/Limpiavidrios Spray.png" alt="Wassington Limpiavidrios Y Multiusos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiavidrios Spray</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIAVIDRIOS Y MULTIUSOS" onclick="showProductInfo('wassington-Limpiavidrios Y Superficies Rex')">
+                            <div class="product-image">
+                                <img src="img2/Limpiavidrios Y Superficies Rex.png" alt="Wassington Limpiavidrios Y Multiusos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiavidrios Y Superficies Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIAVIDRIOS Y MULTIUSOS" onclick="showProductInfo('wassington-Limpia Acero inoxidable Rex')">
+                            <div class="product-image">
+                                <img src="img2/Limpia Acero Inox Rex.png" alt="Wassington Limpiavidrios Y Multiusos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpia Acero Inoxidable Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIAVIDRIOS Y MULTIUSOS" onclick="showProductInfo('wassington-Espuma Limpiadora Multiuso Rex')">
+                            <div class="product-image">
+                                <img src="img2/Espuma Limpiadora Multiuso Aerosol.png" alt="Wassington Limpiavidrios Y Multiusos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Espuma Limpiadora Multiuso Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIAVIDRIOS Y MULTIUSOS" onclick="showProductInfo('wassington-Limpiametales Rex')">
+                            <div class="product-image">
+                                <img src="img2/Limpiametales Rex.png" alt="Wassington Limpiavidrios Y Multiusos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiamentales Rex</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="wassington" data-category="LIMPIAVIDRIOS Y MULTIUSOS" onclick="showProductInfo('wassington-Limpiador Desodorante Extra Concentrado Lysto')">
+                            <div class="product-image">
+                                <img src="img2/Limpiador Deso Extra Concentrado Lysto.png" alt="Wassington Limpiavidrios Y Multiusos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Desodorante Extra Concentrado Lysto</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                    
+
+                        <!-- ROYCO -->
+
+                        <!-- CARROS, CESTOS Y CONTENEDORES -->
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Carro Mini Con Prensamopas Horizontal')">
+                            <div class="product-image">
+                                <img src="img3/Carro Mini Con Prensamopas Horizontal.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Carro Mini Con Prensamopas Horizontal</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Carro Hotelero')">
+                            <div class="product-image">
+                                <img src="img3/Carro Hotelero.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Carro Hotelero</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Carro Multiservicios Top')">
+                            <div class="product-image">
+                                <img src="img3/Carro Multiservicios Top.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Carro Multiservicios Top</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Carro Double-Bucket')">
+                            <div class="product-image">
+                                <img src="img3/Carro Double-Bucket.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Carro Double-Bucket</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Carro Auxiliar Top')">
+                            <div class="product-image">
+                                <img src="img3/Carro Auxiliar Top.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Carro Auxiliar Top</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Cesto a Pedal 15/30/60/100 Lts')">
+                            <div class="product-image">
+                                <img src="img3/Cesto A Pedal.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cesto a Pedal 15/30/60/100 Lts</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Cesto Push 60/100 Lts')">
+                            <div class="product-image">
+                                <img src="img3/Cesto Push.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cesto Push 60/100 Lts</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Cesto Buzon 50 Lts')">
+                            <div class="product-image">
+                                <img src="img3/Cesto Buzon.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cesto Buzón 50 Lts</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Cesto Redondo 14/23 Lts')">
+                            <div class="product-image">
+                                <img src="img3/Cesto Redondo.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cesto Redondo 14/23 Lts</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CARROS, CESTOS Y CONTENEDORES" onclick="showProductInfo('royco-Contenedores 240 Lts')">
+                            <div class="product-image">
+                                <img src="img3/Contenedores.png" alt="Royco Carros, Cestos Y Contenedores" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Contenedores 240 Lts</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- EQUIPAMIENTO DE LIMPIEZA -->
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Kit Wet Mop')">
+                            <div class="product-image">
+                                <img src="img3/Kit Wet Mop.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Kit Wet Mop</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Balde 12 Lts Con Escurridor')">
+                            <div class="product-image">
+                                <img src="img3/Balde 12lt Con Escurridor.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Balde 12 Lts Con Escurridor</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Balde Plastico 4 Lts')">
+                            <div class="product-image">
+                                <img src="img3/Balde Plastico 4 lt.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Balde Plástico 4 Lts</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Bandeja Portaobjetos')">
+                            <div class="product-image">
+                                <img src="img3/Bandeja Portaobjetos.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Bandeja Portaobjetos</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Pala Aeropuerto')">
+                            <div class="product-image">
+                                <img src="img3/Pala Aeropuerto.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Pala Aeropuerto</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Fibras Abrasivas y Zocaleros')">
+                            <div class="product-image">
+                                <img src="img3/Fibras Abrasivas Y Zocalos.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Fibras Abrasivas y Zocaleros</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Discos Abrasivos 13/16/17/20 Pulgadas')">
+                            <div class="product-image">
+                                <img src="img3/Discos Abrasivos.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Discos Abrasivos 13/16/17/20 Pulgadas</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Extensores Telescopicos')">
+                            <div class="product-image">
+                                <img src="img3/Extensores Telescopicos.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Extensores Telescópicos</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Cambiador De Bebé')">
+                            <div class="product-image">
+                                <img src="img3/Cambiador De Bebe.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cambiador De Bebé</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPAMIENTO DE LIMPIEZA" onclick="showProductInfo('royco-Señal De Piso Mojado')">
+                            <div class="product-image">
+                                <img src="img3/Senal De Piso Mojado.png" alt="Royco Equipamiento De Limpieza" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Señal De Piso Mojado</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+
+                        <!-- EQUIPOS DE VIDRIO -->
+                         <div class="product-card" data-brand="royco" data-category="EQUIPOS DE VIDRIO" onclick="showProductInfo('royco-Lava Secavidrios Ambo Plastico')">
+                            <div class="product-image">
+                                <img src="img3/Lava Secavidrios Ambo Plastico.png" alt="Royco Equipos De Vidrio" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Lava-secavidrios Ambo Plástico</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPOS DE VIDRIO" onclick="showProductInfo('royco-Secavidrios Profesional Acero Inoxidable')">
+                            <div class="product-image">
+                                <img src="img3/Secavidrios Profesional Acero Inoxidable.png" alt="Royco Equipos De Vidrio" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Secavidrios Profesional Acero Inoxidable</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPOS DE VIDRIO" onclick="showProductInfo('royco-Lavavidrios Vellon y Soporte')">
+                            <div class="product-image">
+                                <img src="img3/Lavavidrios Vellon Y Soporte.png" alt="Royco Equipos De Vidrio" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Lavavidrios Vellon y Soporte</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPOS DE VIDRIO" onclick="showProductInfo('royco-Secavidrios King Plastico')">
+                            <div class="product-image">
+                                <img src="img3/Secavidrios King Plastico.png" alt="Royco Equipos De Vidrio" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Secavidrios King Plástico</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="EQUIPOS DE VIDRIO" onclick="showProductInfo('royco-Soportes Lavavidrios')">
+                            <div class="product-image">
+                                <img src="img3/Soportes Lavavidrios.png" alt="Royco Equipos De Vidrio" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Soportes Lavavidrios</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+
+                        <!-- CABOS-->
+                         <div class="product-card" data-brand="royco" data-category="CABOS" onclick="showProductInfo('royco-Cabo Acero Reforzado')">
+                            <div class="product-image">
+                                <img src="img3/Cabo Acero Reforzado.png" alt="Royco Cabos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cabo De Acero Reforzado</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CABOS" onclick="showProductInfo('royco-Cabo Aluminio Liso')">
+                            <div class="product-image">
+                                <img src="img3/Cabo Aluminio Liso.png" alt="Royco Cabos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cabo De Aluminio Liso</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="CABOS" onclick="showProductInfo('royco-Cabo Acero Inoxidable')">
+                            <div class="product-image">
+                                <img src="img3/Cabo Acero Inoxidable.png" alt="Royco Cabos" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cabo De Acero Inoxidable</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+
+                        <!-- ESCOBAS, BARREDORES Y ESCOBILLONES -->
+                         <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Escoba Plastica Italia')">
+                            <div class="product-image">
+                                <img src="img3/Escoba Plastica Italia.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Escoba Plástica Italia</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Escobillon Plastico 40 Cm')">
+                            <div class="product-image">
+                                <img src="img3/Escobillon Plastico 40cm.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Escobillón Plástico 40 Cm</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Escobillon Cordero 30 Cm')">
+                            <div class="product-image">
+                                <img src="img3/Escobillon Cordero 30cm.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Escobillón Cordero 30 Cm</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Barrendero Base Plastica 60 Cm')">
+                            <div class="product-image">
+                                <img src="img3/Barrendero Base Plastica 60cm.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Barrendero Base Plástica 60 Cm</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Barrendero Base Madera 80 Cm')">
+                            <div class="product-image">
+                                <img src="img3/Barrendero Base Madera 80cm.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Barrendero Base Madera 80 Cm</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Barredor Profesional Domestico Completo')">
+                            <div class="product-image">
+                                <img src="img3/Barredor Profesional Domestico Completo.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Barredor Profesional Doméstico Completo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Barredor Profesional Acrilico Completo')">
+                            <div class="product-image">
+                                <img src="img3/Barredor Profesional Acrilico Completo.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Barredor Profesional Acrílico Completo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Barredor Profesional Algodon Completo')">
+                            <div class="product-image">
+                                <img src="img3/Barredor Profesional Algodon Completo.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Barredor Profesional Algodón Completo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="ESCOBAS, BARREDORES Y ESCOBILLONES" onclick="showProductInfo('royco-Armazon Profesional 45/60/80/100/120 Cm')">
+                            <div class="product-image">
+                                <img src="img3/Armazon Profesional.png" alt="Royco Escobas, Barredores Y Escobillones" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Armazon Profesional 45/60/80/100/120 Cm</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+
+                        <!-- SECADORES DE PISO -->
+                         <div class="product-card" data-brand="royco" data-category="SECADORES DE PISO" onclick="showProductInfo('royco-Musto')">
+                            <div class="product-image">
+                                <img src="img3/Secadores De Piso Musto.png" alt="Royco Secadores De Piso" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Secador De Piso Musto</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="SECADORES DE PISO" onclick="showProductInfo('royco-Aluminio Blanco')">
+                            <div class="product-image">
+                                <img src="img3/Secadores De Piso De Aluminio Blanco.png" alt="Royco Secadores De Piso" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Secador De Piso Aluminio Blanco</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="royco" data-category="SECADORES DE PISO" onclick="showProductInfo('royco-Twister')">
+                            <div class="product-image">
+                                <img src="img3/Secador De Piso Twister.png" alt="Royco Secadores De Piso" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Secador De Piso Twister</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <!-- PRODUCTOS VARIOS -->
+
+                         <!-- TRAPOS Y PAÑOS -->
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Paños Multiuso De Cocina')">
+                            <div class="product-image">
+                                <img src="img4/Panos Multiuso De Cocina.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños Multiuso De Cocina</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Paños Microfibra')">
+                            <div class="product-image">
+                                <img src="img4/Panos Microfibra.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Paños Microfibra</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Rejilla Doble s/coche')">
+                            <div class="product-image">
+                                <img src="img4/Rejilla Doble.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rejila Doble s/coche</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Rejilla Simple De Algodon')">
+                            <div class="product-image">
+                                <img src="img4/Rejilla Simple Algodon.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rejilla Simple De Algodón</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Rejilla Para Coche Grande')">
+                            <div class="product-image">
+                                <img src="img4/Rejilla Para Coche Grande.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rejilla Para Coche Grande</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Repasador Nido De Abeja')">
+                            <div class="product-image">
+                                <img src="img4/Repasador Nido De Abeja.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Repasador Nido De Abeja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Rejilla Americana')">
+                            <div class="product-image">
+                                <img src="img4/Rejilla Americana.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rejilla Americana</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Rejilla Pabilo')">
+                            <div class="product-image">
+                                <img src="img4/Rejilla Pabilo.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Rejilla Pabilo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Trapo De Piso Star Costurado Blanco')">
+                            <div class="product-image">
+                                <img src="img4/Trapo De Piso Star Blanco.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Trapo De Piso Star Costurado Blanco</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Trapo De Piso Star Costurado Gris')">
+                            <div class="product-image">
+                                <img src="img4/Trapo De Piso Star Gris.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Trapo De Piso Star Costurado Gris</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Trapo De Piso Blanco Reforzado')">
+                            <div class="product-image">
+                                <img src="img4/Trapo De Piso Blanco Reforzado.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Trapo De Piso Blanco Reforzado</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Trapo De Piso Gris Reforzado')">
+                            <div class="product-image">
+                                <img src="img4/Trapo De Piso Gris Reforzado.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Trapo De Piso Gris Reforzado</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="TRAPOS Y PAÑOS" onclick="showProductInfo('productos varios-Franela Naranja')">
+                            <div class="product-image">
+                                <img src="img4/Franela Naranja.png" alt="Productos Varios Trapos Y Paños" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Franela Naranja</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                             </div>
+                        </div>
+
+                        <!-- VARIOS -->
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Blem Lustramuebles En Aerosol')">
+                            <div class="product-image">
+                                <img src="img4/Blen Lustramuebles.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Blem Lustramuebles En Aerosol</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Lustramuebles Ceramicol En Aerosol')">
+                            <div class="product-image">
+                                <img src="img4/Ceramicol Lustramuebles.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Lustramuebles Ceramicol En Aerosol</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Desinfectante Lysoform En Aerosol')">
+                            <div class="product-image">
+                                <img src="img4/Lysoform Desinfectante.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Desinfectante Lysoform En Aerosol</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Fuyi Mata Moscas Y Mosquitos')">
+                            <div class="product-image">
+                                <img src="img4/Fuyi Mata Moscas Y Mosquitos.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Fuyi Mata Moscas Y Mosquitos</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Desodorante De Ambiente Glade')">
+                            <div class="product-image">
+                                <img src="img4/Glade Desodorante De Ambiente.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Desodorante De Ambiente Glade</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Raid Mata Moscas Y Mosquitos')">
+                            <div class="product-image">
+                                <img src="img4/Raid Mata Moscas Y Mosquitos.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Raid Mata Moscas Y Mosquitos</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Pato Gel')">
+                            <div class="product-image">
+                                <img src="img4/Pato Gel.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Pato Gel</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Esencia De Ambiente Feel Y Smell')">
+                            <div class="product-image">
+                                <img src="img4/Esencia De Ambiente Feel Y Smell.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Esencia De Ambiente Feel Y Smell</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Limpiador Cremoso Cif')">
+                            <div class="product-image">
+                                <img src="img4/Cif Limpiador.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiador Cremoso Cif</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Off En Aerosol')">
+                            <div class="product-image">
+                                <img src="img4/Off Aerosol.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Off En Aerosol</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Detergente Ala Lavavajillas')">
+                            <div class="product-image">
+                                <img src="img4/Ala Lavavajillas Detergente.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Detergente Ala Lavavajillas</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Limpiavidrios Cif')">
+                            <div class="product-image">
+                                <img src="img4/Cif Limpia Vidrios.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Limpiavidrios Cif</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Echo Listo')">
+                            <div class="product-image">
+                                <img src="img4/Echo Liso.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Echo Listo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Ceramicol Autobrillo')">
+                            <div class="product-image">
+                                <img src="img4/Ceramicol Autobrillo.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Ceramicol Autobrillo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Ceramicol Lampazos')">
+                            <div class="product-image">
+                                <img src="img4/Ceramicol Lampazos.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Ceramicol Lampazos</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Alcohol Frau 500ml')">
+                            <div class="product-image">
+                                <img src="img4/Alcohol Frau.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Alcohol Frau 500ml</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Cif Gel Lavandina 2l')">
+                            <div class="product-image">
+                                <img src="img4/Cif Gel Con Lavandina.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Cif Gel Lavandina 2l</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Pato Pastillas Autoadhesivas')">
+                            <div class="product-image">
+                                <img src="img4/Pato Pastillas Autoadhesivas.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Pato Pastillas Autoadhesivas</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Glade Pastillas')">
+                            <div class="product-image">
+                                <img src="img4/Glade Pastillas.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Glade Pastillas</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Pulverizadores 500/1000 ml')">
+                            <div class="product-image">
+                                <img src="img4/Pulverizadores.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Pulverizadores 500/1000 ml</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Fibra Esponja Lisa')">
+                            <div class="product-image">
+                                <img src="img4/Fibra Esponja Lisa.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Fibra Esponja Lisa</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Fibra Verde Multiuso')">
+                            <div class="product-image">
+                                <img src="img4/Fibra Verde Multiuso.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Fibra Verde Multiuso</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Esponja De Acero Inoxidable')">
+                            <div class="product-image">
+                                <img src="img4/Esponja De Acero Inoxidable.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Esponja De Acero Inoxidable</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Lana De Acero Batuque')">
+                            <div class="product-image">
+                                <img src="img4/Lana De Acero Batuque.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Lana De Acero Batuque</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Pala Con Cabo')">
+                            <div class="product-image">
+                                <img src="img4/Pala Con Cabo.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Pala Con Cabo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Balde 13 lt Con Mango Metalico')">
+                            <div class="product-image">
+                                <img src="img4/Balde 13 lt Con Mango Metalico.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Balde 13 lt Con Mango Metalico</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Balde Plastico 10 lt')">
+                            <div class="product-image">
+                                <img src="img4/Balde Plastico 10 lt.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Balde Plastico 10 lt</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Escobilla De Baño')">
+                            <div class="product-image">
+                                <img src="img4/Escoba De Baño.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Escobilla De Baño</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Plumero De Techo')">
+                            <div class="product-image">
+                                <img src="img4/Plumero De Techo.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Plumero De Techo</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Plumero De Lana')">
+                            <div class="product-image">
+                                <img src="img4/Plumero De Lana.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Plumero De Lana</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Bolsas De Residuos')">
+                            <div class="product-image">
+                                <img src="img4/Bolsas De Residuos.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Bolsas De Residuos</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Guantes Moteados')">
+                            <div class="product-image">
+                                <img src="img4/Guantes Moteados.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Guantes Moteados</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Guantes De Latex S/M/L')">
+                            <div class="product-image">
+                                <img src="img4/Guantes De Latex.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Guantes De Latex S/M/L</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Guantes De Nitrilo S/M/L')">
+                            <div class="product-image">
+                                <img src="img4/Guantes De Nitrilo.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Guantes De Nitrilo S/M/L</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Mopa Microfibra Blanca')">
+                            <div class="product-image">
+                                <img src="img4/Mopa Microfibra Blanca.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Mopa Microfibra Blanca</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Mopin Algodon Blanco')">
+                            <div class="product-image">
+                                <img src="img4/Mopin Algodon Blanco.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Mopin Algodon Blanco</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Plumero Nacional')">
+                            <div class="product-image">
+                                <img src="img4/Plumero Nacional.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Plumero Nacional</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Pasacera')">
+                            <div class="product-image">
+                                <img src="img4/Pasacera.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Pasacera</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Sopapa')">
+                            <div class="product-image">
+                                <img src="img4/Sopapa.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Sopapa</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand="productos varios" data-category="VARIOS" onclick="showProductInfo('productos varios-Secadores De Pisos 40/50 cm')">
+                            <div class="product-image">
+                                <img src="img4/Secadores De Piso.png" alt="Productos Varios Varios" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Secadores De Pisos 40/50 cm</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>                       
+                            </div>
+                        </div>
+
+
+                        <!-- RCN -->
+
+                        <!-- MAQUINAS DE LIMPIEZA RCN -->                         
+                        <div class="product-card" data-brand= "rcm" data-category="MÁQUINAS DE LIMPIEZA RCM" onclick="showProductInfo('rcm-Bite I')">
+                            <div class="product-image">
+                                <img src="img5/Bite I.png" alt="Rcn Maquinas De Limpieza Rcm" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Byte I</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand= "rcm" data-category="MÁQUINAS DE LIMPIEZA RCM" onclick="showProductInfo('rcm-Bite II')">
+                            <div class="product-image">
+                                <img src="img5/Bite II.png" alt="Rcn Maquinas De Limpieza Rcm" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Byte II</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand= "rcm" data-category="MÁQUINAS DE LIMPIEZA RCM" onclick="showProductInfo('rcm-Giga')">
+                            <div class="product-image">
+                                <img src="img5/Giga.png" alt="Rcn Maquinas De Limpieza Rcm" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Giga</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-brand= "rcm" data-category="MÁQUINAS DE LIMPIEZA RCM" onclick="showProductInfo('rcm-Boxer Plus')">
+                            <div class="product-image">
+                                <img src="img5/Boxer Plus.png" alt="Rcn Maquinas De Limpieza Rcm" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>Boxer Plus</h3>
+                                <button class="btn-ver-mas" >VER MÁS</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- INFORMACION PRODUCTO -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+     <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CLEAN PEL</h3>
+                    <p>Líderes en higiene institucional.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/cleanpelrosario/" class="social-btn instagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>PRODUCTOS</h4>
+                    <ul>
+                        <li><a href="productos.html">Elite</a></li>
+                        <li><a href="productos.html">Wassington</a></li>
+                        <li><a href="productos.html">Royco</a></li>
+                        <li><a href="productos.html">Productos Varios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>SERVICIOS</h4>
+                    <ul>
+                        <li><a href="servicios.html">Servicios Especializados</a></li>
+                        <li><a href="servicios.html">Proceso Logístico</a></li>
+                        <li><a href="servicios.html">Consultoría</a></li>
+                        <li><a href="servicios.html">Capacitación</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACTO</h4>
+                    <p><i class="fas fa-phone"></i>       +54 341 2 151 619</p>
+                    <p><i class="fas fa-envelope"></i>     ventas@cleanpel.com.ar</p>
+                    <p><i class="fas fa-map-marker-alt"></i>    Rosario, Argentina</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Desarrollado por CRISMAN JUAN BAUTISTA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chatbot" data-aos="fade-down">
+        <div class="chatbot-icon" onclick="toggleChat()">
+            <img src="imgCleanPel/robot cp.png" alt="Chatbot" class="chatbot-img">
+        </div>
+        <div class="chatbot-popup" id="chatPopup">
+            <div class="chat-header">
+                <h4>PREGUNTAS FRECUENTES</h4>
+                <span class="close-chat" onclick="toggleChat()">&times;</span>
+            </div>
+            <div class="chat-content">
+                <div class="faq-item" onclick="showAnswer(1)">
+                    <p>¿Hacemos repartos a todo el país?</p>
+                    <div class="answer" id="answer1">Sí. En Rosario y alrededores entregamos en 24/48 hs. Para el resto del país, realizamos envíos coordinados según la ubicación.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(2)">
+                    <p>¿Qué servicios ofrecemos?</p>
+                    <div class="answer" id="answer2">Distribucion de productos de higiene, asesoramiento personalizado  y colocación de dispensadores en comodato.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(3)">
+                    <p>¿Por dónde puedo hacer los pedidos?</p>
+                    <div class="answer" id="answer3">Puedes hacer pedidos por WhatsApp, email o a través de nuestro formulario de contacto.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(4)">
+                    <p>¿Tienen un catálogo con todos los productos?</p>
+                    <div class="answer" id="answer4">Sí, puedes ver nuestro catálogo completo en la sección Productos de nuestra web.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="productos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+    window.AOS?.init({ duration: 1000, once: true });
+
+</script>
+</body>
+</html>
+
+

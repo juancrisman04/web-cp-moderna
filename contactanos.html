@@ -1,0 +1,342 @@
+﻿<!-- PÁGINA DE CONTACTANOS - HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactanos - CLEAN PEL</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="contactanos.css">
+    <link rel="stylesheet" href="upgrade.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" href="imgCleanPel/hoja logo cp-Photoroom.png" type="image/png">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+
+            <div id="menuToggle" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <a href="index.html" class="logo">
+                <img src="imgCleanPel/logo_cleanpel_cromatico (4) (3).png" alt="CLEAN PEL Logo">
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">LA EMPRESA</a>
+                <a href="productos.html" class="nav-link">PRODUCTOS</a>
+                <a href="servicios.html" class="nav-link">SERVICIOS</a>
+                <a href="contactanos.html" class="nav-link active">CONTACTANOS</a>
+            </nav>
+            <div class="social-buttons">
+                <button type="button" class="nav-cta js-open-quote"><i class="fa-solid fa-bolt"></i><span>Cotizar</span></button>
+                <a href="https://www.instagram.com/cleanpelrosario/" class="social-btn instagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ====== MENÚ LATERAL (RESPONSIVE) ====== -->
+    <div class="side-menu" id="side-menu">
+        <div class="menu-header">
+            <div class="menu-close" id="menu-close">
+            <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <div class="menu-content">
+            <div class="menu-social">
+            <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/cleanpelrosario/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <nav class="menu-nav">
+                <a href="index.html">LA EMPRESA</a>
+                <a href="productos.html">PRODUCTOS</a>
+                <a href="servicios.html">SERVICIOS</a>
+                <a href="contactanos.html">CONTACTANOS</a>
+            </nav>
+
+            <div class="menu-contact">
+                <a href="mailto:ventas@cleanpel.com.ar">
+                    <i class="fas fa-envelope"></i> ventas@cleanpel.com.ar
+                </a>
+            </div>
+
+            <!-- CHATBOT DENTRO DEL MENU -->
+            <div id="mobileChatContainer"></div>
+
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content" data-aos="slide-right">
+            <span class="hero-eyebrow"><i class="fa-solid fa-comments"></i> Contacto comercial</span>
+            <h1 class="hero-title">CONTACTANOS</h1>
+            <p class="hero-subtitle">Estamos para ayudarte a resolver compras, reposiciones, instalaciones y consultas técnicas con una respuesta clara y rápida.</p>
+            <div class="hero-actions">
+                <button type="button" class="cta-button cta-button-main js-open-quote">Cotizar ahora</button>
+                <a href="tel:+543412151619" class="ghost-button"><i class="fa-solid fa-phone"></i> Llamar</a>
+            </div>
+            <div class="hero-proof-grid">
+                <div class="hero-proof">
+                    <strong>24 hs</strong>
+                    <span>respuesta por formulario</span>
+                </div>
+                <div class="hero-proof">
+                    <strong>Rosario</strong>
+                    <span>entregas y visitas coordinadas</span>
+                </div>
+                <div class="hero-proof">
+                    <strong>Asesor</strong>
+                    <span>atencion personalizada</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image" data-aos ="fade-down">
+            <div class="video-container">
+                <video class="floating-video hero-video" muted playsinline preload="metadata">
+                    <source src="imgCleanPel/video servicios y contactanos.mp4" type="video/mp4">
+                </video>
+
+                <div class="video-controls">
+                    <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    <div class="progress-container"><input type="range" class="progress-bar" value="0"></div>
+                    <span class="time">0:00 / 0:14</span>
+                    <button class="mute-btn"><i class="fa-solid fa-volume-high"></i></button>
+                    <button class="fullscreen-btn"><i class="fa-solid fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información de Contacto -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>TELÉFONO</h3>
+                    <p>+54 341-215-1619</p>
+                    <p>+54 341-741-8212</p>
+                    <p>+54 341-378-1974</p>
+                    <span class="contact-hours">Emergencias 24/7</span>
+                </div>
+
+                <div class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>EMAIL</h3>
+                    <p>ventas@cleanpel.com.ar</p>
+                    <p>administracion@cleanpel.com.ar</p>
+                    <p>compras@cleanpel.com.ar</p>
+                    <span class="contact-hours">Respuesta en 24hs</span>
+                </div>
+
+                <div class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>DIRECCIÓN</h3>
+                    <p>Vera y Pintado 178</p>
+                    <p>Rosario, Santa Fe</p>
+                    <span class="contact-hours">Visítanos</span>
+                </div>
+
+                <div class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>HORARIOS</h3>
+                    <p>Lunes a Viernes: 7:00 a 15:00</p>
+                    <span class="contact-hours">Emergencias 24/7</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-content" data-aos="slide-right">
+                    <h2>ENVIANOS UN MENSAJE</h2>
+                    <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">NOMBRE *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">APELLIDO *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">EMAIL *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">TELÉFONO</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">MENSAJE *</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Cuéntanos sobre tu proyecto o necesidades..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            ENVIAR MENSAJE
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="form-image" data-aos="slide-left">
+                    <img src="imgCleanPel/santi colocando.jpg" alt="Contacto">
+                    <div class="image-overlay">
+                        <div class="overlay-content">
+                            <h3>¿Necesitas una Cotización Rápida?</h3>
+                            <p>Llámanos directamente y te atenderemos de inmediato.</p>
+                            <a href="tel:+543412151619" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                LLAMAR AHORA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPA Y UBICACIÓN -->
+    <section class="location-section">
+        <div class="container">
+            <h2>NUESTRA UBICACIÓN</h2>
+            <div class="location-content">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Vera+y+Pintado+178,+Rosario,+Santa+Fe" 
+                target="_blank" class="map-container" data-aos="fade-up">
+                    <img src="imgCleanPel/mapa cp.png" alt="Mapa de Clean Pel" class="map-image">
+                    <div class="btn-directions inside-map">
+                        <i class="fas fa-directions"></i> COMO LLEGAR
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+     <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CLEAN PEL</h3>
+                    <p>Líderes en higiene institucional.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/cleanpelrosario/" class="social-btn instagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20más%20información" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>PRODUCTOS</h4>
+                    <ul>
+                        <li><a href="productos.html">Elite</a></li>
+                        <li><a href="productos.html">Wassington</a></li>
+                        <li><a href="productos.html">Royco</a></li>
+                        <li><a href="productos.html">Productos Varios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>SERVICIOS</h4>
+                    <ul>
+                        <li><a href="servicios.html">Servicios Especializados</a></li>
+                        <li><a href="servicios.html">Proceso Logístico</a></li>
+                        <li><a href="servicios.html">Consultoría</a></li>
+                        <li><a href="servicios.html">Capacitación</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACTO</h4>
+                    <p><i class="fas fa-phone"></i>       +54 341 2 151 619</p>
+                    <p><i class="fas fa-envelope"></i>     ventas@cleanpel.com.ar</p>
+                    <p><i class="fas fa-map-marker-alt"></i>    Rosario, Argentina</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Desarrollado por CRISMAN JUAN BAUTISTA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chatbot" data-aos="fade-down">
+        <div class="chatbot-icon" onclick="toggleChat()">
+            <img src="imgCleanPel/robot cp.png" alt="Chatbot" class="chatbot-img">
+        </div>
+        <div class="chatbot-popup" id="chatPopup">
+            <div class="chat-header">
+                <h4>PREGUNTAS FRECUENTES</h4>
+                <span class="close-chat" onclick="toggleChat()">&times;</span>
+            </div>
+            <div class="chat-content">
+                <div class="faq-item" onclick="showAnswer(1)">
+                    <p>¿Hacemos repartos a todo el país?</p>
+                    <div class="answer" id="answer1">Sí. En Rosario y alrededores entregamos en 24/48 hs. Para el resto del país, realizamos envíos coordinados según la ubicación.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(2)">
+                    <p>¿Qué servicios ofrecemos?</p>
+                    <div class="answer" id="answer2">Distribucion de productos de higiene, asesoramiento personalizado  y colocación de dispensadores en comodato.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(3)">
+                    <p>¿Por dónde puedo hacer los pedidos?</p>
+                    <div class="answer" id="answer3">Puedes hacer pedidos por WhatsApp, email o a través de nuestro formulario de contacto.</div>
+                </div>
+                <div class="faq-item" onclick="showAnswer(4)">
+                    <p>¿Tienen un catálogo con todos los productos?</p>
+                    <div class="answer" id="answer4">Sí, puedes ver nuestro catálogo completo en la sección Productos de nuestra web.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>¡Mensaje Enviado!</h2>
+                <p>Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos dentro de las próximas 24 horas.</p>
+                <button onclick="closeConfirmationModal()" class="btn-primary">CERRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="contactanos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+    window.AOS?.init({ duration: 1000, once: true });
+
+</script>
+</body>
+</html>
+
+
