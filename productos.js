@@ -1690,9 +1690,16 @@ function toggleCategory(categoryId) {
     const arrow = document.getElementById(`${categoryId}-arrow`);
     if (!content || !arrow) return;
 
-    content.classList.add('active');
-    arrow.classList.add('fa-chevron-up');
-    arrow.classList.remove('fa-chevron-down');
+    const isOpen = content.classList.contains('active');
+    content.classList.toggle('active', !isOpen);
+    arrow.classList.toggle('fa-chevron-up', !isOpen);
+    arrow.classList.toggle('fa-chevron-down', isOpen);
+
+    if (isOpen) {
+        content.querySelectorAll('.sub-subcategory-list').forEach((list) => {
+            list.classList.remove('active');
+        });
+    }
 }
 
 function toggleSubSubcategory(event, id) {
@@ -1701,7 +1708,7 @@ function toggleSubSubcategory(event, id) {
     const clickedList = document.getElementById(id);
     if (!clickedList) return;
 
-    clickedList.classList.add('active');
+    clickedList.classList.toggle('active');
 }
 
 function filterProducts(brand, category) {
@@ -1715,7 +1722,7 @@ function filterProducts(brand, category) {
         const matchesCategory = normalizeText(productCategory).startsWith(normalizedCategory);
 
         product.classList.toggle('hidden', !(matchesBrand && matchesCategory));
-        product.classList.toggle('filtered', matchesBrand && matchesCategory);
+        product.classList.remove('filtered');
     });
 
     setProductsTitle(category);
@@ -1747,7 +1754,7 @@ function searchProducts(searchTerm) {
         const isVisible = searchableText.includes(term);
 
         product.classList.toggle('hidden', !isVisible);
-        product.classList.toggle('filtered', isVisible);
+        product.classList.remove('filtered');
     });
 
     setProductsTitle(`RESULTADOS: "${searchTerm}"`);
@@ -1889,7 +1896,7 @@ function highlightSelectedSubcategory(element) {
 function setupProductsPage() {
     allProducts = Array.from(document.querySelectorAll('.product-card'));
     productTitle = document.querySelector('.page-title h1, #productsTitle');
-    expandFilterPanel();
+    expandCategoryPanel();
 
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.querySelector('.search-btn');
@@ -1938,6 +1945,7 @@ function openFilters() {
     const backdrop = document.getElementById('filterBackdrop');
     if (!drawer || !backdrop) return;
 
+    expandCategoryPanel();
     drawer.classList.add('is-open');
     backdrop.classList.add('is-open');
     drawer.setAttribute('aria-hidden', 'false');
@@ -1955,18 +1963,18 @@ function closeFilters() {
     document.body.classList.remove('filters-open');
 }
 
-function expandFilterPanel() {
+function expandCategoryPanel() {
     document.querySelectorAll('.category-content').forEach((content) => {
-        content.classList.add('active');
+        content.classList.remove('active');
     });
 
     document.querySelectorAll('.sub-subcategory-list').forEach((list) => {
-        list.classList.add('active');
+        list.classList.remove('active');
     });
 
     document.querySelectorAll('.category-arrow').forEach((arrow) => {
-        arrow.classList.add('fa-chevron-up');
-        arrow.classList.remove('fa-chevron-down');
+        arrow.classList.add('fa-chevron-down');
+        arrow.classList.remove('fa-chevron-up');
     });
 }
 

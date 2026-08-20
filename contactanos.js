@@ -26,7 +26,7 @@
         const form = document.getElementById('contactForm');
         if (!form) return;
 
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formData = new FormData(form);
@@ -42,13 +42,17 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             submitBtn.disabled = true;
 
-            window.setTimeout(() => {
+            try {
+                await sendContactForm(formData);
                 form.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
                 clearErrors(form);
                 showConfirmationModal();
-            }, 800);
+            } catch (error) {
+                showErrors(form, [error.message || 'No pudimos enviar la consulta. Intentá nuevamente.']);
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         });
 
         form.querySelectorAll('input, textarea, select').forEach((field) => {
@@ -99,6 +103,32 @@
 
     function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    async function sendContactForm(formData) {
+        const payload = {
+            nombre: formData.get('firstName'),
+            apellido: formData.get('lastName'),
+            email: formData.get('email'),
+            telefono: formData.get('phone'),
+            mensaje: formData.get('message'),
+            origen: 'formulario-contacto',
+            website: formData.get('website')
+        };
+        const response = await fetch('enviar-consulta.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.ok === false) {
+            throw new Error(result.message || 'No pudimos enviar la consulta.');
+        }
+
+        return result;
     }
 
     function showErrors(form, errors) {

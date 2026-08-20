@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="imgCleanPel/hoja logo cp-Photoroom.png" type="image/png">
 </head>
-<body>
+<body class="contact-page">
     <!-- HEADER -->
     <header class="header">
         <div class="container">
@@ -81,7 +81,7 @@
             <h1 class="hero-title">CONTACTANOS</h1>
             <p class="hero-subtitle">Estamos para ayudarte a resolver compras, reposiciones, instalaciones y consultas técnicas con una respuesta clara y rápida.</p>
             <div class="hero-actions">
-                <button type="button" class="cta-button cta-button-main js-open-quote">Cotizar ahora</button>
+                <button type="button" class="cta-button js-open-quote">Cotizar ahora</button>
                 <a href="tel:+543412151619" class="ghost-button"><i class="fa-solid fa-phone"></i> Llamar</a>
             </div>
             <div class="hero-proof-grid">
@@ -91,7 +91,7 @@
                 </div>
                 <div class="hero-proof">
                     <strong>Rosario</strong>
-                    <span>entregas y visitas coordinadas</span>
+                    <span>entregas coordinadas</span>
                 </div>
                 <div class="hero-proof">
                     <strong>Asesor</strong>
@@ -101,7 +101,7 @@
         </div>
         <div class="hero-image" data-aos ="fade-down">
             <div class="video-container">
-                <video class="floating-video hero-video" muted playsinline preload="none" poster="imgCleanPel/poster-servicios.jpg">
+                <video class="floating-video hero-video" muted playsinline preload="none">
                     <source data-src="imgCleanPel/video servicios y contactanos.mp4" type="video/mp4">
                 </video>
 
@@ -117,7 +117,7 @@
     </section>
 
     <!-- Información de Contacto -->
-    <section class="contact-info">
+    <section class="contact-info clean-blue-section">
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-card" data-aos="fade-up">
@@ -147,7 +147,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <h3>DIRECCIÓN</h3>
-                    <p>Vera y Pintado 178</p>
+                    <p>Vera Pintado 178</p>
                     <p>Rosario, Santa Fe</p>
                     <span class="contact-hours">Visítanos</span>
                 </div>
@@ -173,6 +173,7 @@
                     <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
                     
                     <form class="contact-form" id="contactForm">
+                        <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" hidden>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">NOMBRE *</label>
@@ -233,19 +234,16 @@
                 <p>Estamos en una zona de acceso rápido para coordinar retiros, visitas comerciales y entregas.</p>
             </div>
             <div class="location-content location-modern">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Vera+y+Pintado+178,+Rosario,+Santa+Fe" 
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Vera+Pintado+178,+Rosario,+Santa+Fe"
                 target="_blank" class="map-container" data-aos="fade-up">
                     <img src="imgCleanPel/mapa cp.png" alt="Mapa de Clean Pel" class="map-image">
-                    <div class="btn-directions inside-map">
-                        <i class="fas fa-directions"></i> COMO LLEGAR
-                    </div>
                 </a>
                 <aside class="location-panel" data-aos="fade-up">
                     <div class="location-badge">
                         <i class="fa-solid fa-map-location-dot"></i>
                         <span>Clean Pel</span>
                     </div>
-                    <h3>Vera y Pintado 178</h3>
+                    <h3>Vera Pintado 178</h3>
                     <p class="location-copy">Rosario, Santa Fe. Coordinamos visitas y entregas para empresas, instituciones y comercios.</p>
                     <div class="location-details">
                         <div class="location-detail">
@@ -271,9 +269,6 @@
                         </div>
                     </div>
                     <div class="location-actions">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Vera+y+Pintado+178,+Rosario,+Santa+Fe" target="_blank" class="cta-button">
-                            <i class="fa-solid fa-route"></i> Abrir ruta
-                        </a>
                         <a href="https://wa.me/543412151619?text=Hola!%20Quiero%20coordinar%20una%20visita%20a%20Clean%20Pel" target="_blank" class="ghost-button">
                             <i class="fa-brands fa-whatsapp"></i> Coordinar visita
                         </a>
@@ -364,8 +359,8 @@
                 <div class="success-icon">
                     <i class="fas fa-check-circle"></i>
                 </div>
-                <h2>¡Mensaje Enviado!</h2>
-                <p>Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos dentro de las próximas 24 horas.</p>
+                <h2>Mensaje enviado</h2>
+                <p>Gracias por contactarnos. Guardamos tu consulta y la enviamos a ventas@cleanpel.com.ar.</p>
                 <button onclick="closeConfirmationModal()" class="btn-primary">CERRAR</button>
             </div>
         </div>

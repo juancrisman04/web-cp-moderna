@@ -33,11 +33,47 @@
         const answer = document.getElementById(`answer${questionNumber}`);
         if (!answer) return;
 
-        document.querySelectorAll('.answer').forEach((item) => {
-            if (item !== answer) item.style.display = 'none';
-        });
+        const chatContent = answer.closest('.chat-content');
+        const question = answer.closest('.faq-item')?.querySelector('p')?.textContent?.trim();
+        if (chatContent && question) {
+            let dialog = chatContent.querySelector('.chat-dialog');
+            const intro = chatContent.querySelector('.chat-intro');
 
-        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            if (!dialog) {
+                dialog = document.createElement('div');
+                dialog.className = 'chat-dialog';
+                dialog.setAttribute('aria-live', 'polite');
+
+                if (intro) intro.after(dialog);
+                else chatContent.prepend(dialog);
+            }
+
+            if (dialog._answerTimer) window.clearTimeout(dialog._answerTimer);
+            dialog.replaceChildren();
+            if (intro) intro.style.display = 'none';
+
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-message chat-message--user';
+            userBubble.textContent = question;
+
+            dialog.append(userBubble);
+            chatContent.querySelectorAll('.faq-item').forEach((item) => {
+                item.classList.toggle('is-active', item === answer.closest('.faq-item'));
+            });
+            chatContent.scrollTop = 0;
+
+            dialog._answerTimer = window.setTimeout(() => {
+                const botBubble = document.createElement('div');
+                botBubble.className = 'chat-message chat-message--bot';
+                botBubble.textContent = answer.textContent.trim();
+                dialog.append(botBubble);
+                chatContent.scrollTop = 0;
+            }, 650);
+        }
+
+        document.querySelectorAll('.answer').forEach((item) => {
+            item.style.display = 'none';
+        });
     }
 
     function setupChatbot() {
@@ -45,6 +81,32 @@
         const popup = document.querySelector(SELECTORS.popup);
         const mobileContainer = document.querySelector(SELECTORS.mobileChatContainer);
         if (!chatbot || !popup || !mobileContainer) return;
+
+        const headerTitle = chatbot.querySelector('.chat-header h4');
+        if (headerTitle) {
+            headerTitle.innerHTML = '<span>ASISTENTE CLEAN PEL</span><strong>Preguntas Frecuentes</strong>';
+        }
+
+        const chatContent = chatbot.querySelector('.chat-content');
+        if (chatContent && !chatContent.querySelector('.chat-intro')) {
+            const intro = document.createElement('div');
+            intro.className = 'chat-intro chat-message chat-message--bot';
+            intro.textContent = 'Hola, soy el asistente de Clean Pel. Elegi una pregunta y te respondo al instante.';
+            chatContent.prepend(intro);
+        }
+
+        chatbot.querySelectorAll('.answer').forEach((answer) => {
+            answer.style.display = 'none';
+        });
+        chatbot.querySelectorAll('.faq-item').forEach((item) => {
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            item.addEventListener('keydown', (event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                item.click();
+            });
+        });
 
         const mq = window.matchMedia('(max-width: 768px)');
 
@@ -108,7 +170,7 @@
                             <p>Contanos qué necesitás y un asesor de Clean Pel te contacta con una recomendación concreta de productos, reposición y servicio.</p>
                             <ul>
                                 <li><i class="fa-solid fa-check"></i> Diagnóstico según rubro y consumo.</li>
-                                <li><i class="fa-solid fa-check"></i> Presupuesto por WhatsApp.</li>
+                                <li><i class="fa-solid fa-check"></i> Propuesta enviada a ventas@cleanpel.com.ar.</li>
                                 <li><i class="fa-solid fa-check"></i> Instalación de dispensadores en comodato.</li>
                             </ul>
                         </div>
@@ -118,6 +180,9 @@
                             </label>
                             <label>Teléfono
                                 <input type="tel" name="phone" placeholder="+54 341..." required>
+                            </label>
+                            <label>Email
+                                <input type="email" name="email" placeholder="tuempresa@email.com" required>
                             </label>
                             <label>Necesidad principal
                                 <select name="need">
@@ -131,8 +196,9 @@
                             <label>Mensaje
                                 <textarea name="message" placeholder="Contanos cantidad de baños, rubro, zona o productos de interés."></textarea>
                             </label>
+                            <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" hidden>
                             <button class="btn-submit" type="submit">
-                                <i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp
+                                <i class="fa-solid fa-paper-plane"></i> Enviar consulta
                             </button>
                         </form>
                     </div>
@@ -191,20 +257,38 @@
             }
         });
 
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
             const data = new FormData(form);
-            const text = [
-                'Hola Clean Pel, quiero solicitar una cotizacion.',
-                `Nombre/empresa: ${data.get('name')}`,
-                `Telefono: ${data.get('phone')}`,
-                `Necesidad: ${data.get('need')}`,
-                `Mensaje: ${data.get('message') || 'Sin detalle adicional'}`
-            ].join('\n');
+            const submitButton = form.querySelector('.btn-submit');
+            const originalText = submitButton.innerHTML;
 
-            window.open(`https://api.whatsapp.com/send?phone=543412151619&text=${encodeURIComponent(text)}`, '_blank');
-            close();
-            form.reset();
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+
+            try {
+                await sendLead({
+                    nombre: data.get('name'),
+                    email: data.get('email'),
+                    telefono: data.get('phone'),
+                    necesidad: data.get('need'),
+                    mensaje: data.get('message') || 'Sin detalle adicional',
+                    origen: 'modal-propuesta',
+                    website: data.get('website')
+                });
+
+                submitButton.innerHTML = '<i class="fa-solid fa-check"></i> Enviado';
+                window.setTimeout(() => {
+                    close();
+                    form.reset();
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                }, 900);
+            } catch (error) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+                window.alert(error.message || 'No pudimos enviar la consulta. Intentá nuevamente.');
+            }
         });
     }
 
@@ -327,22 +411,57 @@
             else document.exitFullscreen?.();
         });
 
+        if (video.dataset.autoplay === 'true' && !prefersReducedMotion) {
+            loadVideo().then(async () => {
+                try {
+                    await video.play();
+                    playBtn?.querySelector('i')?.classList.replace('fa-play', 'fa-pause');
+                } catch {
+                    playBtn?.querySelector('i')?.classList.replace('fa-pause', 'fa-play');
+                }
+            });
+        }
     }
 
-    function setupReveal(selector, { threshold = 0.15, rootMargin = '0px 0px -8% 0px' } = {}) {
-        const elements = Array.from(document.querySelectorAll(selector));
-        if (!elements.length) return;
+    async function sendLead(payload) {
+        const response = await fetch('enviar-consulta.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.ok === false) {
+            throw new Error(result.message || 'No pudimos enviar la consulta.');
+        }
+
+        return result;
+    }
+
+    function setupReveal(selector, options = {}) {
+        setupRevealElements(Array.from(document.querySelectorAll(selector)), options);
+    }
+
+    function setupRevealElements(elements, { threshold = 0.15, rootMargin = '0px 0px -8% 0px' } = {}) {
+        const revealableElements = [...new Set(elements)].filter((element) => {
+            if (!element || element.dataset.cleanPelReveal === 'ready') return false;
+            element.dataset.cleanPelReveal = 'ready';
+            return true;
+        });
+
+        if (!revealableElements.length) return;
 
         if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-            elements.forEach(revealElement);
+            revealableElements.forEach(revealElement);
             return;
         }
 
-        elements.forEach((element) => {
+        revealableElements.forEach((element) => {
             element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'opacity 600ms ease, transform 600ms ease';
-            element.style.willChange = 'opacity, transform';
+            element.style.transform = 'translateY(10px)';
+            element.style.transition = 'opacity 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1)';
         });
 
         const observer = new IntersectionObserver((entries, obs) => {
@@ -353,47 +472,53 @@
             });
         }, { threshold, rootMargin });
 
-        elements.forEach((element) => observer.observe(element));
+        revealableElements.forEach((element) => observer.observe(element));
     }
 
     function setupDataAos() {
-        const elements = Array.from(document.querySelectorAll('[data-aos]'));
-        if (!elements.length) return;
-
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-            elements.forEach(revealElement);
-            return;
-        }
-
-        elements.forEach((element) => {
-            element.style.opacity = '0';
-            element.style.transform = getAosStartTransform(element.dataset.aos);
-            element.style.transition = 'opacity 700ms ease, transform 700ms ease';
-            element.style.willChange = 'opacity, transform';
+        setupRevealElements(Array.from(document.querySelectorAll('[data-aos]')), {
+            threshold: 0.12,
+            rootMargin: '0px 0px -6% 0px'
         });
-
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                revealElement(entry.target);
-                obs.unobserve(entry.target);
-            });
-        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-
-        elements.forEach((element) => observer.observe(element));
     }
 
-    function getAosStartTransform(type = '') {
-        if (type.includes('slide-right') || type.includes('fade-right')) return 'translateX(-34px)';
-        if (type.includes('slide-left') || type.includes('fade-left')) return 'translateX(34px)';
-        if (type.includes('fade-down')) return 'translateY(-28px)';
-        return 'translateY(30px)';
+    function setupSiteReveal() {
+        setupReveal([
+            'header.header',
+            'section:not(.hero):not(.products-content)',
+            'footer.footer',
+            '.hero-proof',
+            '.hero-actions',
+            '.hero.equipo .hero-image',
+            '.section-heading',
+            '.proof-card',
+            '.process-card',
+            '.sector-card',
+            '.solution-card',
+            '.featured-product-card',
+            '.filter-toolbar',
+            'body:not(.products-page) .product-card',
+            '.upgrade-card',
+            '.service-card',
+            '.logistics-item',
+            '.advantage-card',
+            '.catalog-panel',
+            '.contact-card',
+            '.form-content',
+            '.form-image',
+            '.map-container',
+            '.location-panel',
+            '.footer-content',
+            '.footer-bottom'
+        ].join(', '), {
+            threshold: 0.08,
+            rootMargin: '0px 0px -5% 0px'
+        });
     }
 
     function revealElement(element) {
         element.style.opacity = '1';
         element.style.transform = 'translateY(0)';
-        element.style.willChange = 'auto';
     }
 
     function setupLazyMedia({ eagerCount = 3 } = {}) {
@@ -459,5 +584,6 @@
         setupHeaderState();
         setupLeadModal();
         setupDataAos();
+        setupSiteReveal();
     });
 }());

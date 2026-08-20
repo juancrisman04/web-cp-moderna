@@ -8,6 +8,8 @@ const files = [
   'contactanos.css',
   'contactanos.html',
   'contactanos.js',
+  'db-config.example.php',
+  'enviar-consulta.php',
   'index.css',
   'index.html',
   'index.js',
