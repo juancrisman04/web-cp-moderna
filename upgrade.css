@@ -5398,6 +5398,17 @@ video {
     width: 44px !important;
 }
 
+/* Las tarjetas de contacto siguen el formato de las .upgrade-card de las
+   secciones azules: mismo glifo y sin margen sobrante bajo la ultima linea,
+   para que las dos rejillas cierren a la misma altura. */
+.contact-page .contact-icon i {
+    font-size: 1.12rem !important;
+}
+
+.contact-page .contact-card p:last-child {
+    margin-bottom: 0 !important;
+}
+
 .contact-page .contact-card h3 {
     color: #ffffff !important;
     font-size: var(--cp-card-title-size) !important;
