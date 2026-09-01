@@ -105,6 +105,17 @@
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
+    // Hostinger sirve el endpoint PHP junto al sitio. Vercel es estatico y no
+    // ejecuta PHP, asi que desde ahi el formulario apunta al dominio real.
+    const PHP_HOSTS = ['cleanpel.com.ar', 'www.cleanpel.com.ar'];
+    const REMOTE_FORM_ENDPOINT = 'https://cleanpel.com.ar/enviar-consulta.php';
+
+    function resolveFormEndpoint() {
+        return PHP_HOSTS.includes(window.location.hostname)
+            ? 'enviar-consulta.php'
+            : REMOTE_FORM_ENDPOINT;
+    }
+
     async function sendContactForm(formData) {
         const payload = {
             nombre: formData.get('firstName'),
@@ -115,7 +126,7 @@
             origen: 'formulario-contacto',
             website: formData.get('website')
         };
-        const response = await fetch('enviar-consulta.php', {
+        const response = await fetch(resolveFormEndpoint(), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

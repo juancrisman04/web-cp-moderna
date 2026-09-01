@@ -3,6 +3,32 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
 
+// El sitio se publica tambien desde Vercel (preview del rediseno), que no
+// ejecuta PHP. Esas paginas consultan este endpoint de forma cross-origin,
+// asi que se habilita CORS solo para los dominios propios.
+$allowedOrigins = [
+    'https://cleanpel.com.ar',
+    'https://www.cleanpel.com.ar',
+    'https://web-cp-moderna.vercel.app',
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+$originAllowed = in_array($origin, $allowedOrigins, true)
+    || preg_match('#^https://web-cp-moderna-[a-z0-9-]+\.vercel\.app$#', $origin) === 1;
+
+if ($originAllowed) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+    header('Vary: Origin');
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Access-Control-Max-Age: 86400');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code($originAllowed ? 204 : 403);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['ok' => false, 'message' => 'Metodo no permitido']);
