@@ -5379,7 +5379,6 @@ video {
     box-shadow: none !important;
     box-sizing: border-box;
     display: grid !important;
-    grid-template-rows: auto auto auto 1fr;
     min-height: 212px !important;
     padding: 22px !important;
     text-align: left !important;

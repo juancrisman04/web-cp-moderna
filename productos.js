@@ -9,7 +9,7 @@ const productData = {
         image: "img/Papel Higienico SH Plus.png",
         detailImage: "imgdetalles/ph sh plus.png",
         brand: "Elite",
-        category: "Papel Higienico Alto Metraje",
+        category: "Papel Higiénico Alto Metraje",
         fichaTecnica: "https://www.abastecedoradelsur.com.ar/webfiles/abastecedoradelsur/productos/1633/archivos/ficha%20tecnica.pdf?srsltid=AfmBOorWW1sNg3i2HYvQA9iTTCt8iVZBauu4vC7vJ6YMJe3s9DfzktbL"
     },
 
@@ -17,7 +17,7 @@ const productData = {
         image: "img/Papel Higienico Elite Rollo SH Classic.png",
         detailImage: "imgdetalles/ph elite rollo sh classic.png",
         brand: "Elite",
-        category: "Papel Higienico Alto Metraje",
+        category: "Papel Higiénico Alto Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.ar/assets/uploads/images/21a1a-ficha-tecnica-ph-elite-pro-6109.pdf"
     },
 
@@ -26,7 +26,7 @@ const productData = {
         image: "img/Papel Higienico Elite Rollo SH Plus 300.png",
         detailImage: "imgdetalles/ph elite rollo sh plus 300.png",
         brand: "Elite",
-        category: "Papel Higienico Alto Metraje",
+        category: "Papel Higiénico Alto Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.ar/assets/uploads/images/d888c-ficha-tecnica-ph-elite-pro-6112.pdf"
     },
 
@@ -34,7 +34,7 @@ const productData = {
         image: "img/Papel Higienico Elite Rollo SH Plus 500.png",
         detailImage: "imgdetalles/ph elite rollo sh plus 500.png",
         brand: "Elite",
-        category: "Papel Higienico Alto Metraje",
+        category: "Papel Higiénico Alto Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.ar/assets/uploads/images/6194b-ficha-tecnica-ph-elite-pro-6128.pdf"
     },
 
@@ -42,7 +42,7 @@ const productData = {
         image: "img/Papel Higienico Elite Rollo SH Plus.png",
         detailImage: "imgdetalles/ph elite rollo sh plus.png",
         brand: "Elite",
-        category: "Papel Higienico Bajo Metraje",
+        category: "Papel Higiénico Bajo Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.ar/assets/uploads/images/de23c-ficha-tecnica-ph-elite-pro_6607.pdf"
     },
 
@@ -50,7 +50,7 @@ const productData = {
         image: "img/Papel Higienico Elite SH Plus.png",
         detailImage: "imgdetalles/ph elite sh plus.png",
         brand: "Elite",
-        category: "Papel Higienico Bajo Metraje",
+        category: "Papel Higiénico Bajo Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.ar/assets/uploads/images/1eea1-ficha-tecnica-ph-elite-pro-6122-renovado.pdf"
     },
 
@@ -58,7 +58,7 @@ const productData = {
         image: "img/Papel Higienico Elite DH Excellence.png",
         detailImage: "imgdetalles/ph dh excellence.png",
         brand: "Elite",
-        category: "Papel Higienico Bajo Metraje",
+        category: "Papel Higiénico Bajo Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.ar/assets/uploads/images/a6a28-ficha-tecnica-ph-elite-pro_6616.pdf"
     },
 
@@ -66,7 +66,7 @@ const productData = {
         image: "img/Papel Higienico Interfoliado Doble Hoja.png",
         detailImage: "imgdetalles/ph interfoliado doble hoja.png",
         brand: "Elite",
-        category: "Papel Higienico Bajo Metraje",
+        category: "Papel Higiénico Bajo Metraje",
         fichaTecnica: "https://www.eliteprofessional.com.br/assets/uploads/images/611f4-ficha-tecnica-207124.pdf"
     },
 
@@ -757,7 +757,7 @@ const productData = {
     'royco-Contenedores 240 Lts': {
         image: "img3/Contenedores.png",
         features: [
-            "Fabricado con plastico inyectado virgen, resistente y duradero.",
+            "Fabricado con plástico inyectado virgen, resistente y duradero.",
             "Ruedas reforzadas de 200 mm",
             "COLOR: Negro, Azul, Amarillo, Verde, Rojo",
             "MEDIDAS: 59 x 74 x 120 cm (alto)",
@@ -927,7 +927,7 @@ const productData = {
     'royco-Secavidrios King Plastico': {
         image: "img3/Secavidrios King Plastico.png",
         features: [
-            "Empuñadura de plastico inyectado y soporte de aluminio con goma premium.",
+            "Empuñadura de plástico inyectado y soporte de aluminio con goma premium.",
             "Empuñadura ergonómica y antideslizante.",
             "COLOR: Gris",
             "MEDIDAS: 15cm, 20cm, 25cm, 30cm, 35cm, 40cm, 45cm, 50cm",
@@ -1773,7 +1773,7 @@ function showProductInfo(productId) {
     const category = product.category || 'Producto institucional';
     const description = product.description || buildProductDescription(title, brand, category);
     const features = product.features?.length ? product.features : buildDefaultFeatures(category);
-    const quoteText = encodeURIComponent(`Hola Clean Pel, quiero cotizar este producto: ${title}. Marca: ${brand}. Categoria: ${category}.`);
+    const quoteText = encodeURIComponent(`Hola Clean Pel, quiero cotizar este producto: ${title}. Marca: ${brand}. Categoría: ${category}.`);
 
     modal.style.display = 'block';
     modal.scrollTop = 0;
@@ -1786,7 +1786,7 @@ function showProductInfo(productId) {
                 ${product.detailImage ? `
                     <div class="product-detail-slot">
                         <button type="button" class="load-detail-btn" data-detail-image="${escapeHTML(product.detailImage)}" data-detail-title="${escapeHTML(title)}">
-                            <i class="fa-solid fa-image"></i> Ver detalle tecnico
+                            <i class="fa-solid fa-image"></i> Ver detalle técnico
                         </button>
                     </div>
                 ` : ''}
@@ -1805,7 +1805,7 @@ function showProductInfo(productId) {
                 <div class="modal-actions">
                     ${product.fichaTecnica ? `
                         <a href="${escapeHTML(product.fichaTecnica)}" target="_blank" class="ghost-button">
-                            <i class="fa-solid fa-file-lines"></i> Ficha tecnica
+                            <i class="fa-solid fa-file-lines"></i> Ficha técnica
                         </a>
                     ` : ''}
                     <a href="https://api.whatsapp.com/send?phone=543412151619&text=${quoteText}" target="_blank" class="cta-button">
@@ -1853,13 +1853,13 @@ function loadProductDetailImage(event) {
 }
 
 function buildProductDescription(title, brand, category) {
-    return `${title} de ${brand}, seleccionado para abastecimiento institucional en la categoria ${category}. Ideal para compras profesionales que buscan continuidad de stock, rendimiento y soporte comercial de Clean Pel.`;
+    return `${title} de ${brand}, seleccionado para abastecimiento institucional en la categoría ${category}. Ideal para compras profesionales que buscan continuidad de stock, rendimiento y soporte comercial de Clean Pel.`;
 }
 
 function buildDefaultFeatures(category) {
     return [
         `Aplicacion recomendada para ${category.toLowerCase()}.`,
-        'Disponible para cotizacion y reposicion programada.',
+        'Disponible para cotización y reposición programada.',
         'Asesoramiento para elegir presentacion, consumo estimado y productos complementarios.'
     ];
 }
