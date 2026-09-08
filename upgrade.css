@@ -6211,74 +6211,65 @@ html::-webkit-scrollbar-thumb {
 .catalog-tree {
     display: flex;
     flex-direction: column;
-    gap: 6px;
 }
 
 .catalog-brand {
-    border: 1px solid var(--cp-line);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: border-color 160ms ease;
+    border-bottom: 1px solid var(--cp-line);
 }
 
-.catalog-brand:hover {
-    border-color: rgba(61, 164, 216, 0.5);
+.catalog-brand:last-child {
+    border-bottom: 0;
 }
 
 .catalog-brand-head {
     align-items: center;
-    background: var(--cp-soft);
-    display: flex;
-    gap: 6px;
-    padding: 4px 4px 4px 10px;
-}
-
-.catalog-brand-pick {
-    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
     cursor: pointer;
     display: flex;
-    flex: 1;
-    gap: 10px;
-    padding: 8px 0;
+    font: inherit;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 13px 2px;
+    text-align: left;
+    width: 100%;
 }
 
 .catalog-brand-name {
     color: var(--cp-blue-dark);
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 800;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
+    transition: color 140ms ease;
 }
 
-.catalog-brand-pick input:checked ~ .catalog-brand-name {
+.catalog-brand-head:hover .catalog-brand-name,
+.catalog-brand.is-filtered .catalog-brand-name {
     color: var(--cp-blue);
 }
 
-.catalog-brand-toggle {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    border-radius: 8px;
+/* Cabecilla dibujada con bordes: marca que la sección se despliega,
+   sin sumar un icono al lado del nombre. */
+.catalog-brand-arrow {
+    border-bottom: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
     color: var(--cp-muted);
-    cursor: pointer;
-    display: inline-flex;
-    height: 32px;
-    justify-content: center;
-    width: 32px;
+    flex: 0 0 auto;
+    height: 7px;
+    margin-right: 4px;
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 180ms ease, color 140ms ease;
+    width: 7px;
 }
 
-.catalog-brand-toggle:hover {
-    background: rgba(61, 164, 216, 0.14);
+.catalog-brand-head:hover .catalog-brand-arrow {
     color: var(--cp-blue);
 }
 
-.catalog-brand-toggle i {
-    font-size: 0.8rem;
-    transition: transform 180ms ease;
-}
-
-.catalog-brand.is-open .catalog-brand-toggle i {
-    transform: rotate(180deg);
+.catalog-brand.is-open .catalog-brand-arrow {
+    transform: rotate(225deg) translate(-2px, -2px);
 }
 
 .catalog-brand-list {
@@ -6287,11 +6278,9 @@ html::-webkit-scrollbar-thumb {
 
 .catalog-brand.is-open .catalog-brand-list {
     animation: catalogoDespliega 200ms ease both;
-    background: var(--cp-surface);
-    border-top: 1px solid var(--cp-line);
     display: flex;
     flex-direction: column;
-    padding: 6px;
+    padding: 0 0 12px;
 }
 
 @keyframes catalogoDespliega {
@@ -6300,94 +6289,48 @@ html::-webkit-scrollbar-thumb {
 }
 
 .catalog-leaf {
-    align-items: center;
-    border-radius: 7px;
+    background: transparent;
+    border: 0;
+    border-left: 2px solid transparent;
+    border-radius: 0 7px 7px 0;
+    color: var(--cp-ink);
     cursor: pointer;
-    display: flex;
-    gap: 10px;
-    padding: 7px 8px 7px 14px;
-    transition: background-color 140ms ease;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.35;
+    padding: 8px 10px 8px 14px;
+    text-align: left;
+    transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+    width: 100%;
 }
 
 .catalog-leaf:hover {
     background: var(--cp-soft);
+    color: var(--cp-blue);
 }
 
-.catalog-leaf-text {
-    color: var(--cp-ink);
-    flex: 1;
-    font-size: 0.85rem;
-    font-weight: 600;
-    line-height: 1.35;
-}
-
-.catalog-leaf input:checked ~ .catalog-leaf-text {
+.catalog-leaf.is-active {
+    background: rgba(61, 164, 216, 0.12);
+    border-left-color: var(--cp-blue);
     color: var(--cp-blue);
     font-weight: 800;
 }
 
-/* Casilla compartida por marcas y rubros. */
-
-.catalog-brand-pick input,
-.catalog-leaf input {
-    height: 0;
-    opacity: 0;
-    position: absolute;
-    width: 0;
+.catalog-leaf:focus-visible {
+    outline: 2px solid var(--cp-sky);
+    outline-offset: -2px;
 }
 
-.catalog-option-box {
-    align-items: center;
-    background: var(--cp-surface);
-    border: 1.5px solid var(--cp-line);
-    border-radius: 5px;
-    display: inline-flex;
-    flex: 0 0 auto;
-    height: 17px;
-    justify-content: center;
-    transition: background-color 140ms ease, border-color 140ms ease;
-    width: 17px;
+.catalog-leaf--todos {
+    color: var(--cp-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
-.catalog-option-box::after {
-    border-bottom: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    content: '';
-    height: 4px;
-    opacity: 0;
-    transform: rotate(-45deg) translate(1px, -1px);
-    width: 9px;
-}
-
-.catalog-brand-pick input:checked ~ .catalog-option-box,
-.catalog-leaf input:checked ~ .catalog-option-box {
-    background: var(--cp-blue);
-    border-color: var(--cp-blue);
-}
-
-.catalog-brand-pick input:checked ~ .catalog-option-box::after,
-.catalog-leaf input:checked ~ .catalog-option-box::after {
-    opacity: 1;
-}
-
-/* Marca con algunos rubros elegidos: guion en vez de tilde. */
-.catalog-brand-pick input:indeterminate ~ .catalog-option-box {
-    background: var(--cp-blue);
-    border-color: var(--cp-blue);
-}
-
-.catalog-brand-pick input:indeterminate ~ .catalog-option-box::after {
-    border-bottom: 2px solid #ffffff;
-    border-left: 0;
-    height: 0;
-    opacity: 1;
-    transform: none;
-    width: 8px;
-}
-
-.catalog-brand-pick input:focus-visible ~ .catalog-option-box,
-.catalog-leaf input:focus-visible ~ .catalog-option-box {
-    box-shadow: 0 0 0 3px rgba(61, 164, 216, 0.28);
+.catalog-leaf--todos.is-active {
+    color: var(--cp-blue);
+    font-weight: 800;
 }
 
 /* ---------- Botón de limpiar ---------- */

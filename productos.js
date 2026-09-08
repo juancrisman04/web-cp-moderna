@@ -1944,59 +1944,61 @@ function pintarArbol(terminos) {
     const vivos = rubrosConTexto(terminos);
     const hayTexto = vivos !== null;
     const { marcas, rubros } = catalogo.seleccion;
-    const indeterminadas = [];
 
     const html = catalogo.arbol.map((marca) => {
         const visibles = marca.rubros.filter((rubro) => !hayTexto || vivos.has(rubro.valor) || rubros.has(rubro.valor));
         if (hayTexto && visibles.length === 0) return '';
 
-        const marcaMarcada = marcas.has(marca.valor);
+        const marcaElegida = marcas.has(marca.valor);
         const rubrosElegidos = marca.rubros.filter((rubro) => rubros.has(rubro.valor)).length;
-        const parcial = !marcaMarcada && rubrosElegidos > 0;
-        const abierta = marcaEstaAbierta(marca, marcaMarcada || rubrosElegidos > 0, hayTexto);
-        const idMarca = 'marca-' + marca.valor;
+        const abierta = marcaEstaAbierta(marca, marcaElegida || rubrosElegidos > 0, hayTexto);
         const idLista = 'rubros-' + marca.valor;
 
-        if (parcial) indeterminadas.push(idMarca);
-
         const items = visibles.map((rubro) => {
-            const id = 'rubro-' + rubro.valor;
-            // Con la marca entera elegida sus rubros van tildados: si no, destildar
-            // uno se leia como marcarlo y la seleccion no cambiaba.
-            const elegido = marcaMarcada || rubros.has(rubro.valor);
-            return '<label class="catalog-leaf" for="' + id + '">'
-                + '<input type="checkbox" id="' + id + '" value="' + rubro.valor + '" data-tipo="rubro"'
-                + (elegido ? ' checked' : '') + '>'
-                + '<span class="catalog-option-box" aria-hidden="true"></span>'
-                + '<span class="catalog-leaf-text">' + escapeHTML(rubro.etiqueta) + '</span>'
-                + '</label>';
+            const activo = marcaElegida || rubros.has(rubro.valor);
+            return '<button type="button" class="catalog-leaf' + (activo ? ' is-active' : '') + '"'
+                + ' data-tipo="rubro" data-valor="' + rubro.valor + '" aria-pressed="' + (activo ? 'true' : 'false') + '">'
+                + escapeHTML(rubro.etiqueta)
+                + '</button>';
         }).join('');
 
-        return '<div class="catalog-brand' + (abierta ? ' is-open' : '') + '">'
-            + '<div class="catalog-brand-head">'
-            + '<label class="catalog-brand-pick" for="' + idMarca + '">'
-            + '<input type="checkbox" id="' + idMarca + '" value="' + marca.valor + '" data-tipo="marca"'
-            + (marcaMarcada ? ' checked' : '') + '>'
-            + '<span class="catalog-option-box" aria-hidden="true"></span>'
+        const todos = '<button type="button" class="catalog-leaf catalog-leaf--todos'
+            + (marcaElegida ? ' is-active' : '') + '"'
+            + ' data-tipo="marca" data-valor="' + marca.valor + '" aria-pressed="' + (marcaElegida ? 'true' : 'false') + '">'
+            + 'Todos'
+            + '</button>';
+
+        return '<div class="catalog-brand' + (abierta ? ' is-open' : '')
+            + (marcaElegida || rubrosElegidos > 0 ? ' is-filtered' : '') + '">'
+            + '<button type="button" class="catalog-brand-head" data-marca="' + marca.valor + '"'
+            + ' aria-expanded="' + (abierta ? 'true' : 'false') + '" aria-controls="' + idLista + '">'
             + '<span class="catalog-brand-name">' + escapeHTML(marca.etiqueta) + '</span>'
-            + '</label>'
-            + '<button type="button" class="catalog-brand-toggle" data-marca="' + marca.valor + '"'
-            + ' aria-expanded="' + (abierta ? 'true' : 'false') + '" aria-controls="' + idLista + '"'
-            + ' aria-label="Ver rubros de ' + escapeHTML(marca.etiqueta) + '">'
-            + '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>'
+            + '<span class="catalog-brand-arrow" aria-hidden="true"></span>'
             + '</button>'
-            + '</div>'
-            + '<div class="catalog-brand-list" id="' + idLista + '">' + items + '</div>'
+            + '<div class="catalog-brand-list" id="' + idLista + '">' + todos + items + '</div>'
             + '</div>';
     }).join('');
 
-    const foco = document.activeElement && document.activeElement.id;
+    // Repintar reemplaza los nodos, asi que hay que devolver el foco a su
+    // equivalente: si no, navegando por teclado se pierde el lugar en cada clic.
+    const activo = document.activeElement;
+    const previo = catalogo.nodos.arbol.contains(activo)
+        ? {
+            cabecera: activo.classList.contains('catalog-brand-head'),
+            marca: activo.dataset.marca,
+            tipo: activo.dataset.tipo,
+            valor: activo.dataset.valor
+        }
+        : null;
+
     catalogo.nodos.arbol.innerHTML = html;
-    indeterminadas.forEach((id) => {
-        const entrada = document.getElementById(id);
-        if (entrada) entrada.indeterminate = true;
-    });
-    if (foco) document.getElementById(foco)?.focus();
+
+    if (previo) {
+        const selector = previo.cabecera
+            ? '.catalog-brand-head[data-marca="' + previo.marca + '"]'
+            : '.catalog-leaf[data-tipo="' + previo.tipo + '"][data-valor="' + previo.valor + '"]';
+        catalogo.nodos.arbol.querySelector(selector)?.focus();
+    }
 }
 
 function pintarChips() {
@@ -2220,23 +2222,24 @@ function setupCatalogo() {
         catalogo.nodos.busqueda.focus();
     });
 
-    catalogo.nodos.arbol.addEventListener('change', (evento) => {
-        const entrada = evento.target.closest('input[type="checkbox"]');
-        if (!entrada) return;
-        if (entrada.dataset.tipo === 'marca') alternarMarca(entrada.value, entrada.checked);
-        else alternarRubro(entrada.value, entrada.checked);
-        aplicarFiltros();
-    });
-
     catalogo.nodos.arbol.addEventListener('click', (evento) => {
-        const boton = evento.target.closest('.catalog-brand-toggle');
-        if (!boton) return;
-        const valor = boton.dataset.marca;
-        if (catalogo.abiertas.has(valor)) catalogo.abiertas.delete(valor);
-        else catalogo.abiertas.add(valor);
-        const caja = boton.closest('.catalog-brand');
-        const abierta = caja.classList.toggle('is-open');
-        boton.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+        const cabecera = evento.target.closest('.catalog-brand-head');
+        if (cabecera) {
+            const valor = cabecera.dataset.marca;
+            if (catalogo.abiertas.has(valor)) catalogo.abiertas.delete(valor);
+            else catalogo.abiertas.add(valor);
+            const abierta = cabecera.closest('.catalog-brand').classList.toggle('is-open');
+            cabecera.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+            return;
+        }
+
+        const hoja = evento.target.closest('.catalog-leaf');
+        if (!hoja) return;
+
+        const activo = hoja.getAttribute('aria-pressed') === 'true';
+        if (hoja.dataset.tipo === 'marca') alternarMarca(hoja.dataset.valor, !activo);
+        else alternarRubro(hoja.dataset.valor, !activo);
+        aplicarFiltros();
     });
 
     catalogo.nodos.orden.addEventListener('change', () => {
