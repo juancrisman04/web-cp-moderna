@@ -1816,25 +1816,28 @@ function setupModalCatalogo() {
 }
 
 /* =========================================================
-   Catálogo: filtro facetado.
-   Las facetas se arman leyendo las tarjetas del DOM, así el
-   panel nunca queda desfasado del catálogo real.
+   Catálogo: filtro por marca con rubros desplegables.
+   El árbol se arma leyendo las tarjetas del DOM, así el panel
+   nunca queda desfasado del catálogo real.
    ========================================================= */
 
 const ETIQUETAS_MARCA = {
     'elite': 'Elite',
-    'wassington': 'Wassington',
     'royco': 'Royco',
     'productos varios': 'Productos varios',
-    'rcm': 'RCM'
+    'rcm': 'RCM',
+    'wassington': 'Wassington'
 };
+
+// Orden de exhibición pedido para las cinco marcas principales.
+const ORDEN_MARCAS = ['elite', 'royco', 'productos-varios', 'rcm', 'wassington'];
 
 const ACRONIMOS = ['RCM'];
 
 const catalogo = {
     fichas: [],
-    marcas: [],
-    rubros: [],
+    arbol: [],
+    abiertas: new Set(),
     seleccion: { marcas: new Set(), rubros: new Set(), texto: '' },
     orden: 'catalogo',
     nodos: {}
@@ -1875,16 +1878,29 @@ function indexarCatalogo() {
         };
     });
 
-    const marcas = new Map();
-    const rubros = new Map();
+    const porMarca = new Map();
     catalogo.fichas.forEach((ficha) => {
-        if (!marcas.has(ficha.marcaSlug)) marcas.set(ficha.marcaSlug, ficha.marcaEtiqueta);
-        if (!rubros.has(ficha.rubroSlug)) rubros.set(ficha.rubroSlug, ficha.rubroEtiqueta);
+        if (!porMarca.has(ficha.marcaSlug)) {
+            porMarca.set(ficha.marcaSlug, { valor: ficha.marcaSlug, etiqueta: ficha.marcaEtiqueta, rubros: new Map() });
+        }
+        porMarca.get(ficha.marcaSlug).rubros.set(ficha.rubroSlug, ficha.rubroEtiqueta);
     });
 
-    catalogo.marcas = Array.from(marcas, ([valor, etiqueta]) => ({ valor, etiqueta }));
-    catalogo.rubros = Array.from(rubros, ([valor, etiqueta]) => ({ valor, etiqueta }))
-        .sort((a, b) => a.etiqueta.localeCompare(b.etiqueta, 'es'));
+    catalogo.arbol = Array.from(porMarca.values())
+        .map((marca) => ({
+            valor: marca.valor,
+            etiqueta: marca.etiqueta,
+            rubros: Array.from(marca.rubros, ([valor, etiqueta]) => ({ valor, etiqueta }))
+                .sort((a, b) => a.etiqueta.localeCompare(b.etiqueta, 'es'))
+        }))
+        .sort((a, b) => {
+            const ia = ORDEN_MARCAS.indexOf(a.valor);
+            const ib = ORDEN_MARCAS.indexOf(b.valor);
+            if (ia !== -1 && ib !== -1) return ia - ib;
+            if (ia !== -1) return -1;
+            if (ib !== -1) return 1;
+            return a.etiqueta.localeCompare(b.etiqueta, 'es');
+        });
 }
 
 function terminosBusqueda() {
@@ -1895,48 +1911,92 @@ function pasaTexto(ficha, terminos) {
     return terminos.every((termino) => ficha.buscable.includes(termino));
 }
 
-// Conteo facetado: cada faceta se cuenta ignorando su propia selección, que es
-// lo que hace que los números sigan siendo útiles al combinar varios filtros.
-function contar(faceta, terminos) {
-    const { marcas, rubros } = catalogo.seleccion;
-    const conteo = new Map();
+// Con un árbol por marca lo natural es sumar lo elegido: marcar Elite y además
+// un rubro de Royco muestra ambos, no su intersección (que siempre daría vacío,
+// porque cada rubro pertenece a una sola marca).
+function haySeleccion() {
+    return catalogo.seleccion.marcas.size > 0 || catalogo.seleccion.rubros.size > 0;
+}
 
+function pasaSeleccion(ficha) {
+    if (!haySeleccion()) return true;
+    return catalogo.seleccion.marcas.has(ficha.marcaSlug)
+        || catalogo.seleccion.rubros.has(ficha.rubroSlug);
+}
+
+// Rubros que tienen al menos un producto para el texto buscado.
+// Devuelve null cuando no hay búsqueda activa: entonces se muestra todo el árbol.
+function rubrosConTexto(terminos) {
+    if (!terminos.length) return null;
+    const vivos = new Set();
     catalogo.fichas.forEach((ficha) => {
-        if (!pasaTexto(ficha, terminos)) return;
-        if (faceta !== 'marcas' && marcas.size && !marcas.has(ficha.marcaSlug)) return;
-        if (faceta !== 'rubros' && rubros.size && !rubros.has(ficha.rubroSlug)) return;
-        const clave = faceta === 'marcas' ? ficha.marcaSlug : ficha.rubroSlug;
-        conteo.set(clave, (conteo.get(clave) || 0) + 1);
+        if (pasaTexto(ficha, terminos)) vivos.add(ficha.rubroSlug);
     });
-
-    return conteo;
+    return vivos;
 }
 
-function opcionHTML(faceta, valor, etiqueta, cantidad, marcada) {
-    const id = 'op-' + faceta + '-' + valor;
-    const inactiva = cantidad === 0 && !marcada;
-    return '<label class="catalog-option' + (inactiva ? ' is-empty' : '') + '" for="' + id + '">'
-        + '<input type="checkbox" id="' + id + '" value="' + valor + '" data-faceta="' + faceta + '"'
-        + (marcada ? ' checked' : '') + (inactiva ? ' disabled' : '') + '>'
-        + '<span class="catalog-option-box" aria-hidden="true"></span>'
-        + '<span class="catalog-option-text">' + escapeHTML(etiqueta) + '</span>'
-        + '<span class="catalog-option-count">' + cantidad + '</span>'
-        + '</label>';
+function marcaEstaAbierta(marca, tieneSeleccion, hayTexto) {
+    if (hayTexto) return true;
+    return catalogo.abiertas.has(marca.valor) || tieneSeleccion;
 }
 
-function pintarFacetas(terminos) {
-    const conteoMarcas = contar('marcas', terminos);
-    const conteoRubros = contar('rubros', terminos);
+function pintarArbol(terminos) {
+    const vivos = rubrosConTexto(terminos);
+    const hayTexto = vivos !== null;
+    const { marcas, rubros } = catalogo.seleccion;
+    const indeterminadas = [];
 
-    catalogo.nodos.marcas.innerHTML = catalogo.marcas
-        .map((m) => opcionHTML('marcas', m.valor, m.etiqueta, conteoMarcas.get(m.valor) || 0, catalogo.seleccion.marcas.has(m.valor)))
-        .join('');
+    const html = catalogo.arbol.map((marca) => {
+        const visibles = marca.rubros.filter((rubro) => !hayTexto || vivos.has(rubro.valor) || rubros.has(rubro.valor));
+        if (hayTexto && visibles.length === 0) return '';
 
-    // Los rubros sin resultados se ocultan: al elegir una marca la lista se acota sola.
-    catalogo.nodos.rubros.innerHTML = catalogo.rubros
-        .filter((r) => (conteoRubros.get(r.valor) || 0) > 0 || catalogo.seleccion.rubros.has(r.valor))
-        .map((r) => opcionHTML('rubros', r.valor, r.etiqueta, conteoRubros.get(r.valor) || 0, catalogo.seleccion.rubros.has(r.valor)))
-        .join('');
+        const marcaMarcada = marcas.has(marca.valor);
+        const rubrosElegidos = marca.rubros.filter((rubro) => rubros.has(rubro.valor)).length;
+        const parcial = !marcaMarcada && rubrosElegidos > 0;
+        const abierta = marcaEstaAbierta(marca, marcaMarcada || rubrosElegidos > 0, hayTexto);
+        const idMarca = 'marca-' + marca.valor;
+        const idLista = 'rubros-' + marca.valor;
+
+        if (parcial) indeterminadas.push(idMarca);
+
+        const items = visibles.map((rubro) => {
+            const id = 'rubro-' + rubro.valor;
+            // Con la marca entera elegida sus rubros van tildados: si no, destildar
+            // uno se leia como marcarlo y la seleccion no cambiaba.
+            const elegido = marcaMarcada || rubros.has(rubro.valor);
+            return '<label class="catalog-leaf" for="' + id + '">'
+                + '<input type="checkbox" id="' + id + '" value="' + rubro.valor + '" data-tipo="rubro"'
+                + (elegido ? ' checked' : '') + '>'
+                + '<span class="catalog-option-box" aria-hidden="true"></span>'
+                + '<span class="catalog-leaf-text">' + escapeHTML(rubro.etiqueta) + '</span>'
+                + '</label>';
+        }).join('');
+
+        return '<div class="catalog-brand' + (abierta ? ' is-open' : '') + '">'
+            + '<div class="catalog-brand-head">'
+            + '<label class="catalog-brand-pick" for="' + idMarca + '">'
+            + '<input type="checkbox" id="' + idMarca + '" value="' + marca.valor + '" data-tipo="marca"'
+            + (marcaMarcada ? ' checked' : '') + '>'
+            + '<span class="catalog-option-box" aria-hidden="true"></span>'
+            + '<span class="catalog-brand-name">' + escapeHTML(marca.etiqueta) + '</span>'
+            + '</label>'
+            + '<button type="button" class="catalog-brand-toggle" data-marca="' + marca.valor + '"'
+            + ' aria-expanded="' + (abierta ? 'true' : 'false') + '" aria-controls="' + idLista + '"'
+            + ' aria-label="Ver rubros de ' + escapeHTML(marca.etiqueta) + '">'
+            + '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>'
+            + '</button>'
+            + '</div>'
+            + '<div class="catalog-brand-list" id="' + idLista + '">' + items + '</div>'
+            + '</div>';
+    }).join('');
+
+    const foco = document.activeElement && document.activeElement.id;
+    catalogo.nodos.arbol.innerHTML = html;
+    indeterminadas.forEach((id) => {
+        const entrada = document.getElementById(id);
+        if (entrada) entrada.indeterminate = true;
+    });
+    if (foco) document.getElementById(foco)?.focus();
 }
 
 function pintarChips() {
@@ -1949,18 +2009,31 @@ function pintarChips() {
             + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
     }
 
-    catalogo.marcas.forEach((m) => {
-        if (!catalogo.seleccion.marcas.has(m.valor)) return;
-        partes.push('<button type="button" class="catalog-chip" data-quitar="marcas" data-valor="' + m.valor + '">'
-            + escapeHTML(m.etiqueta)
-            + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
-    });
+    catalogo.arbol.forEach((marca) => {
+        if (catalogo.seleccion.marcas.has(marca.valor)) {
+            partes.push('<button type="button" class="catalog-chip" data-quitar="marcas" data-valor="' + marca.valor + '">'
+                + escapeHTML(marca.etiqueta)
+                + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+            return;
+        }
 
-    catalogo.rubros.forEach((r) => {
-        if (!catalogo.seleccion.rubros.has(r.valor)) return;
-        partes.push('<button type="button" class="catalog-chip" data-quitar="rubros" data-valor="' + r.valor + '">'
-            + escapeHTML(r.etiqueta)
-            + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+        const elegidos = marca.rubros.filter((rubro) => catalogo.seleccion.rubros.has(rubro.valor));
+        if (!elegidos.length) return;
+
+        // Muchos rubros de una misma marca se resumen en un chip: si no, quitar uno
+        // de una marca completa llenaba la barra con ocho etiquetas.
+        if (elegidos.length > 3) {
+            partes.push('<button type="button" class="catalog-chip" data-quitar="grupo" data-valor="' + marca.valor + '">'
+                + escapeHTML(marca.etiqueta) + ' · ' + elegidos.length + ' rubros'
+                + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+            return;
+        }
+
+        elegidos.forEach((rubro) => {
+            partes.push('<button type="button" class="catalog-chip" data-quitar="rubros" data-valor="' + rubro.valor + '">'
+                + escapeHTML(marca.etiqueta) + ' · ' + escapeHTML(rubro.etiqueta)
+                + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+        });
     });
 
     if (partes.length > 1) {
@@ -1991,18 +2064,15 @@ function filtrosActivos() {
 
 function aplicarFiltros() {
     const terminos = terminosBusqueda();
-    const { marcas, rubros } = catalogo.seleccion;
     let visibles = 0;
 
     catalogo.fichas.forEach((ficha) => {
-        const visible = (marcas.size === 0 || marcas.has(ficha.marcaSlug))
-            && (rubros.size === 0 || rubros.has(ficha.rubroSlug))
-            && pasaTexto(ficha, terminos);
+        const visible = pasaSeleccion(ficha) && pasaTexto(ficha, terminos);
         ficha.nodo.classList.toggle('hidden', !visible);
         if (visible) visibles += 1;
     });
 
-    pintarFacetas(terminos);
+    pintarArbol(terminos);
     pintarChips();
 
     const total = catalogo.fichas.length;
@@ -2039,8 +2109,9 @@ function escribirURL() {
 
 function leerURL() {
     const params = new URLSearchParams(window.location.search);
-    const marcasValidas = new Set(catalogo.marcas.map((m) => m.valor));
-    const rubrosValidos = new Set(catalogo.rubros.map((r) => r.valor));
+    const marcasValidas = new Set(catalogo.arbol.map((m) => m.valor));
+    const rubrosValidos = new Set();
+    catalogo.arbol.forEach((m) => m.rubros.forEach((r) => rubrosValidos.add(r.valor)));
 
     catalogo.seleccion.texto = params.get('q') || '';
     (params.get('marca') || '').split(',').filter(Boolean)
@@ -2058,6 +2129,40 @@ function limpiarCatalogo() {
     catalogo.seleccion.texto = '';
     catalogo.nodos.busqueda.value = '';
     aplicarFiltros();
+}
+
+function alternarMarca(valor, marcada) {
+    const marca = catalogo.arbol.find((m) => m.valor === valor);
+    if (!marca) return;
+
+    if (marcada) {
+        catalogo.seleccion.marcas.add(valor);
+        // Elegir la marca entera reemplaza a sus rubros sueltos.
+        marca.rubros.forEach((rubro) => catalogo.seleccion.rubros.delete(rubro.valor));
+        catalogo.abiertas.add(valor);
+    } else {
+        catalogo.seleccion.marcas.delete(valor);
+    }
+}
+
+function alternarRubro(valor, marcado) {
+    const marca = catalogo.arbol.find((m) => m.rubros.some((r) => r.valor === valor));
+
+    // Si la marca estaba elegida entera, primero se desarma en rubros sueltos.
+    if (marca && catalogo.seleccion.marcas.has(marca.valor)) {
+        catalogo.seleccion.marcas.delete(marca.valor);
+        marca.rubros.forEach((rubro) => catalogo.seleccion.rubros.add(rubro.valor));
+    }
+
+    if (marcado) catalogo.seleccion.rubros.add(valor);
+    else catalogo.seleccion.rubros.delete(valor);
+
+    // Si quedaron todos los rubros de la marca, se vuelve a plegar en la marca:
+    // deja un solo chip y una URL corta en vez de repetir cada rubro.
+    if (marca && marca.rubros.every((rubro) => catalogo.seleccion.rubros.has(rubro.valor))) {
+        marca.rubros.forEach((rubro) => catalogo.seleccion.rubros.delete(rubro.valor));
+        catalogo.seleccion.marcas.add(marca.valor);
+    }
 }
 
 function abrirRiel() {
@@ -2085,8 +2190,7 @@ function setupCatalogo() {
         fondo: document.getElementById('catalogBackdrop'),
         fab: document.getElementById('catalogFab'),
         fabCuenta: document.getElementById('catalogFabCount'),
-        marcas: document.getElementById('brandOptions'),
-        rubros: document.getElementById('categoryOptions'),
+        arbol: document.getElementById('brandTree'),
         chips: document.getElementById('catalogChips'),
         conteo: document.getElementById('catalogCount'),
         vacio: document.getElementById('catalogEmpty'),
@@ -2116,14 +2220,23 @@ function setupCatalogo() {
         catalogo.nodos.busqueda.focus();
     });
 
-    catalogo.nodos.riel.addEventListener('change', (evento) => {
+    catalogo.nodos.arbol.addEventListener('change', (evento) => {
         const entrada = evento.target.closest('input[type="checkbox"]');
         if (!entrada) return;
-        const conjunto = catalogo.seleccion[entrada.dataset.faceta];
-        if (!conjunto) return;
-        if (entrada.checked) conjunto.add(entrada.value);
-        else conjunto.delete(entrada.value);
+        if (entrada.dataset.tipo === 'marca') alternarMarca(entrada.value, entrada.checked);
+        else alternarRubro(entrada.value, entrada.checked);
         aplicarFiltros();
+    });
+
+    catalogo.nodos.arbol.addEventListener('click', (evento) => {
+        const boton = evento.target.closest('.catalog-brand-toggle');
+        if (!boton) return;
+        const valor = boton.dataset.marca;
+        if (catalogo.abiertas.has(valor)) catalogo.abiertas.delete(valor);
+        else catalogo.abiertas.add(valor);
+        const caja = boton.closest('.catalog-brand');
+        const abierta = caja.classList.toggle('is-open');
+        boton.setAttribute('aria-expanded', abierta ? 'true' : 'false');
     });
 
     catalogo.nodos.orden.addEventListener('change', () => {
@@ -2138,6 +2251,9 @@ function setupCatalogo() {
         if (chip.dataset.quitar === 'texto') {
             catalogo.nodos.busqueda.value = '';
             catalogo.seleccion.texto = '';
+        } else if (chip.dataset.quitar === 'grupo') {
+            const marca = catalogo.arbol.find((m) => m.valor === chip.dataset.valor);
+            marca?.rubros.forEach((rubro) => catalogo.seleccion.rubros.delete(rubro.valor));
         } else {
             catalogo.seleccion[chip.dataset.quitar].delete(chip.dataset.valor);
         }
