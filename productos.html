@@ -179,144 +179,69 @@
     <!-- BARRA BUSCAR -->
     <main class="main-content">
         <div class="container">
-            <div class="filter-toolbar">
-                <button type="button" class="filter-toggle" id="openFilters">
-                    <i class="fa-solid fa-sliders"></i>
-                    Filtrar catálogo
-                </button>
-                <span>Usá filtros por marca o buscá directo por producto.</span>
-            </div>
-            <div class="page-layout" data-aos="fade-up">
-                <!-- Sidebar -->
-                <aside class="sidebar" id="productFilters" aria-hidden="true">
-                    <div class="filter-panel-head">
-                        <span>Catálogo Clean Pel</span>
-                        <h2>Categorías</h2>
-                        <p>Explorá por marca, línea de producto o necesidad.</p>
-                        <button type="button" class="filter-close" id="closeFilters" aria-label="Cerrar filtros">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                        <button type="button" onclick="clearSearch()" class="filter-reset">
-                            <i class="fa-solid fa-border-all"></i> Ver todo el catálogo
+            <button type="button" class="catalog-fab" id="catalogFab" aria-controls="catalogRail" aria-expanded="false">
+                <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                <span>Filtros</span>
+                <span class="catalog-fab-count" id="catalogFabCount" hidden>0</span>
+            </button>
+
+            <div class="catalog-layout">
+                <aside class="catalog-rail" id="catalogRail" aria-label="Filtros del catálogo">
+                    <div class="catalog-rail-head">
+                        <div>
+                            <span class="catalog-rail-kicker">Catálogo Clean Pel</span>
+                            <h2>Filtros</h2>
+                        </div>
+                        <button type="button" class="catalog-rail-close" id="catalogRailClose" aria-label="Cerrar filtros">
+                            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <!-- Buscador -->
-                    <div class="search-container">
-                        <div class="search-box">
-                            <input type="text" id="searchInput" placeholder="Buscar productos..." class="search-input">
-                            <button class="search-btn">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
+                    <div class="catalog-search">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="catalogSearch" placeholder="Buscar producto o rubro" autocomplete="off" aria-label="Buscar en el catálogo">
+                        <button type="button" class="catalog-search-clear" id="catalogSearchClear" aria-label="Borrar búsqueda" hidden>
+                            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
                     </div>
 
-                    <!-- CATEGORIAS DESPLEGABLES -->
-                    <div class="categories" data-aos ="slide-up">
+                    <section class="catalog-facet">
+                        <h3>Marca</h3>
+                        <div class="catalog-options" id="brandOptions"></div>
+                    </section>
 
-                        <!-- ELITE -->
-                        <div class="category-item">
-                            <div class="category-header" onclick="toggleCategory('elite')">
-                                <span class="category-title">ELITE</span>
-                                <i class="fas fa-chevron-down category-arrow" id="elite-arrow"></i>
-                            </div>
-                            <div class="category-content" id="elite-content">
-                                <ul class="subcategory-list">
-                                    <li><a href="#"onclick="filterProducts('elite','PAPEL HIGIÉNICO'); toggleSubSubcategory(event, 'elite-Papel Higienico')">PAPEL HIGIÉNICO <i class="fas fa-chevron-down"></i></a>
-                                      <ul class="sub-subcategory-list" id="elite-Papel Higienico">
-                                         <li><a href="#" onclick="filterProducts('elite','PAPEL HIGIÉNICO ALTO METRAJE'); highlightSelectedSubcategory(this)">ALTO METRAJE</a></li>
-                                         <li><a href="#" onclick="filterProducts('elite', 'PAPEL HIGIÉNICO BAJO METRAJE'); highlightSelectedSubcategory(this)">BAJO METRAJE</a></li>
-                                      </ul>
-                                    </li>
+                    <section class="catalog-facet">
+                        <h3>Rubro</h3>
+                        <div class="catalog-options catalog-options--scroll" id="categoryOptions"></div>
+                    </section>
 
-                                    <li><a href="#"onclick="filterProducts('elite','TOALLAS DE PAPEL'); toggleSubSubcategory(event, 'elite-Toallas De Papel')">TOALLAS DE PAPEL <i class="fas fa-chevron-down"></i></a>
-                                      <ul class="sub-subcategory-list" id="elite-Toallas De Papel">
-                                         <li><a href="#" onclick="filterProducts('elite', 'TOALLAS DE PAPEL EN ROLLO'); highlightSelectedSubcategory(this)">EN ROLLO</a></li>
-                                         <li><a href="#" onclick="filterProducts('elite', 'TOALLAS DE PAPEL INTERCALADAS'); highlightSelectedSubcategory(this)">INTERCALADAS</a></li>
-                                      </ul>
-                                    </li>
-
-                                    <li><a href="#" onclick="filterProducts('elite', 'ROLLOS Y BOBINAS'); highlightSelectedSubcategory(this)">ROLLOS Y BOBINAS</a></li>
-                                    <li><a href="#" onclick="filterProducts('elite','SERVILLETAS'); highlightSelectedSubcategory(this)">SERVILLETAS</a></li>
-                                    <li><a href="#" onclick="filterProducts('elite', 'PAÑOS DE LIMPIEZA'); highlightSelectedSubcategory(this)">PAÑOS DE LIMPIEZA</a></li>
-                                    <li><a href="#" onclick="filterProducts('elite', 'JABONES Y ALCOHOLES'); highlightSelectedSubcategory(this)">JABONES Y ALCOHOLES</a></li>
-                                    <li><a href="#" onclick="filterProducts('elite', 'DISPENSADORES'); highlightSelectedSubcategory(this)">DISPENSADORES</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- WASSINGTON -->
-                        <div class="category-item">
-                            <div class="category-header" onclick="toggleCategory('wassington')">
-                                <span class="category-title">WASSINGTON</span>
-                                <i class="fas fa-chevron-down category-arrow" id="wassington-arrow"></i>
-                            </div>
-                            <div class="category-content" id="wassington-content">
-                                <ul class="subcategory-list">
-                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO DE PISOS'); highlightSelectedSubcategory(this)">CUIDADO DE PISOS</a></li>
-                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO DE BAÑOS'); highlightSelectedSubcategory(this)">CUIDADO DE BAÑOS</a></li>
-                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO DE COCINAS'); highlightSelectedSubcategory(this)">CUIDADO DE COCINAS</a></li>
-                                    <li><a href="#" onclick="filterProducts('wassington', 'CUIDADO PERSONAL'); highlightSelectedSubcategory(this)">CUIDADO PERSONAL</a></li>
-                                    <li><a href="#" onclick="filterProducts('wassington', 'LIMPIADORES Y DESINFECTANTES'); highlightSelectedSubcategory(this)">LIMPIADORES Y DESINFECTANTES</a></li>    
-                                    <li><a href="#" onclick="filterProducts('wassington', 'LIMPIAVIDRIOS Y MULTIUSOS'); highlightSelectedSubcategory(this)">LIMPIAVIDRIOS Y MULTIUSOS</a></li>                         
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- ROYCO -->
-                        <div class="category-item">
-                            <div class="category-header" onclick="toggleCategory('royco')">
-                                <span class="category-title">ROYCO</span>
-                                <i class="fas fa-chevron-down category-arrow" id="royco-arrow"></i>
-                            </div>
-                            <div class="category-content" id="royco-content">
-                                <ul class="subcategory-list">
-                                    <li><a href="#" onclick="filterProducts('royco', 'CARROS, CESTOS Y CONTENEDORES'); highlightSelectedSubcategory(this)">CARROS, CESTOS Y CONTENEDORES</a></li>
-                                    <li><a href="#" onclick="filterProducts('royco', 'EQUIPAMIENTO DE LIMPIEZA'); highlightSelectedSubcategory(this)">EQUIPAMIENTO DE LIMPIEZA</a></li>
-                                    <li><a href="#" onclick="filterProducts('royco', 'EQUIPOS DE VIDRIO'); highlightSelectedSubcategory(this)">EQUIPOS DE VIDRIO</a></li>
-                                    <li><a href="#" onclick="filterProducts('royco', 'CABOS'); highlightSelectedSubcategory(this)">CABOS</a></li>
-                                    <li><a href="#" onclick="filterProducts('royco', 'ESCOBAS, BARREDORES Y ESCOBILLONES'); highlightSelectedSubcategory(this)">ESCOBAS, BARREDORES Y ESCOBILLONES</a></li>
-                                    <li><a href="#" onclick="filterProducts('royco', 'SECADORES DE PISO'); highlightSelectedSubcategory(this)">SECADORES DE PISO</a></li>                                  
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- PRODUCTOS VARIOS -->
-                        <div class="category-item">
-                            <div class="category-header" onclick="toggleCategory('productos varios')">
-                                <span class="category-title">PRODUCTOS VARIOS</span>
-                                <i class="fas fa-chevron-down category-arrow" id="productos varios-arrow"></i>
-                            </div>
-                            <div class="category-content" id="productos varios-content">
-                                <ul class="subcategory-list">
-                                    <li><a href="#" onclick="filterProducts('productos varios', 'TRAPOS Y PAÑOS'); highlightSelectedSubcategory(this)">TRAPOS Y PAÑOS</a></li>
-                                    <li><a href="#" onclick="filterProducts('productos varios', 'VARIOS'); highlightSelectedSubcategory(this)">VARIOS</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- MAQUINAS DE LIMPIEZA RCN -->
-                        <div class="category-item">
-                            <div class="category-header" onclick="toggleCategory('rcm')">
-                                <span class="category-title">RCM</span>
-                                <i class="fas fa-chevron-down category-arrow" id="rcm-arrow"></i>
-                            </div>
-                            <div class="category-content" id="rcm-content">
-                                <ul class="subcategory-list">
-                                    <li><a href="#" onclick="filterProducts('rcm', 'MÁQUINAS DE LIMPIEZA RCM'); highlightSelectedSubcategory(this)">MÁQUINAS DE LIMPIEZA RCM</a></li>                               
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="button" class="catalog-reset" data-catalog-reset>
+                        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Limpiar filtros
+                    </button>
                 </aside>
-                <div class="filter-backdrop" id="filterBackdrop"></div>
+
+                <div class="catalog-backdrop" id="catalogBackdrop" hidden></div>
 
                 <!-- PRODUCTOS -->
                 <section class="products-content">
-                    <div class="page-title">
-                    <h1 id="productsTitle">PRODUCTOS</h1>
+                    <div class="catalog-results-head">
+                        <div class="catalog-results-title">
+                            <h1 id="productsTitle">Catálogo</h1>
+                            <p class="catalog-count" id="catalogCount" role="status" aria-live="polite"></p>
+                        </div>
+                        <label class="catalog-sort">
+                            <span>Ordenar</span>
+                            <select id="catalogSort">
+                                <option value="catalogo">Orden del catálogo</option>
+                                <option value="az">Nombre A-Z</option>
+                                <option value="za">Nombre Z-A</option>
+                            </select>
+                        </label>
                     </div>
-                    <div class="products-grid"  id="productsGrid" data-aos ="fade-left">
+
+                    <div class="catalog-chips" id="catalogChips" hidden></div>
+
+                    <div class="products-grid" id="productsGrid">
 
                         <!-- ELITE -->
 
@@ -2118,6 +2043,15 @@
                                 <button class="btn-ver-mas" >VER MÁS</button>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="catalog-empty" id="catalogEmpty" hidden>
+                        <i class="fa-solid fa-box-open" aria-hidden="true"></i>
+                        <h3>No hay productos con esos filtros</h3>
+                        <p>Probá quitando algún filtro o revisando la búsqueda.</p>
+                        <button type="button" class="catalog-reset" data-catalog-reset>
+                            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Limpiar filtros
+                        </button>
                     </div>
                 </section>
             </div>

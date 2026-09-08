@@ -1681,85 +1681,6 @@ const productData = {
 // ========================================
 // INTERACCION DE PRODUCTOS
 // ========================================
-let currentFilter = { brand: 'all', category: 'all' };
-let allProducts = [];
-let productTitle = null;
-
-function toggleCategory(categoryId) {
-    const content = document.getElementById(`${categoryId}-content`);
-    const arrow = document.getElementById(`${categoryId}-arrow`);
-    if (!content || !arrow) return;
-
-    const isOpen = content.classList.contains('active');
-    content.classList.toggle('active', !isOpen);
-    arrow.classList.toggle('fa-chevron-up', !isOpen);
-    arrow.classList.toggle('fa-chevron-down', isOpen);
-
-    if (isOpen) {
-        content.querySelectorAll('.sub-subcategory-list').forEach((list) => {
-            list.classList.remove('active');
-        });
-    }
-}
-
-function toggleSubSubcategory(event, id) {
-    event.preventDefault();
-
-    const clickedList = document.getElementById(id);
-    if (!clickedList) return;
-
-    clickedList.classList.toggle('active');
-}
-
-function filterProducts(brand, category) {
-    currentFilter = { brand, category };
-    const normalizedCategory = normalizeText(category);
-
-    allProducts.forEach((product) => {
-        const productBrand = product.dataset.brand || '';
-        const productCategory = product.dataset.category || '';
-        const matchesBrand = productBrand === brand;
-        const matchesCategory = normalizeText(productCategory).startsWith(normalizedCategory);
-
-        product.classList.toggle('hidden', !(matchesBrand && matchesCategory));
-        product.classList.remove('filtered');
-    });
-
-    setProductsTitle(category);
-    closeFilters();
-    scrollToProductsTitle();
-}
-
-function showAllProducts() {
-    allProducts.forEach((product) => {
-        product.classList.remove('hidden');
-        product.classList.remove('filtered');
-    });
-
-    setProductsTitle('PRODUCTOS');
-    closeFilters();
-}
-
-function searchProducts(searchTerm) {
-    const term = normalizeText(searchTerm);
-
-    if (!term) {
-        showAllProducts();
-        return;
-    }
-
-    allProducts.forEach((product) => {
-        const title = product.querySelector('h3')?.textContent || '';
-        const searchableText = normalizeText(`${title} ${product.dataset.brand || ''} ${product.dataset.category || ''}`);
-        const isVisible = searchableText.includes(term);
-
-        product.classList.toggle('hidden', !isVisible);
-        product.classList.remove('filtered');
-    });
-
-    setProductsTitle(`RESULTADOS: "${searchTerm}"`);
-}
-
 function showProductInfo(productId) {
     const product = productData[productId];
     if (!product) return;
@@ -1881,115 +1802,364 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 
-function clearSearch() {
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) searchInput.value = '';
-    showAllProducts();
-}
-
-function highlightSelectedSubcategory(element) {
-    document.querySelectorAll('.subcategory-list a, .sub-subcategory-list a')
-        .forEach((link) => link.classList.remove('active-subcategory'));
-    element?.classList.add('active-subcategory');
-}
-
-function setupProductsPage() {
-    allProducts = Array.from(document.querySelectorAll('.product-card'));
-    productTitle = document.querySelector('.page-title h1, #productsTitle');
-    expandCategoryPanel();
-
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.querySelector('.search-btn');
-    const debouncedSearch = window.CleanPel.debounce(() => searchProducts(searchInput.value.trim()), 160);
-    setupFilterDrawer();
-
-    searchInput?.addEventListener('input', debouncedSearch);
-    searchBtn?.addEventListener('click', () => searchProducts(searchInput?.value.trim() || ''));
-    searchInput?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') searchProducts(searchInput.value.trim());
-    });
-
+function setupModalCatalogo() {
     const modal = document.getElementById('productModal');
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) closeModal();
+    if (!modal) return;
+
+    window.addEventListener('click', (evento) => {
+        if (evento.target === modal) closeModal();
     });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeModal();
-    });
-
-    showAllProducts();
-}
-
-function setupFilterDrawer() {
-    const drawer = document.getElementById('productFilters');
-    const openButton = document.getElementById('openFilters');
-    const closeButton = document.getElementById('closeFilters');
-    const backdrop = document.getElementById('filterBackdrop');
-    if (!drawer || !openButton || !closeButton || !backdrop) return;
-
-    if (drawer.parentElement !== document.body) document.body.appendChild(drawer);
-    if (backdrop.parentElement !== document.body) document.body.appendChild(backdrop);
-
-    openButton.addEventListener('click', openFilters);
-    closeButton.addEventListener('click', closeFilters);
-    backdrop.addEventListener('click', closeFilters);
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeFilters();
+    document.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Escape') closeModal();
     });
 }
 
-function openFilters() {
-    const drawer = document.getElementById('productFilters');
-    const backdrop = document.getElementById('filterBackdrop');
-    if (!drawer || !backdrop) return;
+/* =========================================================
+   Catálogo: filtro facetado.
+   Las facetas se arman leyendo las tarjetas del DOM, así el
+   panel nunca queda desfasado del catálogo real.
+   ========================================================= */
 
-    expandCategoryPanel();
-    drawer.classList.add('is-open');
-    backdrop.classList.add('is-open');
-    drawer.setAttribute('aria-hidden', 'false');
+const ETIQUETAS_MARCA = {
+    'elite': 'Elite',
+    'wassington': 'Wassington',
+    'royco': 'Royco',
+    'productos varios': 'Productos varios',
+    'rcm': 'RCM'
+};
+
+const ACRONIMOS = ['RCM'];
+
+const catalogo = {
+    fichas: [],
+    marcas: [],
+    rubros: [],
+    seleccion: { marcas: new Set(), rubros: new Set(), texto: '' },
+    orden: 'catalogo',
+    nodos: {}
+};
+
+function slugificar(valor) {
+    const crudo = Array.from(normalizeText(valor))
+        .map((letra) => (/[a-z0-9]/.test(letra) ? letra : '-'))
+        .join('');
+    return crudo.split('-').filter(Boolean).join('-');
+}
+
+function titular(texto) {
+    const suave = String(texto || '').toLocaleLowerCase('es');
+    if (!suave) return '';
+    const capitalizado = suave.charAt(0).toLocaleUpperCase('es') + suave.slice(1);
+    return capitalizado
+        .split(' ')
+        .map((palabra) => (ACRONIMOS.includes(palabra.toUpperCase()) ? palabra.toUpperCase() : palabra))
+        .join(' ');
+}
+
+function indexarCatalogo() {
+    catalogo.fichas = Array.from(document.querySelectorAll('.product-card')).map((nodo, orden) => {
+        const marca = (nodo.dataset.brand || '').trim();
+        const rubro = (nodo.dataset.category || '').trim();
+        const titulo = (nodo.querySelector('h3')?.textContent || '').trim();
+        return {
+            nodo,
+            orden,
+            marcaSlug: slugificar(marca),
+            rubroSlug: slugificar(rubro),
+            marcaEtiqueta: ETIQUETAS_MARCA[marca.toLowerCase()] || titular(marca),
+            rubroEtiqueta: titular(rubro),
+            titulo,
+            tituloOrden: normalizeText(titulo),
+            buscable: normalizeText(titulo + ' ' + marca + ' ' + rubro)
+        };
+    });
+
+    const marcas = new Map();
+    const rubros = new Map();
+    catalogo.fichas.forEach((ficha) => {
+        if (!marcas.has(ficha.marcaSlug)) marcas.set(ficha.marcaSlug, ficha.marcaEtiqueta);
+        if (!rubros.has(ficha.rubroSlug)) rubros.set(ficha.rubroSlug, ficha.rubroEtiqueta);
+    });
+
+    catalogo.marcas = Array.from(marcas, ([valor, etiqueta]) => ({ valor, etiqueta }));
+    catalogo.rubros = Array.from(rubros, ([valor, etiqueta]) => ({ valor, etiqueta }))
+        .sort((a, b) => a.etiqueta.localeCompare(b.etiqueta, 'es'));
+}
+
+function terminosBusqueda() {
+    return normalizeText(catalogo.seleccion.texto).split(' ').filter(Boolean);
+}
+
+function pasaTexto(ficha, terminos) {
+    return terminos.every((termino) => ficha.buscable.includes(termino));
+}
+
+// Conteo facetado: cada faceta se cuenta ignorando su propia selección, que es
+// lo que hace que los números sigan siendo útiles al combinar varios filtros.
+function contar(faceta, terminos) {
+    const { marcas, rubros } = catalogo.seleccion;
+    const conteo = new Map();
+
+    catalogo.fichas.forEach((ficha) => {
+        if (!pasaTexto(ficha, terminos)) return;
+        if (faceta !== 'marcas' && marcas.size && !marcas.has(ficha.marcaSlug)) return;
+        if (faceta !== 'rubros' && rubros.size && !rubros.has(ficha.rubroSlug)) return;
+        const clave = faceta === 'marcas' ? ficha.marcaSlug : ficha.rubroSlug;
+        conteo.set(clave, (conteo.get(clave) || 0) + 1);
+    });
+
+    return conteo;
+}
+
+function opcionHTML(faceta, valor, etiqueta, cantidad, marcada) {
+    const id = 'op-' + faceta + '-' + valor;
+    const inactiva = cantidad === 0 && !marcada;
+    return '<label class="catalog-option' + (inactiva ? ' is-empty' : '') + '" for="' + id + '">'
+        + '<input type="checkbox" id="' + id + '" value="' + valor + '" data-faceta="' + faceta + '"'
+        + (marcada ? ' checked' : '') + (inactiva ? ' disabled' : '') + '>'
+        + '<span class="catalog-option-box" aria-hidden="true"></span>'
+        + '<span class="catalog-option-text">' + escapeHTML(etiqueta) + '</span>'
+        + '<span class="catalog-option-count">' + cantidad + '</span>'
+        + '</label>';
+}
+
+function pintarFacetas(terminos) {
+    const conteoMarcas = contar('marcas', terminos);
+    const conteoRubros = contar('rubros', terminos);
+
+    catalogo.nodos.marcas.innerHTML = catalogo.marcas
+        .map((m) => opcionHTML('marcas', m.valor, m.etiqueta, conteoMarcas.get(m.valor) || 0, catalogo.seleccion.marcas.has(m.valor)))
+        .join('');
+
+    // Los rubros sin resultados se ocultan: al elegir una marca la lista se acota sola.
+    catalogo.nodos.rubros.innerHTML = catalogo.rubros
+        .filter((r) => (conteoRubros.get(r.valor) || 0) > 0 || catalogo.seleccion.rubros.has(r.valor))
+        .map((r) => opcionHTML('rubros', r.valor, r.etiqueta, conteoRubros.get(r.valor) || 0, catalogo.seleccion.rubros.has(r.valor)))
+        .join('');
+}
+
+function pintarChips() {
+    const partes = [];
+
+    if (catalogo.seleccion.texto.trim()) {
+        partes.push('<button type="button" class="catalog-chip" data-quitar="texto">'
+            + '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>'
+            + escapeHTML(catalogo.seleccion.texto.trim())
+            + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+    }
+
+    catalogo.marcas.forEach((m) => {
+        if (!catalogo.seleccion.marcas.has(m.valor)) return;
+        partes.push('<button type="button" class="catalog-chip" data-quitar="marcas" data-valor="' + m.valor + '">'
+            + escapeHTML(m.etiqueta)
+            + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+    });
+
+    catalogo.rubros.forEach((r) => {
+        if (!catalogo.seleccion.rubros.has(r.valor)) return;
+        partes.push('<button type="button" class="catalog-chip" data-quitar="rubros" data-valor="' + r.valor + '">'
+            + escapeHTML(r.etiqueta)
+            + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
+    });
+
+    if (partes.length > 1) {
+        partes.push('<button type="button" class="catalog-chip catalog-chip--reset" data-catalog-reset>Limpiar todo</button>');
+    }
+
+    catalogo.nodos.chips.innerHTML = partes.join('');
+    catalogo.nodos.chips.hidden = partes.length === 0;
+}
+
+function ordenarGrilla() {
+    const ordenadas = catalogo.fichas.slice().sort((a, b) => {
+        if (catalogo.orden === 'az') return a.tituloOrden.localeCompare(b.tituloOrden, 'es');
+        if (catalogo.orden === 'za') return b.tituloOrden.localeCompare(a.tituloOrden, 'es');
+        return a.orden - b.orden;
+    });
+
+    const fragmento = document.createDocumentFragment();
+    ordenadas.forEach((ficha) => fragmento.appendChild(ficha.nodo));
+    catalogo.nodos.grilla.appendChild(fragmento);
+}
+
+function filtrosActivos() {
+    return catalogo.seleccion.marcas.size
+        + catalogo.seleccion.rubros.size
+        + (catalogo.seleccion.texto.trim() ? 1 : 0);
+}
+
+function aplicarFiltros() {
+    const terminos = terminosBusqueda();
+    const { marcas, rubros } = catalogo.seleccion;
+    let visibles = 0;
+
+    catalogo.fichas.forEach((ficha) => {
+        const visible = (marcas.size === 0 || marcas.has(ficha.marcaSlug))
+            && (rubros.size === 0 || rubros.has(ficha.rubroSlug))
+            && pasaTexto(ficha, terminos);
+        ficha.nodo.classList.toggle('hidden', !visible);
+        if (visible) visibles += 1;
+    });
+
+    pintarFacetas(terminos);
+    pintarChips();
+
+    const total = catalogo.fichas.length;
+    catalogo.nodos.conteo.textContent = visibles === total
+        ? total + ' productos en el catálogo'
+        : visibles + (visibles === 1 ? ' producto' : ' productos') + ' de ' + total;
+
+    catalogo.nodos.vacio.hidden = visibles !== 0;
+    catalogo.nodos.grilla.hidden = visibles === 0;
+
+    const activos = filtrosActivos();
+    catalogo.nodos.fabCuenta.textContent = String(activos);
+    catalogo.nodos.fabCuenta.hidden = activos === 0;
+    catalogo.nodos.limpiarBusqueda.hidden = !catalogo.seleccion.texto;
+
+    // Reinicia la animación de entrada sólo sobre lo que quedó visible.
+    catalogo.nodos.grilla.classList.remove('is-refreshing');
+    void catalogo.nodos.grilla.offsetWidth;
+    catalogo.nodos.grilla.classList.add('is-refreshing');
+
+    escribirURL();
+}
+
+function escribirURL() {
+    const params = new URLSearchParams();
+    if (catalogo.seleccion.texto.trim()) params.set('q', catalogo.seleccion.texto.trim());
+    if (catalogo.seleccion.marcas.size) params.set('marca', Array.from(catalogo.seleccion.marcas).join(','));
+    if (catalogo.seleccion.rubros.size) params.set('rubro', Array.from(catalogo.seleccion.rubros).join(','));
+    if (catalogo.orden !== 'catalogo') params.set('orden', catalogo.orden);
+
+    const consulta = params.toString();
+    window.history.replaceState(null, '', window.location.pathname + (consulta ? '?' + consulta : ''));
+}
+
+function leerURL() {
+    const params = new URLSearchParams(window.location.search);
+    const marcasValidas = new Set(catalogo.marcas.map((m) => m.valor));
+    const rubrosValidos = new Set(catalogo.rubros.map((r) => r.valor));
+
+    catalogo.seleccion.texto = params.get('q') || '';
+    (params.get('marca') || '').split(',').filter(Boolean)
+        .forEach((valor) => { if (marcasValidas.has(valor)) catalogo.seleccion.marcas.add(valor); });
+    (params.get('rubro') || '').split(',').filter(Boolean)
+        .forEach((valor) => { if (rubrosValidos.has(valor)) catalogo.seleccion.rubros.add(valor); });
+
+    const orden = params.get('orden');
+    if (orden === 'az' || orden === 'za') catalogo.orden = orden;
+}
+
+function limpiarCatalogo() {
+    catalogo.seleccion.marcas.clear();
+    catalogo.seleccion.rubros.clear();
+    catalogo.seleccion.texto = '';
+    catalogo.nodos.busqueda.value = '';
+    aplicarFiltros();
+}
+
+function abrirRiel() {
+    catalogo.nodos.riel.classList.add('is-open');
+    catalogo.nodos.fondo.hidden = false;
+    catalogo.nodos.fab.setAttribute('aria-expanded', 'true');
     document.body.classList.add('filters-open');
 }
 
-function closeFilters() {
-    const drawer = document.getElementById('productFilters');
-    const backdrop = document.getElementById('filterBackdrop');
-    if (!drawer || !backdrop) return;
-
-    drawer.classList.remove('is-open');
-    backdrop.classList.remove('is-open');
-    drawer.setAttribute('aria-hidden', 'true');
+function cerrarRiel() {
+    if (!catalogo.nodos.riel) return;
+    catalogo.nodos.riel.classList.remove('is-open');
+    catalogo.nodos.fondo.hidden = true;
+    catalogo.nodos.fab.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('filters-open');
 }
 
-function expandCategoryPanel() {
-    document.querySelectorAll('.category-content').forEach((content) => {
-        content.classList.remove('active');
+function setupCatalogo() {
+    const grilla = document.getElementById('productsGrid');
+    if (!grilla) return;
+
+    catalogo.nodos = {
+        grilla,
+        riel: document.getElementById('catalogRail'),
+        fondo: document.getElementById('catalogBackdrop'),
+        fab: document.getElementById('catalogFab'),
+        fabCuenta: document.getElementById('catalogFabCount'),
+        marcas: document.getElementById('brandOptions'),
+        rubros: document.getElementById('categoryOptions'),
+        chips: document.getElementById('catalogChips'),
+        conteo: document.getElementById('catalogCount'),
+        vacio: document.getElementById('catalogEmpty'),
+        busqueda: document.getElementById('catalogSearch'),
+        limpiarBusqueda: document.getElementById('catalogSearchClear'),
+        orden: document.getElementById('catalogSort')
+    };
+
+    indexarCatalogo();
+    leerURL();
+
+    catalogo.nodos.busqueda.value = catalogo.seleccion.texto;
+    catalogo.nodos.orden.value = catalogo.orden;
+    if (catalogo.orden !== 'catalogo') ordenarGrilla();
+
+    const buscar = window.CleanPel.debounce(() => {
+        catalogo.seleccion.texto = catalogo.nodos.busqueda.value;
+        aplicarFiltros();
+    }, 160);
+
+    catalogo.nodos.busqueda.addEventListener('input', buscar);
+
+    catalogo.nodos.limpiarBusqueda.addEventListener('click', () => {
+        catalogo.nodos.busqueda.value = '';
+        catalogo.seleccion.texto = '';
+        aplicarFiltros();
+        catalogo.nodos.busqueda.focus();
     });
 
-    document.querySelectorAll('.sub-subcategory-list').forEach((list) => {
-        list.classList.remove('active');
+    catalogo.nodos.riel.addEventListener('change', (evento) => {
+        const entrada = evento.target.closest('input[type="checkbox"]');
+        if (!entrada) return;
+        const conjunto = catalogo.seleccion[entrada.dataset.faceta];
+        if (!conjunto) return;
+        if (entrada.checked) conjunto.add(entrada.value);
+        else conjunto.delete(entrada.value);
+        aplicarFiltros();
     });
 
-    document.querySelectorAll('.category-arrow').forEach((arrow) => {
-        arrow.classList.add('fa-chevron-down');
-        arrow.classList.remove('fa-chevron-up');
+    catalogo.nodos.orden.addEventListener('change', () => {
+        catalogo.orden = catalogo.nodos.orden.value;
+        ordenarGrilla();
+        aplicarFiltros();
     });
-}
 
-function setProductsTitle(title) {
-    const titleElement = productTitle || document.querySelector('.page-title h1, #productsTitle');
-    if (titleElement) titleElement.textContent = title;
-}
+    catalogo.nodos.chips.addEventListener('click', (evento) => {
+        const chip = evento.target.closest('[data-quitar]');
+        if (!chip) return;
+        if (chip.dataset.quitar === 'texto') {
+            catalogo.nodos.busqueda.value = '';
+            catalogo.seleccion.texto = '';
+        } else {
+            catalogo.seleccion[chip.dataset.quitar].delete(chip.dataset.valor);
+        }
+        aplicarFiltros();
+    });
 
-function scrollToProductsTitle() {
-    const titleElement = productTitle || document.querySelector('.page-title h1, #productsTitle');
-    const header = document.querySelector('header');
-    if (!titleElement || !header) return;
+    document.addEventListener('click', (evento) => {
+        if (evento.target.closest('[data-catalog-reset]')) limpiarCatalogo();
+    });
 
-    const top = titleElement.getBoundingClientRect().top + window.pageYOffset - header.offsetHeight - 20;
-    window.scrollTo({ top, behavior: 'smooth' });
+    catalogo.nodos.fab.addEventListener('click', () => {
+        if (catalogo.nodos.riel.classList.contains('is-open')) cerrarRiel();
+        else abrirRiel();
+    });
+
+    document.getElementById('catalogRailClose')?.addEventListener('click', cerrarRiel);
+    catalogo.nodos.fondo.addEventListener('click', cerrarRiel);
+    document.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Escape') cerrarRiel();
+    });
+
+    aplicarFiltros();
 }
 
 function normalizeText(value) {
@@ -2000,15 +2170,8 @@ function normalizeText(value) {
         .trim();
 }
 
-window.toggleCategory = toggleCategory;
-window.toggleSubSubcategory = toggleSubSubcategory;
-window.filterProducts = filterProducts;
 window.showProductInfo = showProductInfo;
 window.closeModal = closeModal;
-window.clearSearch = clearSearch;
-window.highlightSelectedSubcategory = highlightSelectedSubcategory;
-window.openFilters = openFilters;
-window.closeFilters = closeFilters;
 
 window.CleanPel.onReady(() => {
     window.CleanPel.setupLazyMedia({ eagerCount: 5 });
@@ -2017,6 +2180,9 @@ window.CleanPel.onReady(() => {
     window.CleanPel.setupSubmenu();
     window.CleanPel.setupSmoothAnchors();
     window.CleanPel.setupHeroVideo({ forceMuted: true });
-    window.CleanPel.setupReveal('.product-card, .catalog-panel, .sector-card', { threshold: 0.05, rootMargin: '100px 0px' });
-    setupProductsPage();
+    // Las tarjetas quedan fuera del reveal: si el filtro las oculta antes de que
+    // el observer las vea, se quedaban en opacity 0 al volver a mostrarlas.
+    window.CleanPel.setupReveal('.sector-card', { threshold: 0.05, rootMargin: '100px 0px' });
+    setupCatalogo();
+    setupModalCatalogo();
 });
