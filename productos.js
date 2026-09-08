@@ -1737,7 +1737,7 @@ function showProductInfo(productId) {
         </div>
     `;
 
-    modalBody.querySelector('.load-detail-btn')?.addEventListener('click', loadProductDetailImage, { once: true });
+    modalBody.querySelector('.load-detail-btn')?.addEventListener('click', loadProductDetailImage);
 }
 
 function loadProductDetailImage(event) {
@@ -1751,26 +1751,22 @@ function loadProductDetailImage(event) {
 
     const image = new Image();
     image.decoding = 'async';
-    image.loading = 'lazy';
+    // Sin loading="lazy": la imagen se crea fuera del documento, asi que el
+    // navegador difiere la carga para siempre y no dispara onload ni onerror.
+    // Ademas el usuario ya pidio verla, que es justo lo contrario de diferirla.
     image.alt = `${title} detalle`;
     image.className = 'product-detail-image';
 
-    image.onload = async () => {
-        try {
-            await image.decode?.();
-        } catch {
-            // decode can fail on already-decoded images; showing the image is still fine.
-        }
+    image.onload = () => {
         slot.replaceChildren(image);
     };
 
     image.onerror = () => {
-        slot.innerHTML = '<div class="detail-loading">No se pudo cargar el detalle.</div>';
+        slot.replaceChildren(button);
+        button.insertAdjacentHTML('afterend', '<div class="detail-loading">No se pudo cargar el detalle. Probá de nuevo.</div>');
     };
 
-    window.requestAnimationFrame(() => {
-        image.src = detailImage;
-    });
+    image.src = detailImage;
 }
 
 function buildProductDescription(title, brand, category) {
