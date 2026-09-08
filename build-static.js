@@ -1,4 +1,5 @@
-import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 
 const outputDir = 'dist';
@@ -53,4 +54,37 @@ for (const directory of directories) {
   if (existsSync(directory)) {
     cpSync(directory, join(outputDir, directory), { recursive: true });
   }
+}
+
+// vercel.json cachea css/js un dia mientras el html se revalida siempre, asi que
+// tras un deploy que toque ambos el visitante recurrente combinaba html nuevo con
+// js viejo. Cada asset local lleva ahora ?v=<hash de contenido>: el html nuevo
+// apunta a una URL nueva y lo que no cambio conserva su cache.
+const hashes = new Map();
+
+function versionDe(archivo) {
+  if (!hashes.has(archivo)) {
+    const ruta = join(outputDir, archivo);
+    const hash = existsSync(ruta)
+      ? createHash('sha1').update(readFileSync(ruta)).digest('hex').slice(0, 8)
+      : '';
+    hashes.set(archivo, hash);
+  }
+  return hashes.get(archivo);
+}
+
+for (const file of files) {
+  if (!file.endsWith('.html')) continue;
+  const ruta = join(outputDir, file);
+  if (!existsSync(ruta)) continue;
+
+  const html = readFileSync(ruta, 'utf8').replace(
+    /(href|src)="([A-Za-z0-9._-]+.(?:css|js))"/g,
+    (completo, atributo, activo) => {
+      const version = versionDe(activo);
+      return version ? `${atributo}="${activo}?v=${version}"` : completo;
+    }
+  );
+
+  writeFileSync(ruta, html);
 }
