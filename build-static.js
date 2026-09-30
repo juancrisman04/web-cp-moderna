@@ -18,7 +18,8 @@ const files = [
   'servicios.css',
   'servicios.html',
   'servicios.js',
-  'upgrade.css'
+  'upgrade.css',
+  'responsive.css'
 ];
 
 // Vercel sirve el sitio como estatico y no ejecuta PHP: incluir el endpoint

@@ -1,0 +1,605 @@
+/* Responsive system shared by every Clean Pel page. */
+
+:root {
+    --responsive-gutter: 20px;
+    --responsive-gutter-small: 14px;
+}
+
+html {
+    overflow-x: clip;
+    scroll-behavior: smooth;
+}
+
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+    min-width: 0;
+}
+
+img,
+video,
+iframe {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(24, 169, 153, 0.55);
+    outline-offset: 3px;
+}
+
+.container,
+.contact-page .contact-info > .container,
+.contact-page .contact-form-section > .container,
+.contact-page .location-section > .container {
+    width: min(calc(100% - (var(--responsive-gutter) * 2)), 1600px) !important;
+}
+
+.hero > *,
+.hero-content,
+.hero-image,
+.video-container,
+.form-content,
+.form-image,
+.contact-card,
+.location-panel,
+.products-content,
+.catalog-rail,
+.service-card,
+.upgrade-card,
+.footer-section {
+    min-width: 0;
+}
+
+.hero-title,
+.hero-title2,
+.hero-subtitle,
+.section-heading,
+.section-heading h2,
+.service-card h3,
+.product-card h3,
+.footer-section p,
+.footer-section a {
+    overflow-wrap: anywhere;
+}
+
+/* Header: one stable layout until the compact menu takes over. */
+.header {
+    padding: 10px 0 !important;
+}
+
+.header .container {
+    gap: 14px;
+    min-height: 70px !important;
+    padding: 10px 16px !important;
+}
+
+.logo {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.logo img {
+    height: auto;
+    max-width: 154px !important;
+    width: min(154px, 30vw);
+}
+
+.nav {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+}
+
+.social-buttons {
+    flex: 0 0 auto;
+}
+
+.nav-link {
+    white-space: nowrap;
+}
+
+/* Hero and media keep their proportions instead of forcing page width. */
+.hero {
+    align-items: center;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+    gap: clamp(28px, 5vw, 72px);
+}
+
+.hero-content {
+    width: 100%;
+}
+
+.hero-title,
+.hero.equipo .hero-title2,
+.contact-page .hero .hero-title {
+    font-size: 3.5rem !important;
+    line-height: 1.02 !important;
+}
+
+.hero-subtitle {
+    max-width: 58ch;
+}
+
+.hero-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-actions > * {
+    max-width: 100%;
+}
+
+.hero-image,
+.hero-image .video-container,
+.hero-video {
+    width: 100%;
+}
+
+.hero-image .video-container {
+    overflow: hidden;
+}
+
+.video-controls {
+    max-width: 100%;
+}
+
+/* Shared grids: the content breathes on tablets and remains scannable. */
+@media (max-width: 1180px) {
+    .header .container {
+        gap: 8px;
+        padding-inline: 12px !important;
+    }
+
+    .nav {
+        gap: 2px !important;
+    }
+
+    .nav-link {
+        font-size: 0.82rem !important;
+        padding-inline: 8px !important;
+    }
+
+    .hero-title,
+    .hero.equipo .hero-title2,
+    .contact-page .hero .hero-title {
+        font-size: 3rem !important;
+    }
+
+    .hero {
+        gap: 34px;
+        padding-inline: 28px !important;
+    }
+
+    .contact-page .contact-grid,
+    .services-page .services-grid,
+    .services-page .advantages-grid,
+    .services-page .logistics-grid,
+    .insight-grid,
+    .process-cards,
+    .proof-strip,
+    .advantages-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --responsive-gutter: 14px;
+    }
+
+    .header .container {
+        min-height: 62px !important;
+        padding: 8px 12px !important;
+    }
+
+    .header .logo {
+        margin-left: 0 !important;
+    }
+
+    .logo img {
+        max-width: 146px !important;
+        width: min(146px, 48vw);
+    }
+
+    .nav,
+    .social-buttons {
+        display: none !important;
+    }
+
+.menu-toggle {
+        align-items: center;
+        background: #eaf5fb;
+        border: 1px solid #cfe5f1;
+        border-radius: 8px;
+        display: inline-flex !important;
+        height: 42px;
+        justify-content: center;
+        margin-left: auto;
+        order: 3;
+        position: static !important;
+        transform: none !important;
+    width: 42px;
+}
+
+.menu-close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 4px;
+}
+
+    .side-menu {
+        bottom: 0 !important;
+        left: 0 !important;
+        max-width: 360px;
+        opacity: 0;
+        right: auto !important;
+        top: 0 !important;
+        transform: translateX(-105%) !important;
+        transition: opacity 180ms ease, transform 240ms ease, visibility 180ms ease;
+        visibility: hidden;
+        width: min(88vw, 360px) !important;
+    }
+
+    .side-menu.active {
+        opacity: 1;
+        transform: translateX(0) !important;
+        visibility: visible;
+    }
+
+    .menu-content {
+        min-height: 0;
+        overflow-y: auto;
+        padding-bottom: 24px;
+    }
+
+    .hero {
+        align-items: stretch;
+        grid-template-columns: minmax(0, 1fr) !important;
+        min-height: auto !important;
+        padding: 108px var(--responsive-gutter) 54px !important;
+    }
+
+    .hero-content {
+        justify-items: start;
+        max-width: 680px;
+        text-align: left !important;
+    }
+
+    .hero-title,
+    .hero.equipo .hero-title2,
+    .contact-page .hero .hero-title {
+        font-size: 2.75rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .hero-image {
+        padding: 0 !important;
+    }
+
+    .hero-image .video-container {
+        height: auto;
+        min-height: 0;
+    }
+
+    .hero-video {
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+    }
+
+    .hero-proof-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        width: 100%;
+    }
+
+    .hero-actions {
+        width: 100%;
+    }
+
+    .hero-actions .cta-button,
+    .hero-actions .ghost-button {
+        flex: 1 1 180px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .section-heading h2,
+    .contact-page .form-content h2 {
+        font-size: 2.2rem !important;
+    }
+
+    .location-modern,
+    .contact-page .location-modern {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .contact-page .form-container {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .contact-page .form-image {
+        min-height: 340px;
+    }
+
+    .catalog-layout {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .catalog-rail {
+        bottom: 14px;
+        left: 14px;
+        max-height: none;
+        position: fixed;
+        top: 14px;
+        transform: translateX(-115%) !important;
+        width: min(340px, calc(100vw - 28px));
+        z-index: 2400;
+    }
+
+    .catalog-rail.is-open {
+        transform: translateX(0) !important;
+    }
+
+    .catalog-rail-close {
+        display: inline-flex !important;
+    }
+
+    .catalog-fab {
+        bottom: 16px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .products-page .main-content > .container {
+        width: min(calc(100% - 28px), 1600px) !important;
+    }
+
+    .services-page .logistics-item,
+    .services-page .logistics-item.reverse {
+        gap: 24px !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .modal,
+    .lead-modal {
+        padding: 14px;
+    }
+
+    .modal-content,
+    .lead-modal__dialog {
+        max-height: calc(100dvh - 28px);
+        overflow-y: auto;
+        width: min(100%, 760px);
+    }
+}
+
+@media (max-width: 640px) {
+    .header .container {
+        min-height: 58px !important;
+    }
+
+    .logo img {
+        max-width: 136px !important;
+        width: min(136px, 54vw);
+    }
+
+    .menu-toggle {
+        height: 40px;
+        width: 40px;
+    }
+
+    .hero {
+        padding-bottom: 42px !important;
+    }
+
+    .hero-title,
+    .hero.equipo .hero-title2,
+    .contact-page .hero .hero-title {
+        font-size: 2.25rem !important;
+    }
+
+    .hero-eyebrow,
+    .section-eyebrow {
+        font-size: 0.7rem !important;
+        letter-spacing: 0.06em;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .hero-actions .cta-button,
+    .hero-actions .ghost-button,
+    .location-actions .ghost-button {
+        width: 100%;
+    }
+
+    .hero-proof-grid,
+    .contact-page .contact-grid,
+    .services-page .services-grid,
+    .services-page .advantages-grid,
+    .services-page .logistics-grid,
+    .insight-grid,
+    .process-cards,
+    .proof-strip,
+    .advantages-grid,
+    .footer-content {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .hero-proof {
+        display: grid;
+        gap: 2px;
+        grid-template-columns: minmax(92px, 0.6fr) minmax(0, 1fr);
+        text-align: left;
+    }
+
+    .contact-page .contact-card,
+    .contact-page .form-content {
+        padding: 20px !important;
+    }
+
+    .contact-page .form-image {
+        min-height: 300px;
+    }
+
+    .contact-page .location-modern .map-container,
+    .contact-page .location-modern .map-image {
+        min-height: 260px;
+    }
+
+    .form-row,
+    .contact-page .form-row {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .products-grid,
+    .featured-grid,
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    .product-card,
+    .service-card,
+    .upgrade-card {
+        min-width: 0;
+    }
+
+    .product-image {
+        height: 132px !important;
+    }
+
+    .product-info {
+        padding: 12px !important;
+    }
+
+    .product-info h3 {
+        font-size: 0.82rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .btn-ver-mas {
+        padding: 9px 10px !important;
+        width: 100%;
+    }
+
+    .services-page .logistics-item,
+    .services-page .logistics-item.reverse {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .services-page .logistics-item.reverse .logistics-image {
+        order: 0;
+    }
+
+    .services-page .logistics-image img {
+        height: 220px !important;
+    }
+
+    .catalog-results-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .catalog-fab {
+        max-width: calc(100vw - 28px);
+    }
+
+    .lead-modal__aside,
+    .lead-modal__form,
+    .product-modal-copy,
+    .product-modal-media {
+        padding: 20px 16px !important;
+    }
+
+    .chatbot-popup {
+        max-width: calc(100vw - 28px) !important;
+        width: min(360px, calc(100vw - 28px)) !important;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-section ul,
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .products-grid,
+    .featured-grid,
+    .services-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .featured-slider .featured-product-card {
+        width: min(100%, 250px);
+    }
+
+    .hero-title,
+    .hero.equipo .hero-title2,
+    .contact-page .hero .hero-title {
+        font-size: 2rem !important;
+    }
+
+    .video-controls {
+        gap: 7px !important;
+        padding: 8px !important;
+    }
+
+    .video-controls .time {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
