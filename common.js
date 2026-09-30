@@ -352,7 +352,7 @@
                 }
 
                 const done = () => resolve();
-                video.addEventListener('loadedmetadata', done, { once: true });
+                video.addEventListener('loadeddata', done, { once: true });
                 video.addEventListener('error', done, { once: true });
 
                 if (source) source.src = src;
@@ -388,6 +388,9 @@
         video.addEventListener('pointerenter', () => {
             if (window.matchMedia('(pointer: fine)').matches) loadVideo();
         }, { once: true, passive: true });
+
+        // Carga el primer cuadro del video al recargar, sin esperar interacción.
+        loadVideo();
 
         muteBtn?.addEventListener('click', () => {
             video.muted = !video.muted;
