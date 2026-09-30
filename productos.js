@@ -1812,9 +1812,9 @@ function setupModalCatalogo() {
 }
 
 /* =========================================================
-   Catálogo: filtro por marca con rubros desplegables.
-   El árbol se arma leyendo las tarjetas del DOM, así el panel
-   nunca queda desfasado del catálogo real.
+   Catálogo: una categoría activa por vez.
+   El árbol se arma leyendo las tarjetas del DOM para que el
+   filtro y los productos nunca queden desfasados.
    ========================================================= */
 
 const ETIQUETAS_MARCA = {
@@ -1825,17 +1825,38 @@ const ETIQUETAS_MARCA = {
     'wassington': 'Wassington'
 };
 
-// Orden de exhibición pedido para las cinco marcas principales.
-const ORDEN_MARCAS = ['elite', 'royco', 'productos-varios', 'rcm', 'wassington'];
+const ORDEN_MARCAS = ['elite', 'wassington', 'royco', 'productos-varios', 'rcm'];
 
 const ACRONIMOS = ['RCM'];
+
+const GRUPOS_ELITE = [
+    {
+        valor: 'papel-higienico',
+        etiqueta: 'Papel higiénico',
+        rubros: ['papel-higienico-alto-metraje', 'papel-higienico-bajo-metraje']
+    },
+    {
+        valor: 'toallas-de-papel',
+        etiqueta: 'Toallas de papel',
+        rubros: ['toallas-de-papel-en-rollo', 'toallas-de-papel-intercaladas']
+    }
+];
+
+const ORDEN_RUBROS_ELITE = [
+    'rollos-y-bobinas',
+    'servilletas',
+    'panos-de-limpieza',
+    'jabones-y-alcoholes',
+    'dispensadores'
+];
 
 const catalogo = {
     fichas: [],
     arbol: [],
+    opciones: new Map(),
     abiertas: new Set(),
-    seleccion: { marcas: new Set(), rubros: new Set(), texto: '' },
-    orden: 'catalogo',
+    subcategoriasAbiertas: new Set(),
+    seleccion: { filtro: '', texto: '' },
     nodos: {}
 };
 
@@ -1882,6 +1903,7 @@ function indexarCatalogo() {
         porMarca.get(ficha.marcaSlug).rubros.set(ficha.rubroSlug, ficha.rubroEtiqueta);
     });
 
+    catalogo.opciones.clear();
     catalogo.arbol = Array.from(porMarca.values())
         .map((marca) => ({
             valor: marca.valor,
@@ -1897,6 +1919,52 @@ function indexarCatalogo() {
             if (ib !== -1) return 1;
             return a.etiqueta.localeCompare(b.etiqueta, 'es');
         });
+
+    catalogo.arbol.forEach((marca) => {
+        const grupos = marca.valor === 'elite' ? GRUPOS_ELITE : [];
+        const rubrosAgrupados = new Set();
+        marca.items = [];
+
+        grupos.forEach((grupo) => {
+            const hijos = grupo.rubros
+                .map((valor) => marca.rubros.find((rubro) => rubro.valor === valor))
+                .filter(Boolean);
+            if (!hijos.length) return;
+
+            const clave = 'grupo:' + marca.valor + ':' + grupo.valor;
+            catalogo.opciones.set(clave, {
+                clave,
+                marca: marca.valor,
+                rubros: hijos.map((rubro) => rubro.valor)
+            });
+            hijos.forEach((rubro) => rubrosAgrupados.add(rubro.valor));
+            marca.items.push({ tipo: 'grupo', clave, etiqueta: grupo.etiqueta, rubros: hijos });
+        });
+
+        const rubrosOrdenados = marca.valor === 'elite'
+            ? marca.rubros.slice().sort((a, b) => {
+                const ia = ORDEN_RUBROS_ELITE.indexOf(a.valor);
+                const ib = ORDEN_RUBROS_ELITE.indexOf(b.valor);
+                if (ia !== -1 && ib !== -1) return ia - ib;
+                if (ia !== -1) return -1;
+                if (ib !== -1) return 1;
+                return a.etiqueta.localeCompare(b.etiqueta, 'es');
+            })
+            : marca.rubros;
+
+        rubrosOrdenados.forEach((rubro) => {
+            const clave = 'rubro:' + marca.valor + ':' + rubro.valor;
+            catalogo.opciones.set(clave, {
+                clave,
+                marca: marca.valor,
+                rubros: [rubro.valor]
+            });
+
+            if (!rubrosAgrupados.has(rubro.valor)) {
+                marca.items.push({ tipo: 'rubro', clave, etiqueta: rubro.etiqueta });
+            }
+        });
+    });
 }
 
 function terminosBusqueda() {
@@ -1907,71 +1975,55 @@ function pasaTexto(ficha, terminos) {
     return terminos.every((termino) => ficha.buscable.includes(termino));
 }
 
-// Con un árbol por marca lo natural es sumar lo elegido: marcar Elite y además
-// un rubro de Royco muestra ambos, no su intersección (que siempre daría vacío,
-// porque cada rubro pertenece a una sola marca).
 function haySeleccion() {
-    return catalogo.seleccion.marcas.size > 0 || catalogo.seleccion.rubros.size > 0;
+    return Boolean(catalogo.seleccion.filtro);
 }
 
 function pasaSeleccion(ficha) {
     if (!haySeleccion()) return true;
-    return catalogo.seleccion.marcas.has(ficha.marcaSlug)
-        || catalogo.seleccion.rubros.has(ficha.rubroSlug);
+    const filtro = catalogo.opciones.get(catalogo.seleccion.filtro);
+    return filtro?.marca === ficha.marcaSlug && filtro.rubros.includes(ficha.rubroSlug);
 }
 
-// Rubros que tienen al menos un producto para el texto buscado.
-// Devuelve null cuando no hay búsqueda activa: entonces se muestra todo el árbol.
-function rubrosConTexto(terminos) {
-    if (!terminos.length) return null;
-    const vivos = new Set();
-    catalogo.fichas.forEach((ficha) => {
-        if (pasaTexto(ficha, terminos)) vivos.add(ficha.rubroSlug);
-    });
-    return vivos;
-}
-
-function marcaEstaAbierta(marca, tieneSeleccion, hayTexto) {
-    if (hayTexto) return true;
-    return catalogo.abiertas.has(marca.valor) || tieneSeleccion;
-}
-
-function pintarArbol(terminos) {
-    const vivos = rubrosConTexto(terminos);
-    const hayTexto = vivos !== null;
-    const { marcas, rubros } = catalogo.seleccion;
-
+function pintarArbol() {
     const html = catalogo.arbol.map((marca) => {
-        const visibles = marca.rubros.filter((rubro) => !hayTexto || vivos.has(rubro.valor) || rubros.has(rubro.valor));
-        if (hayTexto && visibles.length === 0) return '';
-
-        const marcaElegida = marcas.has(marca.valor);
-        const rubrosElegidos = marca.rubros.filter((rubro) => rubros.has(rubro.valor)).length;
-        const abierta = marcaEstaAbierta(marca, marcaElegida || rubrosElegidos > 0, hayTexto);
+        const abierta = catalogo.abiertas.has(marca.valor);
         const idLista = 'rubros-' + marca.valor;
 
-        const items = visibles.map((rubro) => {
-            const activo = marcaElegida || rubros.has(rubro.valor);
-            return '<button type="button" class="catalog-leaf' + (activo ? ' is-active' : '') + '"'
-                + ' data-tipo="rubro" data-valor="' + rubro.valor + '" aria-pressed="' + (activo ? 'true' : 'false') + '">'
-                + escapeHTML(rubro.etiqueta)
-                + '</button>';
+        const items = marca.items.map((item) => {
+            const activo = catalogo.seleccion.filtro === item.clave;
+            if (item.tipo === 'rubro') {
+                return '<button type="button" class="catalog-leaf' + (activo ? ' is-active' : '') + '"'
+                    + ' data-filter-key="' + item.clave + '" aria-pressed="' + (activo ? 'true' : 'false') + '">'
+                    + escapeHTML(item.etiqueta)
+                    + '</button>';
+            }
+
+            const desplegada = catalogo.subcategoriasAbiertas.has(item.clave);
+            const hijos = item.rubros.map((rubro) => {
+                const clave = 'rubro:' + marca.valor + ':' + rubro.valor;
+                const hijoActivo = catalogo.seleccion.filtro === clave;
+                return '<button type="button" class="catalog-leaf catalog-leaf--child' + (hijoActivo ? ' is-active' : '') + '"'
+                    + ' data-filter-key="' + clave + '" aria-pressed="' + (hijoActivo ? 'true' : 'false') + '">'
+                    + escapeHTML(rubro.etiqueta.replace(/^Papel Higiénico |^Toallas De Papel /, ''))
+                    + '</button>';
+            }).join('');
+
+            return '<div class="catalog-category' + (desplegada ? ' is-open' : '') + '">'
+                + '<button type="button" class="catalog-category-head' + (activo ? ' is-active' : '') + '"'
+                + ' data-filter-key="' + item.clave + '" data-group-key="' + item.clave + '"'
+                + ' aria-pressed="' + (activo ? 'true' : 'false') + '" aria-expanded="' + (desplegada ? 'true' : 'false') + '">'
+                + '<span>' + escapeHTML(item.etiqueta) + '</span><span class="catalog-category-arrow" aria-hidden="true"></span></button>'
+                + '<div class="catalog-subcategory-list">' + hijos + '</div></div>';
         }).join('');
 
-        const todos = '<button type="button" class="catalog-leaf catalog-leaf--todos'
-            + (marcaElegida ? ' is-active' : '') + '"'
-            + ' data-tipo="marca" data-valor="' + marca.valor + '" aria-pressed="' + (marcaElegida ? 'true' : 'false') + '">'
-            + 'Todos'
-            + '</button>';
-
-        return '<div class="catalog-brand' + (abierta ? ' is-open' : '')
-            + (marcaElegida || rubrosElegidos > 0 ? ' is-filtered' : '') + '">'
+        return '<div class="catalog-brand' + (abierta ? ' is-open' : '') + '">'
             + '<button type="button" class="catalog-brand-head" data-marca="' + marca.valor + '"'
             + ' aria-expanded="' + (abierta ? 'true' : 'false') + '" aria-controls="' + idLista + '">'
             + '<span class="catalog-brand-name">' + escapeHTML(marca.etiqueta) + '</span>'
             + '<span class="catalog-brand-arrow" aria-hidden="true"></span>'
             + '</button>'
-            + '<div class="catalog-brand-list" id="' + idLista + '">' + todos + items + '</div>'
+            + '<div class="catalog-brand-list" id="' + idLista + '">' + items + '</div>'
             + '</div>';
     }).join('');
 
@@ -1982,8 +2034,8 @@ function pintarArbol(terminos) {
         ? {
             cabecera: activo.classList.contains('catalog-brand-head'),
             marca: activo.dataset.marca,
-            tipo: activo.dataset.tipo,
-            valor: activo.dataset.valor
+            filtro: activo.dataset.filterKey,
+            grupo: activo.dataset.groupKey
         }
         : null;
 
@@ -1992,72 +2044,13 @@ function pintarArbol(terminos) {
     if (previo) {
         const selector = previo.cabecera
             ? '.catalog-brand-head[data-marca="' + previo.marca + '"]'
-            : '.catalog-leaf[data-tipo="' + previo.tipo + '"][data-valor="' + previo.valor + '"]';
+            : '[data-filter-key="' + previo.filtro + '"]' + (previo.grupo ? '[data-group-key="' + previo.grupo + '"]' : '');
         catalogo.nodos.arbol.querySelector(selector)?.focus();
     }
 }
 
-function pintarChips() {
-    const partes = [];
-
-    if (catalogo.seleccion.texto.trim()) {
-        partes.push('<button type="button" class="catalog-chip" data-quitar="texto">'
-            + '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>'
-            + escapeHTML(catalogo.seleccion.texto.trim())
-            + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
-    }
-
-    catalogo.arbol.forEach((marca) => {
-        if (catalogo.seleccion.marcas.has(marca.valor)) {
-            partes.push('<button type="button" class="catalog-chip" data-quitar="marcas" data-valor="' + marca.valor + '">'
-                + escapeHTML(marca.etiqueta)
-                + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
-            return;
-        }
-
-        const elegidos = marca.rubros.filter((rubro) => catalogo.seleccion.rubros.has(rubro.valor));
-        if (!elegidos.length) return;
-
-        // Muchos rubros de una misma marca se resumen en un chip: si no, quitar uno
-        // de una marca completa llenaba la barra con ocho etiquetas.
-        if (elegidos.length > 3) {
-            partes.push('<button type="button" class="catalog-chip" data-quitar="grupo" data-valor="' + marca.valor + '">'
-                + escapeHTML(marca.etiqueta) + ' · ' + elegidos.length + ' rubros'
-                + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
-            return;
-        }
-
-        elegidos.forEach((rubro) => {
-            partes.push('<button type="button" class="catalog-chip" data-quitar="rubros" data-valor="' + rubro.valor + '">'
-                + escapeHTML(marca.etiqueta) + ' · ' + escapeHTML(rubro.etiqueta)
-                + '<span class="catalog-chip-x" aria-hidden="true">&times;</span></button>');
-        });
-    });
-
-    if (partes.length > 1) {
-        partes.push('<button type="button" class="catalog-chip catalog-chip--reset" data-catalog-reset>Limpiar todo</button>');
-    }
-
-    catalogo.nodos.chips.innerHTML = partes.join('');
-    catalogo.nodos.chips.hidden = partes.length === 0;
-}
-
-function ordenarGrilla() {
-    const ordenadas = catalogo.fichas.slice().sort((a, b) => {
-        if (catalogo.orden === 'az') return a.tituloOrden.localeCompare(b.tituloOrden, 'es');
-        if (catalogo.orden === 'za') return b.tituloOrden.localeCompare(a.tituloOrden, 'es');
-        return a.orden - b.orden;
-    });
-
-    const fragmento = document.createDocumentFragment();
-    ordenadas.forEach((ficha) => fragmento.appendChild(ficha.nodo));
-    catalogo.nodos.grilla.appendChild(fragmento);
-}
-
 function filtrosActivos() {
-    return catalogo.seleccion.marcas.size
-        + catalogo.seleccion.rubros.size
-        + (catalogo.seleccion.texto.trim() ? 1 : 0);
+    return (catalogo.seleccion.filtro ? 1 : 0) + (catalogo.seleccion.texto.trim() ? 1 : 0);
 }
 
 function aplicarFiltros() {
@@ -2070,8 +2063,7 @@ function aplicarFiltros() {
         if (visible) visibles += 1;
     });
 
-    pintarArbol(terminos);
-    pintarChips();
+    pintarArbol();
 
     const total = catalogo.fichas.length;
     catalogo.nodos.conteo.textContent = visibles === total
@@ -2097,9 +2089,7 @@ function aplicarFiltros() {
 function escribirURL() {
     const params = new URLSearchParams();
     if (catalogo.seleccion.texto.trim()) params.set('q', catalogo.seleccion.texto.trim());
-    if (catalogo.seleccion.marcas.size) params.set('marca', Array.from(catalogo.seleccion.marcas).join(','));
-    if (catalogo.seleccion.rubros.size) params.set('rubro', Array.from(catalogo.seleccion.rubros).join(','));
-    if (catalogo.orden !== 'catalogo') params.set('orden', catalogo.orden);
+    if (catalogo.seleccion.filtro) params.set('filtro', catalogo.seleccion.filtro);
 
     const consulta = params.toString();
     window.history.replaceState(null, '', window.location.pathname + (consulta ? '?' + consulta : ''));
@@ -2107,60 +2097,13 @@ function escribirURL() {
 
 function leerURL() {
     const params = new URLSearchParams(window.location.search);
-    const marcasValidas = new Set(catalogo.arbol.map((m) => m.valor));
-    const rubrosValidos = new Set();
-    catalogo.arbol.forEach((m) => m.rubros.forEach((r) => rubrosValidos.add(r.valor)));
-
     catalogo.seleccion.texto = params.get('q') || '';
-    (params.get('marca') || '').split(',').filter(Boolean)
-        .forEach((valor) => { if (marcasValidas.has(valor)) catalogo.seleccion.marcas.add(valor); });
-    (params.get('rubro') || '').split(',').filter(Boolean)
-        .forEach((valor) => { if (rubrosValidos.has(valor)) catalogo.seleccion.rubros.add(valor); });
-
-    const orden = params.get('orden');
-    if (orden === 'az' || orden === 'za') catalogo.orden = orden;
+    const filtro = params.get('filtro') || '';
+    if (catalogo.opciones.has(filtro)) catalogo.seleccion.filtro = filtro;
 }
 
-function limpiarCatalogo() {
-    catalogo.seleccion.marcas.clear();
-    catalogo.seleccion.rubros.clear();
-    catalogo.seleccion.texto = '';
-    catalogo.nodos.busqueda.value = '';
-    aplicarFiltros();
-}
-
-function alternarMarca(valor, marcada) {
-    const marca = catalogo.arbol.find((m) => m.valor === valor);
-    if (!marca) return;
-
-    if (marcada) {
-        catalogo.seleccion.marcas.add(valor);
-        // Elegir la marca entera reemplaza a sus rubros sueltos.
-        marca.rubros.forEach((rubro) => catalogo.seleccion.rubros.delete(rubro.valor));
-        catalogo.abiertas.add(valor);
-    } else {
-        catalogo.seleccion.marcas.delete(valor);
-    }
-}
-
-function alternarRubro(valor, marcado) {
-    const marca = catalogo.arbol.find((m) => m.rubros.some((r) => r.valor === valor));
-
-    // Si la marca estaba elegida entera, primero se desarma en rubros sueltos.
-    if (marca && catalogo.seleccion.marcas.has(marca.valor)) {
-        catalogo.seleccion.marcas.delete(marca.valor);
-        marca.rubros.forEach((rubro) => catalogo.seleccion.rubros.add(rubro.valor));
-    }
-
-    if (marcado) catalogo.seleccion.rubros.add(valor);
-    else catalogo.seleccion.rubros.delete(valor);
-
-    // Si quedaron todos los rubros de la marca, se vuelve a plegar en la marca:
-    // deja un solo chip y una URL corta en vez de repetir cada rubro.
-    if (marca && marca.rubros.every((rubro) => catalogo.seleccion.rubros.has(rubro.valor))) {
-        marca.rubros.forEach((rubro) => catalogo.seleccion.rubros.delete(rubro.valor));
-        catalogo.seleccion.marcas.add(marca.valor);
-    }
+function seleccionarFiltro(clave) {
+    if (catalogo.opciones.has(clave)) catalogo.seleccion.filtro = clave;
 }
 
 function abrirRiel() {
@@ -2189,21 +2132,16 @@ function setupCatalogo() {
         fab: document.getElementById('catalogFab'),
         fabCuenta: document.getElementById('catalogFabCount'),
         arbol: document.getElementById('brandTree'),
-        chips: document.getElementById('catalogChips'),
         conteo: document.getElementById('catalogCount'),
         vacio: document.getElementById('catalogEmpty'),
         busqueda: document.getElementById('catalogSearch'),
-        limpiarBusqueda: document.getElementById('catalogSearchClear'),
-        orden: document.getElementById('catalogSort')
+        limpiarBusqueda: document.getElementById('catalogSearchClear')
     };
 
     indexarCatalogo();
     leerURL();
 
     catalogo.nodos.busqueda.value = catalogo.seleccion.texto;
-    catalogo.nodos.orden.value = catalogo.orden;
-    if (catalogo.orden !== 'catalogo') ordenarGrilla();
-
     const buscar = window.CleanPel.debounce(() => {
         catalogo.seleccion.texto = catalogo.nodos.busqueda.value;
         aplicarFiltros();
@@ -2229,38 +2167,21 @@ function setupCatalogo() {
             return;
         }
 
-        const hoja = evento.target.closest('.catalog-leaf');
-        if (!hoja) return;
+        const categoria = evento.target.closest('[data-filter-key]');
+        if (!categoria) return;
 
-        const activo = hoja.getAttribute('aria-pressed') === 'true';
-        if (hoja.dataset.tipo === 'marca') alternarMarca(hoja.dataset.valor, !activo);
-        else alternarRubro(hoja.dataset.valor, !activo);
-        aplicarFiltros();
-    });
-
-    catalogo.nodos.orden.addEventListener('change', () => {
-        catalogo.orden = catalogo.nodos.orden.value;
-        ordenarGrilla();
-        aplicarFiltros();
-    });
-
-    catalogo.nodos.chips.addEventListener('click', (evento) => {
-        const chip = evento.target.closest('[data-quitar]');
-        if (!chip) return;
-        if (chip.dataset.quitar === 'texto') {
-            catalogo.nodos.busqueda.value = '';
-            catalogo.seleccion.texto = '';
-        } else if (chip.dataset.quitar === 'grupo') {
-            const marca = catalogo.arbol.find((m) => m.valor === chip.dataset.valor);
-            marca?.rubros.forEach((rubro) => catalogo.seleccion.rubros.delete(rubro.valor));
-        } else {
-            catalogo.seleccion[chip.dataset.quitar].delete(chip.dataset.valor);
+        if (categoria.dataset.groupKey) {
+            const clave = categoria.dataset.groupKey;
+            const marca = catalogo.opciones.get(clave)?.marca;
+            const estabaAbierta = catalogo.subcategoriasAbiertas.has(clave);
+            Array.from(catalogo.subcategoriasAbiertas).forEach((abierta) => {
+                if (catalogo.opciones.get(abierta)?.marca === marca) catalogo.subcategoriasAbiertas.delete(abierta);
+            });
+            if (!estabaAbierta) catalogo.subcategoriasAbiertas.add(clave);
         }
-        aplicarFiltros();
-    });
 
-    document.addEventListener('click', (evento) => {
-        if (evento.target.closest('[data-catalog-reset]')) limpiarCatalogo();
+        seleccionarFiltro(categoria.dataset.filterKey);
+        aplicarFiltros();
     });
 
     catalogo.nodos.fab.addEventListener('click', () => {

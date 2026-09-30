@@ -1432,7 +1432,7 @@ body.filters-open {
 }
 
 .logistics {
-    background-image: url('imgCleanPel/logitica.jpg') !important;
+    background-image: url('imgCleanPel/logistica ia.png') !important;
     background-position: center !important;
     background-size: cover !important;
     padding: 70px 0 !important;
@@ -3691,7 +3691,7 @@ video {
     background-color: var(--cp-blue-dark) !important;
     background-image:
         linear-gradient(135deg, rgba(8, 59, 90, 0.78) 0%, rgba(0, 95, 153, 0.58) 56%, rgba(61, 164, 216, 0.42) 100%),
-        url('imgCleanPel/logitica.jpg') !important;
+        url('imgCleanPel/logistica ia.png') !important;
     background-blend-mode: normal;
     background-position: center !important;
     background-size: cover !important;
@@ -6581,5 +6581,174 @@ html::-webkit-scrollbar-thumb {
 
     .catalog-rail {
         transition: none;
+    }
+}
+
+/* Catalogo: subcategorias de Elite con la estetica del riel actual. */
+.catalog-category-head {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--cp-ink);
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    justify-content: space-between;
+    letter-spacing: 0;
+    line-height: 1.35;
+    padding: 8px 10px 8px 14px;
+    text-align: left;
+    width: 100%;
+}
+
+.catalog-category-head:hover,
+.catalog-category-head.is-active {
+    background: var(--cp-soft);
+    color: var(--cp-blue);
+}
+
+.catalog-category-arrow {
+    border-bottom: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    color: currentColor;
+    flex: 0 0 auto;
+    height: 7px;
+    margin-right: 3px;
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 180ms ease;
+    width: 7px;
+}
+
+.catalog-category.is-open .catalog-category-arrow {
+    transform: rotate(225deg) translate(-2px, -2px);
+}
+
+.catalog-subcategory-list {
+    display: none;
+    flex-direction: column;
+}
+
+.catalog-category.is-open .catalog-subcategory-list {
+    display: flex;
+}
+
+.catalog-leaf--child {
+    color: var(--cp-muted);
+    font-size: 0.8rem;
+    padding-left: 28px;
+}
+
+.catalog-category-head:focus-visible,
+.catalog-brand-head:focus-visible,
+.catalog-leaf:focus-visible {
+    outline: 2px solid var(--cp-sky);
+    outline-offset: -2px;
+}
+
+/* Productos destacados: tira continua con cards compactas. */
+.featured-marquee {
+    display: block;
+    overflow: hidden;
+    padding: 10px 0 18px;
+    width: 100%;
+}
+
+.featured-track {
+    --featured-gap: 14px;
+    animation: featuredLoop 42s linear infinite;
+    display: flex;
+    gap: var(--featured-gap);
+    width: max-content;
+    will-change: transform;
+}
+
+@keyframes featuredLoop {
+    to {
+        transform: translate3d(calc(-33.333333% - 4.666667px), 0, 0);
+    }
+}
+
+.featured-grid.featured-slider {
+    align-items: stretch;
+    display: flex !important;
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 14px;
+    min-width: max-content;
+    width: max-content;
+}
+
+.featured-slider .featured-product-card {
+    display: grid;
+    flex: 0 0 clamp(190px, 17vw, 232px);
+    grid-template-rows: 112px minmax(104px, auto);
+    min-height: 224px;
+    width: clamp(190px, 17vw, 232px);
+}
+
+.featured-slider .featured-product-card img {
+    padding: 12px 18px;
+}
+
+.featured-slider .featured-product-card div {
+    padding: 12px 14px 14px;
+}
+
+.featured-slider .featured-product-card span {
+    font-size: 0.68rem;
+}
+
+.featured-slider .featured-product-card h3 {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.featured-slider .featured-product-card p {
+    display: -webkit-box;
+    font-size: 0.76rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.featured-slider .featured-product-card:hover,
+.featured-slider .featured-product-card:focus-within {
+    transform: translateY(-4px) !important;
+}
+
+@media (max-width: 640px) {
+    .featured-marquee {
+        margin-inline: -14px;
+    }
+
+    .featured-grid.featured-slider {
+        gap: 12px;
+    }
+
+    .featured-track {
+        --featured-gap: 12px;
+        animation-name: featuredLoopMobile;
+    }
+
+    .featured-slider .featured-product-card {
+        flex-basis: 184px;
+        grid-template-rows: 104px minmax(100px, auto);
+        min-height: 210px;
+        width: 184px;
+    }
+}
+
+@keyframes featuredLoopMobile {
+    to {
+        transform: translate3d(calc(-33.333333% - 4px), 0, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .featured-track {
+        animation: none;
+        transform: none !important;
     }
 }
