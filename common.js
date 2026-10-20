@@ -2,7 +2,6 @@
     const SELECTORS = {
         chatbot: '.chatbot',
         popup: '#chatPopup',
-        mobileChatContainer: '#mobileChatContainer',
         sideMenu: '#side-menu',
         menuToggle: '#menuToggle',
         menuClose: '#menu-close',
@@ -79,8 +78,7 @@
     function setupChatbot() {
         const chatbot = document.querySelector(SELECTORS.chatbot);
         const popup = document.querySelector(SELECTORS.popup);
-        const mobileContainer = document.querySelector(SELECTORS.mobileChatContainer);
-        if (!chatbot || !popup || !mobileContainer) return;
+        if (!chatbot || !popup) return;
 
         const headerTitle = chatbot.querySelector('.chat-header h4');
         if (headerTitle) {
@@ -108,27 +106,10 @@
             });
         });
 
-        const mq = window.matchMedia('(max-width: 768px)');
-
-        const move = () => {
-            if (mq.matches) {
-                if (chatbot.parentElement !== mobileContainer) mobileContainer.appendChild(chatbot);
-                chatbot.style.display = 'flex';
-                chatbot.style.position = '';
-                chatbot.style.bottom = '';
-                chatbot.style.right = '';
-                return;
-            }
-
-            if (chatbot.parentElement !== document.body) document.body.appendChild(chatbot);
-            chatbot.style.position = 'fixed';
-            chatbot.style.bottom = '30px';
-            chatbot.style.right = '40px';
-        };
-
-        move();
-        mq.addEventListener?.('change', move);
-        window.addEventListener('resize', debounce(move, 150), { passive: true });
+        if (chatbot.parentElement !== document.body) document.body.appendChild(chatbot);
+        chatbot.style.position = 'fixed';
+        chatbot.style.bottom = '24px';
+        chatbot.style.right = '24px';
 
         document.addEventListener('click', (event) => {
             if (!chatbot.contains(event.target) && popup.style.display === 'block') {

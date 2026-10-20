@@ -7,6 +7,7 @@ const outputDir = 'dist';
 const files = [
   'common.js',
   'contactanos.css',
+  'contactanos-responsive.css',
   'contactanos.html',
   'contactanos.js',
   'index.css',
@@ -19,7 +20,8 @@ const files = [
   'servicios.html',
   'servicios.js',
   'upgrade.css',
-  'responsive.css'
+  'responsive.css',
+  'site-typography.css'
 ];
 
 // Vercel sirve el sitio como estatico y no ejecuta PHP: incluir el endpoint

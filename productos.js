@@ -1713,11 +1713,6 @@ function showProductInfo(productId) {
                 ` : ''}
             </div>
             <div class="product-modal-copy">
-                <span class="modal-kicker"><i class="fa-solid fa-box"></i> Ficha comercial</span>
-                <div class="product-meta">
-                    <span>${escapeHTML(brand)}</span>
-                    <span>${escapeHTML(category)}</span>
-                </div>
                 <h2>${escapeHTML(title)}</h2>
                 <p class="product-description">${escapeHTML(description)}</p>
                 <ul class="product-feature-list">

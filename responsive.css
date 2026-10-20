@@ -603,3 +603,518 @@ textarea {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* Final mobile refinements: keep touch targets useful without oversized layouts. */
+@media (max-width: 640px) {
+    :root {
+        --responsive-gutter: 10px;
+    }
+
+    .container {
+        width: min(calc(100% - 20px), 1600px) !important;
+    }
+
+    .hero-actions {
+        align-items: center !important;
+        width: 100%;
+    }
+
+    .hero-actions .cta-button,
+    .hero-actions .ghost-button {
+        align-self: center;
+        flex: 0 1 auto;
+        height: auto !important;
+        max-width: min(100%, 320px) !important;
+        min-height: 48px !important;
+        padding: 12px 20px !important;
+        width: min(100%, 320px) !important;
+    }
+
+    .footer-content {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .footer-content > .footer-section:nth-child(2),
+    .footer-content > .footer-section:nth-child(3) {
+        display: none !important;
+    }
+
+    .logo-showcase {
+        padding-block: 34px !important;
+    }
+
+    .logo-showcase .container {
+        gap: 12px !important;
+    }
+
+    .logo-showcase-panel {
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        padding-block: 6px 10px !important;
+    }
+
+    .logo-showcase .brands-slider.logo-board,
+    .logo-showcase .clients-slider.logo-board {
+        gap: 10px !important;
+    }
+
+    .logo-showcase .brand-logo,
+    .logo-showcase .client-logo,
+    .logo-showcase .brands-slider.logo-board .brand-logo,
+    .logo-showcase .clients-slider.logo-board .client-logo {
+        flex-basis: clamp(148px, 43vw, 168px) !important;
+        height: 92px !important;
+        padding: 14px !important;
+        width: clamp(148px, 43vw, 168px) !important;
+    }
+
+    .logo-showcase .brand-logo img,
+    .logo-showcase .client-logo img {
+        max-height: 50px !important;
+    }
+
+    .featured-marquee {
+        margin-inline: -14px;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        padding-inline: 14px;
+    }
+
+    .featured-track,
+    .featured-grid.featured-slider {
+        --featured-gap: 10px;
+        gap: 10px !important;
+    }
+
+    .featured-slider .featured-product-card {
+        flex-basis: clamp(150px, 43vw, 164px) !important;
+        grid-template-rows: 92px minmax(96px, auto) !important;
+        min-height: 198px !important;
+        width: clamp(150px, 43vw, 164px) !important;
+    }
+
+    .featured-slider .featured-product-card img {
+        padding: 8px 12px;
+    }
+
+    .featured-slider .featured-product-card div {
+        padding: 10px 11px 12px;
+    }
+
+    .products-page .products-grid {
+        gap: 12px !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .products-page .product-card {
+        min-height: 0 !important;
+    }
+
+    .products-page .product-image {
+        height: clamp(112px, 34vw, 142px) !important;
+        padding: 10px !important;
+    }
+
+    .products-page .product-info {
+        padding: 10px !important;
+    }
+
+    .products-page .product-info h3 {
+        padding: 6px 4px !important;
+    }
+
+    .company-page .products-services .solutions-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        max-width: 460px !important;
+    }
+
+    .company-page .products-services .solution-card {
+        padding: 20px !important;
+    }
+
+    .company-page .products-services .solution-card h3,
+    .company-page .products-services .solution-card p {
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+    }
+
+    .company-page .company-info .stats {
+        gap: 8px !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        margin-inline: 0 !important;
+        max-width: none !important;
+    }
+
+    .company-page .company-info .stat {
+        min-height: 96px !important;
+        padding: 12px 6px !important;
+    }
+
+    .company-page .company-info .stat h3 {
+        font-size: clamp(1.35rem, 6.5vw, 1.8rem) !important;
+        line-height: 1.1 !important;
+    }
+
+    .company-page .company-info .stat p {
+        font-size: clamp(0.68rem, 2.7vw, 0.78rem) !important;
+        line-height: 1.3 !important;
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+    }
+
+    .company-page .upgrade-section.clean-blue-section .section-heading {
+        max-width: none !important;
+        width: 100% !important;
+    }
+
+    .company-page .upgrade-section.clean-blue-section .section-heading h2 {
+        font-size: clamp(1.65rem, 7vw, 2rem) !important;
+        line-height: 1.12 !important;
+        max-width: none !important;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .products-page .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .logo-showcase .brand-logo,
+    .logo-showcase .client-logo,
+    .logo-showcase .brands-slider.logo-board .brand-logo,
+    .logo-showcase .clients-slider.logo-board .client-logo {
+        flex-basis: 148px !important;
+        width: 148px !important;
+    }
+
+    .featured-slider .featured-product-card {
+        flex-basis: 150px !important;
+        width: 150px !important;
+    }
+}
+
+/* Keep the specialized services cards on the same content rail as other sections. */
+.services-page .main-services .services-grid {
+    box-sizing: border-box !important;
+    margin-inline: auto !important;
+    max-width: var(--site-content-max) !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.services-page .main-services .service-card {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .services-page .main-services .services-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
+@supports not (mask-image: linear-gradient(90deg, transparent, #000)) {
+    @media (max-width: 640px) {
+        .featured-marquee::before,
+        .featured-marquee::after {
+            content: "";
+            inset-block: 0;
+            pointer-events: none;
+            position: absolute;
+            width: 24px;
+            z-index: 2;
+        }
+
+        .featured-marquee {
+            position: relative;
+        }
+
+        .featured-marquee::before {
+            background: linear-gradient(90deg, #fff, transparent);
+            left: 0;
+        }
+
+        .featured-marquee::after {
+            background: linear-gradient(270deg, #fff, transparent);
+            right: 0;
+        }
+    }
+}
+
+/* Product cards keep their depth on desktop as well as on touch screens. */
+.products-page .featured-products .featured-product-card {
+    box-shadow: 0 14px 32px rgba(2, 29, 47, 0.2) !important;
+}
+
+.products-page .featured-products .featured-product-card:hover,
+.products-page .featured-products .featured-product-card:focus-visible {
+    box-shadow: 0 22px 42px rgba(2, 29, 47, 0.28) !important;
+}
+
+/* Keep the product detail readable and contained on every screen size. */
+#productModal .modal-content {
+    margin: 3vh auto !important;
+    max-height: min(84dvh, 820px) !important;
+    max-width: 900px !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+#productModal .product-modal-copy .product-description {
+    letter-spacing: normal !important;
+    text-align: left !important;
+    word-break: normal !important;
+    word-spacing: normal !important;
+    overflow-wrap: break-word;
+}
+
+#productModal .product-feature-list li {
+    letter-spacing: normal !important;
+    text-align: left !important;
+    word-break: normal !important;
+    word-spacing: normal !important;
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+    .products-page .main-content > .container {
+        width: min(calc(100% - 20px), 1600px) !important;
+    }
+
+    .products-page .hero-proof-grid {
+        gap: 10px !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        width: 100%;
+    }
+
+    .products-page .hero-proof {
+        align-items: center;
+        display: grid !important;
+        gap: 8px;
+        grid-template-columns: minmax(96px, 0.8fr) minmax(0, 1.2fr) !important;
+        justify-items: center;
+        min-width: 0;
+        padding: 13px 14px !important;
+        text-align: center !important;
+    }
+
+    .products-page .hero-proof strong {
+        font-size: clamp(0.9rem, 3.7vw, 1rem) !important;
+        line-height: 1.3;
+        text-align: center !important;
+        width: 100%;
+    }
+
+    .products-page .hero-proof span {
+        font-size: clamp(0.78rem, 3vw, 0.86rem) !important;
+        line-height: 1.4;
+        text-align: center !important;
+        width: 100%;
+    }
+
+    #productModal {
+        padding: 10px !important;
+    }
+
+    #productModal .modal-content {
+        margin: 4vh auto !important;
+        max-height: 80dvh !important;
+        max-width: 600px !important;
+        width: calc(100% - 8px) !important;
+    }
+
+    #productModal .product-modal-layout {
+        min-height: 0 !important;
+    }
+
+    #productModal .product-modal-media {
+        gap: 12px;
+        padding: 18px 16px !important;
+    }
+
+    #productModal .product-primary-image {
+        max-height: clamp(150px, 22dvh, 220px) !important;
+    }
+
+    #productModal .product-modal-copy {
+        padding: 22px 18px !important;
+    }
+
+    #productModal .product-modal-copy h2 {
+        font-size: clamp(1.45rem, 6vw, 1.85rem) !important;
+        line-height: 1.12;
+    }
+
+    #productModal .product-modal-copy .product-description {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 16px;
+    }
+
+    #productModal .product-feature-list {
+        gap: 9px;
+        margin-bottom: 18px;
+    }
+}
+
+/* One shared content width across the site, matching Contacto's content rail. */
+:root {
+    --site-content-gutter: clamp(16px, 3.2vw, 40px);
+    --site-content-max: 1360px;
+}
+
+.container,
+main > .container,
+section > .container,
+footer > .container,
+.company-page section > .container,
+.products-page section > .container,
+.products-page .main-content > .container,
+.services-page section > .container,
+.services-page .main-services > .container,
+.services-page .logistics > .container,
+.services-page .advantages > .container,
+.services-page .main-content > .container,
+.contact-page .container,
+.contact-page .contact-info > .container,
+.contact-page .contact-form-section > .container,
+.contact-page .location-section > .container {
+    margin-inline: auto !important;
+    max-width: var(--site-content-max) !important;
+    padding-inline: 0 !important;
+    width: min(calc(100% - (var(--site-content-gutter) * 2)), var(--site-content-max)) !important;
+}
+
+.header .container {
+    padding-inline: 16px !important;
+}
+
+@media (max-width: 640px) {
+    :root {
+        --site-content-gutter: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    :root {
+        --site-content-gutter: 10px;
+    }
+}
+
+/* Keep specialized service card copy aligned like the other site cards. */
+.services-page .main-services .service-card {
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+.services-page .main-services .service-card .service-icon {
+    align-self: flex-start !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.services-page .main-services .service-card h3,
+.services-page .main-services .service-card p,
+.services-page .main-services .service-card .service-features,
+.services-page .main-services .service-card .service-features li {
+    text-align: left !important;
+}
+
+@media (max-width: 640px) {
+    .services-page .hero-proof-grid {
+        margin-top: 38px !important;
+    }
+}
+
+/* Match hero video frames to the rounded photos used across the site. */
+body .hero .hero-image .video-container {
+    border-radius: 22px !important;
+    overflow: hidden !important;
+}
+
+body .hero .hero-image .hero-video,
+body .hero .hero-image .floating-video {
+    border-radius: 14px !important;
+}
+
+body.contact-page .hero .hero-image {
+    border-radius: 22px !important;
+}
+
+@media (max-width: 900px) {
+    body .hero .hero-image .video-container {
+        border-radius: 22px !important;
+        overflow: hidden !important;
+    }
+
+    body .hero .hero-image .video-container > video,
+    body .hero .hero-image .hero-video,
+    body .hero .hero-image .floating-video {
+        border-radius: 14px !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .company-page .hero.equipo {
+        padding-block: 48px !important;
+    }
+}
+
+body > .chatbot {
+    bottom: 24px !important;
+    position: fixed !important;
+    right: 24px !important;
+    z-index: 1200;
+}
+
+body > .chatbot .chatbot-img {
+    width: 64px !important;
+}
+
+@media (max-width: 768px) {
+    body > .chatbot {
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        right: 16px !important;
+    }
+
+    body > .chatbot .chatbot-img {
+        width: 58px !important;
+    }
+
+    body > .chatbot .chatbot-popup {
+        bottom: calc(100% + 12px) !important;
+        left: auto !important;
+        margin: 0 !important;
+        max-height: min(62dvh, 480px) !important;
+        position: absolute !important;
+        right: 0 !important;
+        width: min(360px, calc(100vw - 32px)) !important;
+        z-index: 1201;
+    }
+
+    body > .chatbot .chat-content {
+        max-height: min(48dvh, 340px) !important;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    body .hero .hero-proof {
+        align-items: center !important;
+        column-gap: 12px !important;
+        grid-template-columns: minmax(88px, 0.85fr) minmax(0, 1.15fr) !important;
+    }
+
+    body .hero .hero-proof strong {
+        justify-self: start !important;
+        text-align: left !important;
+    }
+
+    body .hero .hero-proof span {
+        align-self: center !important;
+        justify-self: end !important;
+        text-align: right !important;
+    }
+}
